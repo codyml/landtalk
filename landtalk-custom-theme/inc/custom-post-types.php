@@ -1,0 +1,87 @@
+<?php
+
+/*
+*   Removes unused post type menu options.
+*/
+
+function landtalk_remove_unused_menu_options() {
+    
+    remove_menu_page( 'edit.php' ); // removes Posts
+    remove_menu_page( 'edit-comments.php' ); // removes Comments
+
+}
+
+add_action( 'admin_menu', 'landtalk_remove_unused_menu_options' );
+
+
+/*
+*   Registers Conversation custom post type.
+*/
+
+function landtalk_register_conversation_post_type() {
+
+    register_post_type( CONVERSATION_POST_TYPE, array(
+        'labels' => array(
+            'name' => 'Conversations',
+            'singular_name' => 'Conversation',
+            'add_new_item' => 'Add New Conversation',
+            'edit_item' => 'Edit Conversation',
+            'new_item' => 'New Conversation',
+            'view_item' => 'View Conversation',
+            'view_items' => 'View Conversations',
+            'search_items' => 'Search Conversations',
+            'not_found' => 'No Conversations Found',
+            'not_found_in_trash' => 'No Conversations found in Trash',
+            'all_items' => 'All Conversations',
+            'archives' => 'Conversation Archives',
+            'attributes' => 'Conversation Attributes',
+            'insert_into_item' => 'Insert into Conversation',
+            'uploaded_to_this_item' => 'Uploaded to this Conversation',
+        ),
+        'menu_icon' => 'dashicons-admin-site',
+        'public' => true,
+        'rewrite' => array( 'slug' => 'conversations' ),
+        'show_in_rest' => true,
+        'supports' => array( 'title' ),
+        'taxonomies' => array( KEYWORDS_TAXONOMY ),
+    ) );
+
+}
+
+add_action( 'init', 'landtalk_register_conversation_post_type' );
+
+
+/*
+*   Registers Report custom post type.
+*/
+
+function landtalk_register_report_post_type() {
+
+    register_post_type( REPORT_POST_TYPE, array(
+        'labels' => array(
+            'name' => 'Reports',
+            'singular_name' => 'Report',
+            'add_new_item' => 'Add New Report',
+            'edit_item' => 'Edit Report',
+            'new_item' => 'New Report',
+            'view_item' => 'View Report',
+            'view_items' => 'View Reports',
+            'search_items' => 'Search Reports',
+            'not_found' => 'No Reports Found',
+            'not_found_in_trash' => 'No Reports found in Trash',
+            'all_items' => 'All Reports',
+            'archives' => 'Report Archives',
+            'attributes' => 'Report Attributes',
+            'insert_into_item' => 'Insert into Report',
+            'uploaded_to_this_item' => 'Uploaded to this Report',
+        ),
+        'menu_icon' => 'dashicons-thumbs-down',
+        'public' => true,
+        'rewrite' => array( 'slug' => 'reports' ),
+        'show_in_rest' => true,
+        'supports' => array( 'title' ),
+    ) );
+
+}
+
+add_action( 'init', 'landtalk_register_report_post_type' );

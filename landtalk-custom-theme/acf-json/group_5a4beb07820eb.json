@@ -1,0 +1,67 @@
+{
+    "key": "group_5a4beb07820eb",
+    "title": "Options: Featured Conversations",
+    "fields": [
+        {
+            "key": "field_5a4beb25c85a5",
+            "label": "Featured Conversations",
+            "name": "featured_conversations",
+            "type": "repeater",
+            "instructions": "Select the conversations that will be featured on the Home page and Conversations page, from which three will be selected at random.  If less than three conversations are selected, the others will be selected at random from all published conversations.",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "collapsed": "",
+            "min": 0,
+            "max": 57,
+            "layout": "table",
+            "button_label": "",
+            "sub_fields": [
+                {
+                    "key": "field_5a4bebf2c85a6",
+                    "label": "Conversation",
+                    "name": "conversation",
+                    "type": "post_object",
+                    "instructions": "",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "post_type": [
+                        "landtalk_convers"
+                    ],
+                    "taxonomy": [],
+                    "allow_null": 0,
+                    "multiple": 0,
+                    "return_format": "object",
+                    "ui": 1
+                }
+            ]
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "options_page",
+                "operator": "==",
+                "value": "acf-options-featured-conversations"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "seamless",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "",
+    "modified": 1514925133
+}

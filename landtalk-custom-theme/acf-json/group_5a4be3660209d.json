@@ -1,0 +1,88 @@
+{
+    "key": "group_5a4be3660209d",
+    "title": "Post Type: Report",
+    "fields": [
+        {
+            "key": "field_5a4be37a821b4",
+            "label": "Why are you reporting this conversations?",
+            "name": "reason_for_report",
+            "type": "select",
+            "instructions": "",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "This conversation does not contain a complete response for each field in the Submit form.": "This conversation does not contain a complete response for each field in the Submit form.",
+                "This conversation does not describe observations of changes in a place.": "This conversation does not describe observations of changes in a place.",
+                "This conversation contains promotions for products or organizations.": "This conversation contains promotions for products or organizations.",
+                "This conversation does not meet PG-13 standards for language and decency.": "This conversation does not meet PG-13 standards for language and decency."
+            },
+            "default_value": [],
+            "allow_null": 0,
+            "multiple": 0,
+            "ui": 0,
+            "ajax": 0,
+            "return_format": "value",
+            "placeholder": ""
+        },
+        {
+            "key": "field_5a4be51c821b5",
+            "label": "Please provide more details about why this conversation should be removed from Land Talk.",
+            "name": "more_details",
+            "type": "textarea",
+            "instructions": "",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": "",
+            "rows": "",
+            "new_lines": ""
+        },
+        {
+            "key": "field_5a4be536821b6",
+            "label": "Your Email Address",
+            "name": "reporter_email_address",
+            "type": "email",
+            "instructions": "",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "landtalk_report"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "",
+    "modified": 1514923939
+}
