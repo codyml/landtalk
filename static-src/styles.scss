@@ -1,10 +1,130 @@
+/*
+*   Fonts
+*/
+
+@import url('https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i');
+
+
+/*
+*   Bulma initial variables.
+*/
+
 @import '~bulma/sass/utilities/initial-variables';
 @import '~bulma/sass/utilities/functions';
 
-$pink: #ffb3b3;
-$pink-invert: #fff;
-$primary: $pink;
-$primary-invert: $pink-invert;
+
+/*
+*   Modifications to Bulma variables.
+*/
+
+$family-sans-serif: 'Raleway', sans-serif;
+$medium-dark: #404040;
+$medium: #808080;
+$medium-light: #c0c0c0;
+
+
+/*
+*   The rest of Bulma.
+*/
 
 @import '~bulma/bulma';
+
+
+/*
+*   Font Awesome.
+*/
+
+$fa-font-path: "~font-awesome/fonts";
+@import "~font-awesome/scss/font-awesome";
+
+
+/*
+*   Custom styles.
+*/
+
+.large-nav-menu {
+    margin-top: 1.25em;
+}
+
+.menu-main-nav-menu-container > ul {
+    
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    text-transform: lowercase;
+
+    a {
+        color: $black;
+        font-size: 1.1em;
+        font-weight: lighter;
+    }
+
+    .current-menu-item > a,
+    .current-menu-parent > a {
+        font-weight: bold;
+    }
+
+    .menu-item {
+        
+        > a {
+            padding: .5em;
+            line-height: 1;
+            display: inline-block;
+        }
+
+        &:hover > a {
+            background-color: $light;
+            color: $dark;
+        }
+
+        &::after {
+            content: '';
+            margin: .5em;
+            border-right: 1px solid $medium-light;
+        }
+    
+    }
+
+    .menu-item:last-child::after {
+        display: none;
+    }
+
+    .menu-item-has-children {
+
+        position: relative;
+
+        > a::after {
+            content: '▾';
+            margin-left: .3em;
+            color: $medium;
+        }
+
+        > .sub-menu {
+            
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            text-align: right;
+            background-color: whitesmoke;
+            white-space: nowrap;
+            padding: .5em 0;
+            
+            .menu-item::after {
+                display: none;
+            }
+
+        }
+
+        &:hover > .sub-menu {
+            display: block;
+        }
+
+    }
+
+}
+
+.normal-header-logo {
+    width: 200px;
+}
 

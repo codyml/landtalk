@@ -7,7 +7,7 @@
 ?>
 
         </main>
-        <?php get_template_part( 'parts/page-footer' ); ?>
+        <footer class="section"><?php get_template_part( 'parts/page-footer' ); ?></footer>
         <?php wp_footer(); ?>
     </body>
 </html>

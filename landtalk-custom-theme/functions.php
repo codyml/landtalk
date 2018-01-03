@@ -33,3 +33,10 @@ require_once 'inc/options.php';
 */
 
 require_once 'inc/static.php';
+
+
+/*
+*   Sets up navigational menus.
+*/
+
+require_once 'inc/menus.php';

@@ -4,8 +4,21 @@
 *   Template Name: Land Talk: Submit Conversation
 */
 
+get_header();
+while ( have_posts() ): the_post();
+
 ?>
 
-<?php get_header(); ?>
-<h1>Submit Conversation</h1>
-<?php get_footer(); ?>
+<div class="container">
+    <div class="columns is-centered">
+        <div class="column is-10 content">
+            <h1><?php the_title(); ?></h1>
+            <?php the_content(); ?>
+        </div>
+    </div>
+</div>
+
+<?php
+
+endwhile;
+get_footer();

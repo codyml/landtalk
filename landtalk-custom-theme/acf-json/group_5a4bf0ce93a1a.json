@@ -3,25 +3,6 @@
     "title": "Page: Conversations",
     "fields": [
         {
-            "key": "field_5a4bf0d7a7663",
-            "label": "Intro Text",
-            "name": "intro_text",
-            "type": "wysiwyg",
-            "instructions": "Enter the text that will appear at the top of the Conversations page.",
-            "required": 1,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "tabs": "all",
-            "toolbar": "full",
-            "media_upload": 1,
-            "delay": 0
-        },
-        {
             "key": "field_5a4bf659273f1",
             "label": "Footer Text",
             "name": "footer_text",
@@ -56,7 +37,6 @@
     "label_placement": "top",
     "instruction_placement": "label",
     "hide_on_screen": [
-        "the_content",
         "excerpt",
         "custom_fields",
         "discussion",
@@ -70,5 +50,5 @@
     ],
     "active": 1,
     "description": "",
-    "modified": 1514927741
+    "modified": 1515018104
 }

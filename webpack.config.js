@@ -24,9 +24,15 @@ module.exports = {
             {
                 test: /\.s(c|a)ss$/,
                 use: ExtractTextPlugin.extract({
-                    use: ['css-loader?sourceMap', 'postcss-loader?sourceMap', 'sass-loader?sourceMap'],
+                    use: ['css-loader', 'postcss-loader', 'sass-loader'],
                 })
             },
+
+            { test: /\.svg$/, loader: 'file-loader?mimetype=image/svg+xml' },
+            { test: /\.woff$/, loader: 'file-loader?mimetype=application/font-woff' },
+            { test: /\.woff2$/, loader: 'file-loader?mimetype=application/font-woff' },
+            { test: /\.ttf$/, loader: 'file-loader?mimetype=application/octet-stream' },
+            { test: /\.eot$/, loader: 'file-loader' },
 
         ],
     },

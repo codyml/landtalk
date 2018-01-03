@@ -11,9 +11,11 @@
         <?php wp_head(); ?>
     </head>
     <body>
-        <?php if ( basename( get_page_template() ) === 'home.php' ) : ?>
-            <?php get_template_part( 'parts/page-header-large' ); ?>
-        <?php else : ?>
-            <?php get_template_part( 'parts/page-header' ); ?>
-        <?php endif; ?>
-        <main>
+        <header class="section">
+            <?php if ( basename( get_page_template() ) === 'home.php' ) : ?>
+                <?php get_template_part( 'parts/page-header-large' ); ?>
+            <?php else : ?>
+                <?php get_template_part( 'parts/page-header' ); ?>
+            <?php endif; ?>
+        </header>
+        <main class="section">

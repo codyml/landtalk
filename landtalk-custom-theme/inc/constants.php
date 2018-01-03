@@ -21,3 +21,10 @@ define( 'KEYWORDS_TAXONOMY', 'landtalk_keywords' );
 */
 
 define( 'HOPEFULLY_UNIQUE_POSITION_DECIMAL', '3982' );
+
+
+/*
+*   Defines the identifier for the main nav menu location.
+*/
+
+define( 'MAIN_NAV_MENU_LOCATION', 'landtalk_main_nav_menu' );

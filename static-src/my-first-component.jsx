@@ -8,7 +8,9 @@ const MyFirstComponent = () => (
 document.addEventListener('DOMContentLoaded', () => {
 
     const element = document.getElementById('react')
-    ReactDOM.render(<MyFirstComponent />, element)
+    if (element) {
+        ReactDOM.render(<MyFirstComponent />, element)
+    }
 
 })
 

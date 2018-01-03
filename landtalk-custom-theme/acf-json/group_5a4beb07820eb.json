@@ -1,6 +1,6 @@
 {
     "key": "group_5a4beb07820eb",
-    "title": "Options: Featured Conversations",
+    "title": "Options",
     "fields": [
         {
             "key": "field_5a4beb25c85a5",
@@ -44,6 +44,25 @@
                     "ui": 1
                 }
             ]
+        },
+        {
+            "key": "field_5a4d4f161c770",
+            "label": "Footer Contents",
+            "name": "footer_contents",
+            "type": "wysiwyg",
+            "instructions": "Enter the text that will appear at the bottom of each page.",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "tabs": "all",
+            "toolbar": "full",
+            "media_upload": 1,
+            "delay": 0
         }
     ],
     "location": [
@@ -51,7 +70,7 @@
             {
                 "param": "options_page",
                 "operator": "==",
-                "value": "acf-options-featured-conversations"
+                "value": "acf-options-options"
             }
         ]
     ],
@@ -63,5 +82,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1514925133
+    "modified": 1515015990
 }
