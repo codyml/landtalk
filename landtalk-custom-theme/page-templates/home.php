@@ -5,20 +5,28 @@
 */
 
 get_header();
-while ( have_posts() ): the_post();
 
 ?>
 
 <div class="container">
     <div class="columns is-centered">
+        <div class="column is-10 home-page-intro-text">
+            <?php the_field( 'intro_text' ); ?>
+        </div>
+    </div>
+</div>
+<div class="react-component" data-component-name="ConversationMap">React Component</div>
+<div class="container">
+    <div class="react-component" data-component-name="FeaturedConversations">React Component</div>
+</div>
+<div class="container">
+    <div class="columns is-centered">
         <div class="column is-10 content">
-            <h1><?php the_title(); ?></h1>
-            <?php the_content(); ?>
+            <?php the_field( 'body_text' ); ?>
         </div>
     </div>
 </div>
 
 <?php
 
-endwhile;
 get_footer();
