@@ -25,6 +25,7 @@ function landtalk_register_keywords_taxonomy() {
         ),
         'public' => true,
         'show_in_rest' => true,
+        'rest_base' => 'keywords',
     ) );
 
 }

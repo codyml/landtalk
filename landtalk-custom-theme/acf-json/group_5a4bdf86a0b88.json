@@ -6,7 +6,7 @@
             "key": "field_5a4bdfa7000f6",
             "label": "Location",
             "name": "",
-            "type": "tab",
+            "type": "accordion",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -15,7 +15,8 @@
                 "class": "",
                 "id": ""
             },
-            "placement": "top",
+            "open": 1,
+            "multi_expand": 0,
             "endpoint": 0
         },
         {
@@ -119,7 +120,7 @@
             "key": "field_5a4be08e000fc",
             "label": "About This Place",
             "name": "",
-            "type": "tab",
+            "type": "accordion",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -128,7 +129,8 @@
                 "class": "",
                 "id": ""
             },
-            "placement": "top",
+            "open": 0,
+            "multi_expand": 0,
             "endpoint": 0
         },
         {
@@ -211,7 +213,7 @@
             "key": "field_5a4be15300102",
             "label": "Photos",
             "name": "",
-            "type": "tab",
+            "type": "accordion",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -220,7 +222,8 @@
                 "class": "",
                 "id": ""
             },
-            "placement": "top",
+            "open": 0,
+            "multi_expand": 0,
             "endpoint": 0
         },
         {
@@ -389,7 +392,7 @@
             "key": "field_5a4be23c0010b",
             "label": "Video",
             "name": "",
-            "type": "tab",
+            "type": "accordion",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -398,7 +401,8 @@
                 "class": "",
                 "id": ""
             },
-            "placement": "top",
+            "open": 0,
+            "multi_expand": 0,
             "endpoint": 0
         },
         {
@@ -495,7 +499,7 @@
             "key": "field_5a4be2eb00112",
             "label": "Submission Details",
             "name": "",
-            "type": "tab",
+            "type": "accordion",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -504,7 +508,8 @@
                 "class": "",
                 "id": ""
             },
-            "placement": "top",
+            "open": 0,
+            "multi_expand": 0,
             "endpoint": 0
         },
         {
@@ -537,11 +542,11 @@
     ],
     "menu_order": 0,
     "position": "normal",
-    "style": "default",
+    "style": "seamless",
     "label_placement": "top",
     "instruction_placement": "label",
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1514930136
+    "modified": 1514935783
 }

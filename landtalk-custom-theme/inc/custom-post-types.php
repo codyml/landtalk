@@ -42,6 +42,7 @@ function landtalk_register_conversation_post_type() {
         'public' => true,
         'rewrite' => array( 'slug' => 'conversations' ),
         'show_in_rest' => true,
+        'rest_base' => 'conversations',
         'supports' => array( 'title' ),
         'taxonomies' => array( KEYWORDS_TAXONOMY ),
     ) );
@@ -79,6 +80,7 @@ function landtalk_register_report_post_type() {
         'public' => true,
         'rewrite' => array( 'slug' => 'reports' ),
         'show_in_rest' => true,
+        'rest_base' => 'reports',
         'supports' => array( 'title' ),
     ) );
 

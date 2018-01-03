@@ -1,2 +1,4 @@
 .DS_Store
 dev-env
+node_modules
+landtalk-custom-theme/static
