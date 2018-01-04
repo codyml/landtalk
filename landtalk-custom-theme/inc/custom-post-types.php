@@ -53,6 +53,28 @@ add_action( 'init', 'landtalk_register_conversation_post_type' );
 
 
 /*
+*   Includes ACF fields in REST responses for Conversations.
+*/
+
+
+function landtalk_add_custom_fields_to_rest( $data, $post, $request ) {  
+    
+    $_data = $data->data;
+    $fields = get_fields( $post->ID );
+
+    foreach ( $fields as $key => $value ) {
+        $_data[ $key ] = $value;
+    }
+
+    $data->data = $_data;
+    return $data;
+
+}
+
+add_filter( 'rest_prepare_' . CONVERSATION_POST_TYPE, 'landtalk_add_custom_fields_to_rest', 10, 3);
+
+
+/*
 *   Registers Report custom post type.
 */
 
