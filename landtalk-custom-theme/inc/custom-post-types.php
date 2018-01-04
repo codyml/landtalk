@@ -56,7 +56,6 @@ add_action( 'init', 'landtalk_register_conversation_post_type' );
 *   Includes ACF fields in REST responses for Conversations.
 */
 
-
 function landtalk_add_custom_fields_to_rest( $data, $post, $request ) {  
     
     $_data = $data->data;
@@ -72,6 +71,30 @@ function landtalk_add_custom_fields_to_rest( $data, $post, $request ) {
 }
 
 add_filter( 'rest_prepare_' . CONVERSATION_POST_TYPE, 'landtalk_add_custom_fields_to_rest', 10, 3);
+
+
+/*
+*   Adds REST endpoint for retrieving the Featured Conversations.
+*/
+
+function landtalk_get_featured_conversations() {
+
+    return get_field( 'featured_conversations', 'options' );
+
+}
+
+function landtalk_register_featured_conversations_endpoint() {
+  
+    register_rest_route( 'landtalk', '/conversations/featured', array(
+        
+        'methods' => 'GET',
+        'callback' => 'landtalk_get_featured_conversations',
+
+    ) );
+
+}
+
+add_action( 'rest_api_init', 'landtalk_register_featured_conversations_endpoint' );
 
 
 /*

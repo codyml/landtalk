@@ -1,0 +1,45 @@
+/*
+*   Fonts
+*/
+
+@import url('https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i');
+
+
+/*
+*   Bulma initial variables.
+*/
+
+@import '~bulma/sass/utilities/initial-variables';
+@import '~bulma/sass/utilities/functions';
+
+
+/*
+*   Modifications to Bulma variables.
+*/
+
+$family-sans-serif: 'Raleway', sans-serif;
+$medium-dark: #404040;
+$medium: #808080;
+$medium-light: #c0c0c0;
+
+
+/*
+*   The rest of Bulma.
+*/
+
+@import '~bulma/bulma';
+
+
+/*
+*   Font Awesome.
+*/
+
+$fa-font-path: '~font-awesome/fonts';
+@import '~font-awesome/scss/font-awesome';
+
+
+/*
+*   Custom styles
+*/
+
+@import 'custom'

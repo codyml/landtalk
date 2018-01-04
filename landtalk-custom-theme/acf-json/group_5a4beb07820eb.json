@@ -7,7 +7,7 @@
             "label": "Featured Conversations",
             "name": "featured_conversations",
             "type": "repeater",
-            "instructions": "Select the conversations that will be featured on the Home page and Conversations page, from which three will be selected at random.  If less than three conversations are selected, the others will be selected at random from all published conversations.",
+            "instructions": "Select the three conversations that will be featured on the Home page and Conversations page.",
             "required": 1,
             "conditional_logic": 0,
             "wrapper": {
@@ -16,8 +16,8 @@
                 "id": ""
             },
             "collapsed": "",
-            "min": 0,
-            "max": 57,
+            "min": 3,
+            "max": 3,
             "layout": "table",
             "button_label": "",
             "sub_fields": [
@@ -82,5 +82,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1515015990
+    "modified": 1515031268
 }

@@ -17,6 +17,7 @@ get_header();
 </div>
 <div class="react-component" data-component-name="ConversationMap">React Component</div>
 <div class="container">
+    <h3 class="is-size-5 has-text-weight-bold has-text-centered has-text-grey has-space-below">Featured Conversations</h3>
     <div class="react-component" data-component-name="FeaturedConversations">React Component</div>
 </div>
 <div class="container">

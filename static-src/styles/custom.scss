@@ -1,0 +1,169 @@
+/*
+*   Custom styles.
+*/
+
+.large-nav-menu {
+    margin-top: 1.25em;
+}
+
+.menu-main-nav-menu-container > ul {
+    
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    text-transform: lowercase;
+
+    a {
+        color: $black;
+        font-size: 1.1em;
+        font-weight: lighter;
+    }
+
+    .current-menu-item > a,
+    .current-menu-parent > a {
+        font-weight: bold;
+    }
+
+    .menu-item {
+        
+        > a {
+            padding: .5em;
+            line-height: 1;
+            display: inline-block;
+        }
+
+        &:hover > a {
+            background-color: $light;
+            color: $dark;
+        }
+
+        &::after {
+            content: '';
+            margin: .5em;
+            border-right: 1px solid $medium-light;
+        }
+    
+    }
+
+    .menu-item:last-child::after {
+        display: none;
+    }
+
+    .menu-item-has-children {
+
+        position: relative;
+
+        > a::after {
+            content: '▾';
+            margin-left: .3em;
+            color: $medium;
+        }
+
+        > .sub-menu {
+            
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            text-align: right;
+            background-color: whitesmoke;
+            white-space: nowrap;
+            padding: .5em 0;
+            
+            .menu-item::after {
+                display: none;
+            }
+
+        }
+
+        &:hover > .sub-menu {
+            display: block;
+        }
+
+    }
+
+}
+
+.normal-header-logo {
+    width: 200px;
+}
+
+.home-page-intro-text {
+    font-size: 1.15em;
+    line-height: 1.5;
+    font-weight: lighter;
+}
+
+.section {
+    padding: 0;
+    margin: 65px 0;
+}
+
+.container {
+    margin: 65px auto;
+}
+
+hr {
+    margin-top: 0;
+}
+
+.map-wrapper {
+
+    height: 35em;
+
+    .map-popup-title {
+        font-family: $family-sans-serif;
+        font-size: 1.5em;
+        margin: .25em 0;
+    }
+
+    .map-popup-link {
+        font-family: $family-sans-serif;
+        color: $dark;
+        font-style: italic;
+        text-decoration: underline;
+    }
+
+    .gm-style-pbc {
+        z-index: 100 !important;
+    }
+
+    .cluster div {
+        text-shadow: 0px 1px 2px $dark;
+    }
+
+}
+
+.map-subtitle {
+
+    font-size: .85em;
+    color: $medium;
+    text-align: center;
+
+    img {
+        height: 2em;
+        position: relative;
+        top: .5em;
+    }
+
+}
+
+.has-space-below {
+    margin-bottom: 25px;
+}
+
+.conversation-excerpt {
+
+    .card-image figure {
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+    }
+
+    .link {
+        color: $dark;
+        font-style: italic;
+        text-decoration: underline;
+    }
+
+}
