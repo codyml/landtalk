@@ -31,3 +31,16 @@ function landtalk_register_keywords_taxonomy() {
 }
 
 add_action( 'init', 'landtalk_register_keywords_taxonomy' );
+
+
+/*
+*   Retrieves a list of all taxonomy terms for a post.
+*/
+
+function landtalk_get_keywords( $post ) {
+
+    $terms = get_the_terms( $post, KEYWORDS_TAXONOMY );
+    if ( ! $terms ) return array();
+    else return array_map( function($term) { return $term->name; }, $terms );
+
+}

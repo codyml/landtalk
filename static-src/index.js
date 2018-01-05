@@ -10,10 +10,12 @@
 import ConversationMap from './js/conversation-map.jsx'
 import FeaturedConversations from './js/featured-conversations.jsx'
 import ConversationArchive from './js/conversation-archive.jsx'
+import MiniConversationMap from './js/mini-conversation-map.jsx'
 const components = {
     ConversationMap,
     FeaturedConversations,
     ConversationArchive,
+    MiniConversationMap,
 }
 
 
@@ -29,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
     elements.forEach(element => {
 
         const Component = components[element.dataset.componentName]
-        if (Component) ReactDOM.render(<Component />, element)
+        if (Component) ReactDOM.render(<Component postId={ element.dataset.postId } />, element)
 
     })
 

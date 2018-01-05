@@ -86,6 +86,7 @@ export default class ConversationMap extends React.Component {
                     center: new google.maps.LatLng(39.8282, -98.5795),
                     streetViewControl: false,
                     mapTypeControl: false,
+                    fullscreenControl: false,
                 })
 
                 const styledMapType = new google.maps.StyledMapType(MAP_STYLES, { name: 'Styled Map' })
@@ -113,34 +114,43 @@ export default class ConversationMap extends React.Component {
         const markers = conversations.map(conversation => {
 
             const position = new google.maps.LatLng(conversation.location.latitude, conversation.location.longitude)
-            const icon = {
+            const normalIcon = {
                 url: markerIcon,
-                scaledSize: { width: 38, height: 60 },
+                scaledSize: { width: 32, height: 51 },
+            }
+
+            const selectedIcon = {
+                url: selectedMarkerIcon,
+                scaledSize: { width: 48, height: 75 },
             }
 
             const infoWindowContent = `
-                <div class="map-popup-title">${ conversation.place_name }</div>
-                <a href="${ conversation.link }" class="map-popup-link">Click for conversation</a>
+                <a href="${ conversation.link }" class="has-text-grey-darker">
+                    <div class="map-popup-title">${ conversation.place_name }</div>
+                    <div class="map-popup-link">Click for conversation</div>
+                </a>
             `
             
-            const mapMarker = new google.maps.Marker({ position, icon })
+            const mapMarker = new google.maps.Marker({ position, icon: normalIcon })
             if (!this.props.miniMap) {
 
                 mapMarker.addListener('click', () => {
                     this.infoWindow.setContent(infoWindowContent)
                     this.infoWindow.open(this.map, mapMarker)
+                    Object.values(this.markers).forEach(marker => marker.mapMarker.setIcon(normalIcon))
+                    mapMarker.setIcon(selectedIcon)
                 })
 
             }
 
             mapMarker.setMap(this.map)
-            return { id: conversation.id, position, mapMarker, infoWindowContent }
+            return { id: conversation.id, position, mapMarker, infoWindowContent, name: conversation.place_name }
 
         })
 
         this.markers = {}
-        markers.forEach(({ id, position, mapMarker, infoWindowContent }) => {
-            this.markers[id] = { position, mapMarker, infoWindowContent }
+        markers.forEach(({ id, position, mapMarker, infoWindowContent, name }) => {
+            this.markers[id] = { position, mapMarker, infoWindowContent, name }
         })
 
     }
@@ -157,16 +167,20 @@ export default class ConversationMap extends React.Component {
             const { position, mapMarker, infoWindowContent } = this.markers[this.props.selectedMarker]
 
             //  Makes selected marker larger
-            const icon = {
+            const selectedIcon = {
                 url: selectedMarkerIcon,
-                scaledSize: { width: 56, height: 86 },
+                scaledSize: { width: 48, height: 75 },
             }
 
-            mapMarker.setIcon(icon)
+            mapMarker.setIcon(selectedIcon)
 
             //  Zooms into the mapMarker and closest other 2 mapMarkers
-            const [ originalPosition, closestPosition, secondClosestPosition ] = this.findNearestMarkers(position, 3)
-            const bounds = (new google.maps.LatLngBounds(originalPosition, closestPosition)).extend(secondClosestPosition)
+            const [ originalMarker, closestMarker, secondClosestMarker ] = this.findNearestMarkers(position, 3)
+            const bounds = new google.maps.LatLngBounds()
+            .extend(originalMarker.position)
+            .extend(closestMarker.position)
+            .extend(secondClosestMarker.position)
+            
             this.map.fitBounds(bounds, 50)
 
             //  Opens info window and sets up marker clustering if full-size map
@@ -193,16 +207,17 @@ export default class ConversationMap extends React.Component {
 
     findNearestMarkers(position, nClosest) {
 
-        const positions = Object.values(this.markers).map(marker => marker.position)
-        const sortedPositions = positions.sort((a, b) => {
+        const markers = Object.values(this.markers)
+        const sortedMarkers = markers.sort((a, b) => {
 
-            const dA = google.maps.geometry.spherical.computeDistanceBetween(position, a)
-            const dB = google.maps.geometry.spherical.computeDistanceBetween(position, b)
+            const dA = google.maps.geometry.spherical.computeDistanceBetween(position, a.position)
+            const dB = google.maps.geometry.spherical.computeDistanceBetween(position, b.position)
             return dA - dB
 
         })
 
-        return sortedPositions.slice(0, nClosest)
+        console.log(sortedMarkers.map(m => m.name + ': ' + google.maps.geometry.spherical.computeDistanceBetween(position, m.position)))
+        return sortedMarkers.slice(0, nClosest)
 
     }
 
@@ -219,8 +234,8 @@ export default class ConversationMap extends React.Component {
             styles: [
                 {
                     url: markerGroupIcon,
-                    height: 65,
-                    width: 49,
+                    height: 56,
+                    width: 42,
                     textColor: '#fff',
                     textSize: 13,
                     anchorText: [ -3, -1 ], 
@@ -235,10 +250,14 @@ export default class ConversationMap extends React.Component {
     render() {
         return (
             <React.Fragment>
-                <div className="map-wrapper" ref={this.createMap}>Map</div>
-                <div className="map-subtitle">
-                    Click a marker group <img src={markerGroupIcon} /> to zoom in on the map and explore conversations.
-                </div>
+                <div className="map-wrapper" ref={this.createMap} />
+                {
+                    this.props.miniMap
+                    ? <div className="map-subtitle">Click map to reveal this conversation on the full-size map and see nearby conversations.</div>
+                    : <div className="map-subtitle">
+                        Click a marker group <img src={markerGroupIcon} /> to zoom in on the map and explore conversations.
+                    </div>
+                }
             </React.Fragment>
         )
     }
