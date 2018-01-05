@@ -4,19 +4,21 @@
 
 import React from 'react'
 import { downloadFeaturedConversations } from './rest.js'
-import ConversationExcerpt from './conversation-excerpt.jsx'
+import ExcerptGallery from './excerpt-gallery.jsx'
 
 
 /*
 *   React component for rendering three random Featured Conversations.
 */
 
-export default class extends React.Component {
+export default class FeaturedConversations extends React.Component {
 
     constructor(props) {
+        
         super(props)
         this.state = { featuredConversations: [] }
         this.componentDidMount = this.componentDidMount.bind(this)
+    
     }
 
     componentDidMount() {
@@ -28,15 +30,7 @@ export default class extends React.Component {
     }
 
     render() {
-        return (
-            <div className="columns">{
-                this.state.featuredConversations.map(conversation => (
-                    <div className="column is-one-third" key={ conversation.id }>
-                        <ConversationExcerpt conversation={ conversation } />
-                    </div>
-                ))
-            }</div>
-        )
+        return <ExcerptGallery conversations={ this.state.featuredConversations } />
     }
 
 }

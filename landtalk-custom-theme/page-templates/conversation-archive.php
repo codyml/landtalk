@@ -17,6 +17,14 @@ while ( have_posts() ): the_post();
         </div>
     </div>
 </div>
+<div class="react-component" data-component-name="ConversationArchive"></div>
+<div class="container">
+    <div class="columns is-centered">
+        <div class="column is-10 content">
+            <?php the_field('footer_text'); ?>
+        </div>
+    </div>
+</div>
 
 <?php
 

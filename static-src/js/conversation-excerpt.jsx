@@ -11,14 +11,15 @@ import React from 'react'
 
 const ConversationExcerpt = ({ conversation }) => (
 
-    <a href={ conversation.link }>
-        <div className="card conversation-excerpt">
-            <div className="card-image">
-                <figure className="image is-3by2" style={{ backgroundImage: `url('${ conversation.historical_image.image_file.sizes.medium_large }')` }} />
+    <a href={ conversation.link } className='conversation-excerpt'>
+        <div className='card'>
+            <div className='card-image'>
+                <figure className='image is-3by2' style={{ backgroundImage: `url('${ conversation.historical_image_url }')` }} />
             </div>
-            <div className="card-content">
-                <div className="content" dangerouslySetInnerHTML={ { __html: conversation.summary } }></div>
-                <div className="link" href={ conversation.link }>Click for conversation</div>
+            <div className='card-content'>
+                <div className='is-size-5 has-text-weight-light has-space-below'>{ conversation.place_name }</div>
+                <div className='content' dangerouslySetInnerHTML={ { __html: conversation.summary } }></div>
+                <div className='link' href={ conversation.link }>Click for conversation</div>
             </div>
         </div>
     </a>

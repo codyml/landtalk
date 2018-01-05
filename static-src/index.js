@@ -9,9 +9,11 @@
 
 import ConversationMap from './js/conversation-map.jsx'
 import FeaturedConversations from './js/featured-conversations.jsx'
+import ConversationArchive from './js/conversation-archive.jsx'
 const components = {
     ConversationMap,
     FeaturedConversations,
+    ConversationArchive,
 }
 
 

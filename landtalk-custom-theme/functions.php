@@ -40,3 +40,21 @@ require_once 'inc/static.php';
 */
 
 require_once 'inc/menus.php';
+
+
+/*
+*   Registers custom REST endpoints.
+*/
+
+require_once 'inc/rest.php';
+
+
+/*
+*   Enables auto-generation of the <title> tag.
+*/
+
+function theme_slug_setup() {
+    add_theme_support( 'title-tag' );
+}
+
+add_action( 'after_setup_theme', 'theme_slug_setup' );

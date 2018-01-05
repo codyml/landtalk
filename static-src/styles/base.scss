@@ -21,6 +21,11 @@ $family-sans-serif: 'Raleway', sans-serif;
 $medium-dark: #404040;
 $medium: #808080;
 $medium-light: #c0c0c0;
+$gap: 50px;
+$tablet: 500px;
+$desktop: 700px + (2 * $gap);
+$widescreen: 900px + (2 * $gap);
+$fullhd: 1100px + (2 * $gap);
 
 
 /*
