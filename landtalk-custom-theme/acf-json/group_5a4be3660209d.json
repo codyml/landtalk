@@ -4,9 +4,9 @@
     "fields": [
         {
             "key": "field_5a4be37a821b4",
-            "label": "Why are you reporting this conversations?",
+            "label": "Why are you reporting this conversation?",
             "name": "reason_for_report",
-            "type": "select",
+            "type": "radio",
             "instructions": "",
             "required": 1,
             "conditional_logic": 0,
@@ -21,13 +21,12 @@
                 "This conversation contains promotions for products or organizations.": "This conversation contains promotions for products or organizations.",
                 "This conversation does not meet PG-13 standards for language and decency.": "This conversation does not meet PG-13 standards for language and decency."
             },
-            "default_value": [],
             "allow_null": 0,
-            "multiple": 0,
-            "ui": 0,
-            "ajax": 0,
-            "return_format": "value",
-            "placeholder": ""
+            "other_choice": 1,
+            "save_other_choice": 0,
+            "default_value": "",
+            "layout": "vertical",
+            "return_format": "value"
         },
         {
             "key": "field_5a4be51c821b5",
@@ -50,7 +49,7 @@
         },
         {
             "key": "field_5a4be536821b6",
-            "label": "Your Email Address",
+            "label": "Enter your email address",
             "name": "reporter_email_address",
             "type": "email",
             "instructions": "",
@@ -62,9 +61,31 @@
                 "id": ""
             },
             "default_value": "",
-            "placeholder": "",
+            "placeholder": "Email address",
             "prepend": "",
             "append": ""
+        },
+        {
+            "key": "field_5a4fff85d70fe",
+            "label": "Conversation",
+            "name": "conversation",
+            "type": "post_object",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "post_type": [
+                "landtalk_convers"
+            ],
+            "taxonomy": [],
+            "allow_null": 0,
+            "multiple": 0,
+            "return_format": "id",
+            "ui": 1
         }
     ],
     "location": [
@@ -84,5 +105,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1514923939
+    "modified": 1515192422
 }

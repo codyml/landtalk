@@ -21,10 +21,10 @@
         },
         {
             "key": "field_5a4bdfbc000f7",
-            "label": "Place Name",
+            "label": "Place Name (Required)",
             "name": "place_name",
             "type": "text",
-            "instructions": "",
+            "instructions": "Include the name of the city, state\/province if applicable, and country.",
             "required": 1,
             "conditional_logic": 0,
             "wrapper": {
@@ -33,7 +33,7 @@
                 "id": ""
             },
             "default_value": "",
-            "placeholder": "",
+            "placeholder": "Example: Central Park, New York, NY, United States",
             "prepend": "",
             "append": "",
             "maxlength": ""
@@ -43,7 +43,7 @@
             "label": "Managing Organization",
             "name": "managing_organization",
             "type": "text",
-            "instructions": "",
+            "instructions": "If the place is managed by a municipal, state, national, nonprofit or commercial organization, enter its name here.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -52,17 +52,17 @@
                 "id": ""
             },
             "default_value": "",
-            "placeholder": "",
+            "placeholder": "Example: United States National Park Service",
             "prepend": "",
             "append": "",
             "maxlength": ""
         },
         {
             "key": "field_5a4be016000f9",
-            "label": "Location",
+            "label": "Coordinates",
             "name": "location",
             "type": "group",
-            "instructions": "",
+            "instructions": "Enter the latitude and longitude of the place in decimal format.  Be sure to include any negative signs (-).  If possible, include 4 digits after the decimal point (for example, 48.4085).\r\n\r\nTo convert from hours-minutes-seconds format, use this tool: https:\/\/www.fcc.gov\/media\/radio\/dms-decimal\r\n\r\nTo find coordinates of a location from Google Maps, zoom in until the place is easily distinguishable, then right-click on the place and select “What’s here?”.  Then, copy and paste the latitude and longitude values from the resulting pop-up at the bottom of the screen.",
             "required": 1,
             "conditional_logic": 0,
             "wrapper": {
@@ -77,11 +77,11 @@
                     "label": "Latitude",
                     "name": "latitude",
                     "type": "number",
-                    "instructions": "",
+                    "instructions": "Valid latitudes are between -90.0000 and 90.0000.",
                     "required": 1,
                     "conditional_logic": 0,
                     "wrapper": {
-                        "width": "",
+                        "width": "50",
                         "class": "",
                         "id": ""
                     },
@@ -98,11 +98,11 @@
                     "label": "Longitude",
                     "name": "longitude",
                     "type": "number",
-                    "instructions": "",
+                    "instructions": "Valid longitudes are between -180.0000 and 180.0000.",
                     "required": 1,
                     "conditional_logic": 0,
                     "wrapper": {
-                        "width": "",
+                        "width": "50",
                         "class": "",
                         "id": ""
                     },
@@ -548,5 +548,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1515035110
+    "modified": 1515182876
 }

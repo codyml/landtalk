@@ -77,7 +77,9 @@ function landtalk_get_featured_conversations() {
     $response = array();
     foreach ( $conversations as $conversation ) {
 
-        $response[] = landtalk_prepare_conversation_for_rest_response( $conversation['conversation'] );
+        if ( $conversation['conversation']->post_status === 'publish' ) {
+            $response[] = landtalk_prepare_conversation_for_rest_response( $conversation['conversation'] );
+        }
 
     }
 

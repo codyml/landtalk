@@ -216,7 +216,6 @@ export default class ConversationMap extends React.Component {
 
         })
 
-        console.log(sortedMarkers.map(m => m.name + ': ' + google.maps.geometry.spherical.computeDistanceBetween(position, m.position)))
         return sortedMarkers.slice(0, nClosest)
 
     }
