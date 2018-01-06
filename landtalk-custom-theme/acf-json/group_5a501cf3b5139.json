@@ -1,0 +1,100 @@
+{
+    "key": "group_5a501cf3b5139",
+    "title": "Post Type: Message",
+    "fields": [
+        {
+            "key": "field_5a501cfc53583",
+            "label": "Your Name",
+            "name": "name",
+            "type": "text",
+            "instructions": "",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "Full name",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_5a501d2853584",
+            "label": "Your Email Address",
+            "name": "email_address",
+            "type": "email",
+            "instructions": "",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "Email address",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_5a501d4353585",
+            "label": "Your Message",
+            "name": "message",
+            "type": "textarea",
+            "instructions": "",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": "",
+            "rows": "",
+            "new_lines": ""
+        },
+        {
+            "key": "field_5a501d6553586",
+            "label": "",
+            "name": "captcha",
+            "type": "recaptcha",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "site_key": "",
+            "secret_key": "",
+            "re_theme": "light",
+            "re_type": "image",
+            "re_size": "normal"
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "landtalk_contact"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "seamless",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "",
+    "recaptcha": 0,
+    "modified": 1515200341
+}

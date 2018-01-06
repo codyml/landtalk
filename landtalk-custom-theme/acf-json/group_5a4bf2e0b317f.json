@@ -26,6 +26,25 @@
             "max_height": "",
             "max_size": "",
             "mime_types": ""
+        },
+        {
+            "key": "field_5a501b7fbee2c",
+            "label": "Contact Form",
+            "name": "contact_form",
+            "type": "wysiwyg",
+            "instructions": "Enter the introduction to the contact form.",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "tabs": "all",
+            "toolbar": "full",
+            "media_upload": 1,
+            "delay": 0
         }
     ],
     "location": [
@@ -45,5 +64,6 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1514926927
+    "recaptcha": 0,
+    "modified": 1515199400
 }

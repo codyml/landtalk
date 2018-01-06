@@ -87,3 +87,38 @@ function landtalk_register_report_post_type() {
 }
 
 add_action( 'init', 'landtalk_register_report_post_type' );
+
+
+/*
+*   Registers Contact Message custom post type.
+*/
+
+function landtalk_register_contact_message_post_type() {
+
+    register_post_type( CONTACT_MESSAGE_POST_TYPE, array(
+        'labels' => array(
+            'name' => 'Messages',
+            'singular_name' => 'Message',
+            'add_new_item' => 'Add New Message',
+            'edit_item' => 'Edit Message',
+            'new_item' => 'New Message',
+            'view_item' => 'View Message',
+            'view_items' => 'View Messages',
+            'search_items' => 'Search Messages',
+            'not_found' => 'No Messages Found',
+            'not_found_in_trash' => 'No Messages found in Trash',
+            'all_items' => 'All Messages',
+            'archives' => 'Message Archives',
+            'attributes' => 'Message Attributes',
+            'insert_into_item' => 'Insert into Message',
+            'uploaded_to_this_item' => 'Uploaded to this Message',
+        ),
+        'menu_icon' => 'dashicons-email',
+        'public' => true,
+        'rewrite' => array( 'slug' => 'message' ),
+        'supports' => array( 'title' ),
+    ) );
+
+}
+
+add_action( 'init', 'landtalk_register_contact_message_post_type' );

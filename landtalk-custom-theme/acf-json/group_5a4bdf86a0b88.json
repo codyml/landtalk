@@ -59,10 +59,10 @@
         },
         {
             "key": "field_5a4be016000f9",
-            "label": "Coordinates",
+            "label": "Coordinates (Required)",
             "name": "location",
             "type": "group",
-            "instructions": "Enter the latitude and longitude of the place in decimal format.  Be sure to include any negative signs (-).  If possible, include 4 digits after the decimal point (for example, 48.4085).\r\n\r\nTo convert from hours-minutes-seconds format, use this tool: https:\/\/www.fcc.gov\/media\/radio\/dms-decimal\r\n\r\nTo find coordinates of a location from Google Maps, zoom in until the place is easily distinguishable, then right-click on the place and select “What’s here?”.  Then, copy and paste the latitude and longitude values from the resulting pop-up at the bottom of the screen.",
+            "instructions": "",
             "required": 1,
             "conditional_logic": 0,
             "wrapper": {
@@ -73,32 +73,28 @@
             "layout": "block",
             "sub_fields": [
                 {
-                    "key": "field_5a4be042000fa",
-                    "label": "Latitude",
-                    "name": "latitude",
-                    "type": "number",
-                    "instructions": "Valid latitudes are between -90.0000 and 90.0000.",
-                    "required": 1,
+                    "key": "field_5a50075139b03",
+                    "label": "",
+                    "name": "",
+                    "type": "message",
+                    "instructions": "",
+                    "required": 0,
                     "conditional_logic": 0,
                     "wrapper": {
-                        "width": "50",
+                        "width": "",
                         "class": "",
                         "id": ""
                     },
-                    "default_value": "",
-                    "placeholder": "",
-                    "prepend": "",
-                    "append": "",
-                    "min": -90,
-                    "max": 90,
-                    "step": ".000001"
+                    "message": "Enter the latitude and longitude of the place in decimal format.  Be sure to include any negative signs (-).  If possible, include 4 digits after the decimal point (for example, 48.4085).\r\n\r\nTo convert from hours-minutes-seconds format, use <a href=\"https:\/\/www.fcc.gov\/media\/radio\/dms-decimal\">this tool<\/a>.\r\n\r\nTo find coordinates of a location from Google Maps, zoom in until the place is easily distinguishable, then right-click on the place and select “What’s here?”.  Then, copy and paste the latitude and longitude values from the resulting pop-up at the bottom of the screen.",
+                    "new_lines": "wpautop",
+                    "esc_html": 0
                 },
                 {
-                    "key": "field_5a4be072000fb",
-                    "label": "Longitude",
-                    "name": "longitude",
-                    "type": "number",
-                    "instructions": "Valid longitudes are between -180.0000 and 180.0000.",
+                    "key": "field_5a50212270f29",
+                    "label": "",
+                    "name": "lat_lng",
+                    "type": "group",
+                    "instructions": "",
                     "required": 1,
                     "conditional_logic": 0,
                     "wrapper": {
@@ -106,13 +102,67 @@
                         "class": "",
                         "id": ""
                     },
-                    "default_value": "",
-                    "placeholder": "",
-                    "prepend": "",
-                    "append": "",
-                    "min": -180,
-                    "max": 180,
-                    "step": ".000001"
+                    "layout": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_5a4be042000fa",
+                            "label": "Latitude",
+                            "name": "latitude",
+                            "type": "number",
+                            "instructions": "Valid latitudes are between -90.0000 and 90.0000.",
+                            "required": 1,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": "submit-form-latitude"
+                            },
+                            "default_value": "",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "min": -90,
+                            "max": 90,
+                            "step": ".000001"
+                        },
+                        {
+                            "key": "field_5a4be072000fb",
+                            "label": "Longitude",
+                            "name": "longitude",
+                            "type": "number",
+                            "instructions": "Valid longitudes are between -180.0000 and 180.0000.",
+                            "required": 1,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": "submit-form-longitude"
+                            },
+                            "default_value": "",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "min": -180,
+                            "max": 180,
+                            "step": ".000001"
+                        }
+                    ]
+                },
+                {
+                    "key": "field_5a50216c70f2a",
+                    "label": "",
+                    "name": "location_preview",
+                    "type": "group",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "50",
+                        "class": "",
+                        "id": "submit-form-location-preview"
+                    },
+                    "layout": "block",
+                    "sub_fields": []
                 }
             ]
         },
@@ -134,11 +184,28 @@
             "endpoint": 0
         },
         {
+            "key": "field_5a5007d9f1812",
+            "label": "",
+            "name": "",
+            "type": "message",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "Each response should be 100 - 1000 characters in length.  To avoid losing your work if the submit form reloads, we recommend writing your responses in a word processor, then copying and pasting the responses to the submit form.",
+            "new_lines": "wpautop",
+            "esc_html": 0
+        },
+        {
             "key": "field_5a4be09f000fd",
-            "label": "How did the observer describe the way the place used to look?",
+            "label": "Historic Appearance (Required)",
             "name": "used_to_look",
             "type": "textarea",
-            "instructions": "",
+            "instructions": "How did the observer describe the way the place used to look?",
             "required": 1,
             "conditional_logic": 0,
             "wrapper": {
@@ -147,17 +214,17 @@
                 "id": ""
             },
             "default_value": "",
-            "placeholder": "",
+            "placeholder": "10-1000 characters",
             "maxlength": 1000,
             "rows": "",
             "new_lines": "wpautop"
         },
         {
             "key": "field_5a4be0fd000fe",
-            "label": "How did the observer describe how the place has changed?",
+            "label": "Changes over Time (Required)",
             "name": "has_changed",
             "type": "textarea",
-            "instructions": "",
+            "instructions": "How did the observer describe how the place has changed?",
             "required": 1,
             "conditional_logic": 0,
             "wrapper": {
@@ -166,17 +233,17 @@
                 "id": ""
             },
             "default_value": "",
-            "placeholder": "",
+            "placeholder": "10-1000 characters",
             "maxlength": 1000,
             "rows": "",
             "new_lines": "wpautop"
         },
         {
             "key": "field_5a4be11c00100",
-            "label": "What are some of the things the observer used to do here?",
+            "label": "Historic Activities (Required)",
             "name": "used_to_do_here",
             "type": "textarea",
-            "instructions": "",
+            "instructions": "What are some of the things the observer used to do here?",
             "required": 1,
             "conditional_logic": 0,
             "wrapper": {
@@ -185,17 +252,17 @@
                 "id": ""
             },
             "default_value": "",
-            "placeholder": "",
+            "placeholder": "10-1000 characters",
             "maxlength": 1000,
             "rows": "",
             "new_lines": "wpautop"
         },
         {
             "key": "field_5a4be12c00101",
-            "label": "What are some of the things the observer does here now?",
+            "label": "Current Activities (Required)",
             "name": "does_here_now",
             "type": "textarea",
-            "instructions": "",
+            "instructions": "What are some of the things the observer does here now?",
             "required": 1,
             "conditional_logic": 0,
             "wrapper": {
@@ -204,7 +271,7 @@
                 "id": ""
             },
             "default_value": "",
-            "placeholder": "",
+            "placeholder": "10-1000 characters",
             "maxlength": 1000,
             "rows": "",
             "new_lines": "wpautop"
@@ -227,15 +294,32 @@
             "endpoint": 0
         },
         {
+            "key": "field_5a500828f1813",
+            "label": "",
+            "name": "",
+            "type": "message",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "Upload two digital photographs: one current photo, and one from the historical period that the observer describes in the conversation.  If no historical photograph is available, a historical drawing may be uploaded instead.  Photos should be as high resolution as possible. Images must be at least 1200px by 800px.",
+            "new_lines": "wpautop",
+            "esc_html": 0
+        },
+        {
             "key": "field_5a4be16b00103",
-            "label": "Historical Image",
+            "label": "Historical Image (Required)",
             "name": "historical_image",
             "type": "group",
             "instructions": "",
             "required": 1,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "",
+                "width": "50",
                 "class": "",
                 "id": ""
             },
@@ -300,7 +384,7 @@
                         "id": ""
                     },
                     "default_value": "",
-                    "placeholder": "",
+                    "placeholder": "10-500 characters",
                     "maxlength": 500,
                     "rows": 4,
                     "new_lines": "wpautop"
@@ -309,14 +393,14 @@
         },
         {
             "key": "field_5a4be21f00107",
-            "label": "Current Image",
+            "label": "Current Image (Required)",
             "name": "current_image",
             "type": "group",
             "instructions": "",
             "required": 1,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "",
+                "width": "50",
                 "class": "",
                 "id": ""
             },
@@ -381,7 +465,7 @@
                         "id": ""
                     },
                     "default_value": "",
-                    "placeholder": "",
+                    "placeholder": "10-500 characters",
                     "maxlength": 500,
                     "rows": 4,
                     "new_lines": "wpautop"
@@ -406,11 +490,11 @@
             "endpoint": 0
         },
         {
-            "key": "field_5a4be2440010c",
-            "label": "YouTube URL",
+            "key": "field_5a5021c370f2b",
+            "label": "YouTube URL (Required)",
             "name": "youtube_url",
-            "type": "url",
-            "instructions": "",
+            "type": "group",
+            "instructions": "Enter a valid URL to the YouTube video with the recorded conversation.  To find this URL, go to the YouTube page for the video, then copy and paste the URL for that page in your browser’s address bar.  The YouTube video must be set to Public and have embedding enabled.",
             "required": 1,
             "conditional_logic": 0,
             "wrapper": {
@@ -418,15 +502,48 @@
                 "class": "",
                 "id": ""
             },
-            "default_value": "",
-            "placeholder": ""
+            "layout": "block",
+            "sub_fields": [
+                {
+                    "key": "field_5a4be2440010c",
+                    "label": "URL",
+                    "name": "url",
+                    "type": "url",
+                    "instructions": "",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "50",
+                        "class": "",
+                        "id": "submit-form-youtube-url"
+                    },
+                    "default_value": "",
+                    "placeholder": "Example: https:\/\/www.youtube.com\/watch?v=..."
+                },
+                {
+                    "key": "field_5a50221870f2c",
+                    "label": "",
+                    "name": "url_preview",
+                    "type": "group",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "50",
+                        "class": "",
+                        "id": "submit-form-youtube-preview"
+                    },
+                    "layout": "block",
+                    "sub_fields": []
+                }
+            ]
         },
         {
             "key": "field_5a4be2630010d",
-            "label": "Summary",
+            "label": "Summary (Required)",
             "name": "summary",
             "type": "textarea",
-            "instructions": "",
+            "instructions": "Write a brief summary of the video.  Describe who says what about the place.",
             "required": 1,
             "conditional_logic": 0,
             "wrapper": {
@@ -435,17 +552,17 @@
                 "id": ""
             },
             "default_value": "",
-            "placeholder": "",
+            "placeholder": "10-1000 characters",
             "maxlength": 1000,
             "rows": "",
             "new_lines": "wpautop"
         },
         {
             "key": "field_5a4be27d0010e",
-            "label": "Date",
+            "label": "Date (Required)",
             "name": "date",
             "type": "date_picker",
-            "instructions": "",
+            "instructions": "Choose the date from the calendar that the conversation was recorded.",
             "required": 1,
             "conditional_logic": 0,
             "wrapper": {
@@ -459,7 +576,7 @@
         },
         {
             "key": "field_5a4be2b70010f",
-            "label": "Interviewer's Full Name",
+            "label": "Your Full Name (Required)",
             "name": "interviewer_full_name",
             "type": "text",
             "instructions": "",
@@ -471,17 +588,17 @@
                 "id": ""
             },
             "default_value": "",
-            "placeholder": "",
+            "placeholder": "Full name",
             "prepend": "",
             "append": "",
             "maxlength": ""
         },
         {
             "key": "field_5a4be2cf00110",
-            "label": "Observer's Full Name",
+            "label": "Observer's Full Name (Optional)",
             "name": "observer_full_name",
             "type": "text",
-            "instructions": "",
+            "instructions": "If the observer prefers to remain anonymous, leave this field blank.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -490,10 +607,32 @@
                 "id": ""
             },
             "default_value": "",
-            "placeholder": "",
+            "placeholder": "Full name",
             "prepend": "",
             "append": "",
             "maxlength": ""
+        },
+        {
+            "key": "field_5a5009dfab9b3",
+            "label": "Keywords (Required)",
+            "name": "keywords",
+            "type": "taxonomy",
+            "instructions": "Add some keywords for topics discussed in this conversation.  To add a keyword, click the + button on the right end of the field.",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "taxonomy": "landtalk_keywords",
+            "field_type": "multi_select",
+            "allow_null": 0,
+            "add_term": 1,
+            "save_terms": 1,
+            "load_terms": 1,
+            "return_format": "object",
+            "multiple": 0
         },
         {
             "key": "field_5a4be2eb00112",
@@ -514,10 +653,10 @@
         },
         {
             "key": "field_5a4be30b00113",
-            "label": "Interviewer Email Address",
+            "label": "Your Email Address",
             "name": "interviewer_email_address",
             "type": "email",
-            "instructions": "",
+            "instructions": "We collect this in case we need to contact you about your submission.  We will not share your email address with anyone.",
             "required": 1,
             "conditional_logic": 0,
             "wrapper": {
@@ -526,9 +665,109 @@
                 "id": ""
             },
             "default_value": "",
-            "placeholder": "",
+            "placeholder": "Email address",
             "prepend": "",
             "append": ""
+        },
+        {
+            "key": "field_5a500a24ab9b4",
+            "label": "Send me the published conversation",
+            "name": "email_to_interviewer",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "Check this box if you would like to be sent a link to the published conversation.",
+            "default_value": 1,
+            "ui": 0,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
+            "key": "field_5a500a61ab9b5",
+            "label": "Send the published conversation to the observer",
+            "name": "email_to_observer",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "Check this box if the observer would like to be sent a link to the posted conversation.",
+            "default_value": 0,
+            "ui": 0,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
+            "key": "field_5a500a80ab9b6",
+            "label": "Observer's Email Address",
+            "name": "observer_email_address",
+            "type": "email",
+            "instructions": "The observer’s email address will be used only to send an email with a link to the published conversation.  We will not share this email address with anyone.",
+            "required": 1,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_5a500a61ab9b5",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "Email address",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_5a500ab4ab9b7",
+            "label": "",
+            "name": "captcha",
+            "type": "recaptcha",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "site_key": "",
+            "secret_key": "",
+            "re_theme": "light",
+            "re_type": "image",
+            "re_size": "normal"
+        },
+        {
+            "key": "field_5a500ad1ab9b8",
+            "label": "",
+            "name": "",
+            "type": "message",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "Land Talk will host conversations that meets all the following quality and appropriateness standards:\r\n\r\n<ul>\r\n<li>The submission contains a complete response for each required field in the Submit form.<\/li>\r\n<li>The submission describes observations of a place.<\/li>\r\n<li>The submission is free of promotions for products or organizations.<\/li>\r\n<li>The submission meets PG-13 standards for language and decency.<\/li>\r\n<\/ul>\r\n\r\nPlease ensure that your submission meets these standards.\r\n\r\nBefore submitting, please check your submission for errors and completeness.  You will not be able to edit your submission after you click the Submit button.",
+            "new_lines": "wpautop",
+            "esc_html": 0
         }
     ],
     "location": [
@@ -548,5 +787,6 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1515182876
+    "recaptcha": 0,
+    "modified": 1515202397
 }

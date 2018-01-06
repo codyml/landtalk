@@ -39,6 +39,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 /*
+*   Adds interactivity to the Submit form.
+*/
+
+// import addSubmitFormInteractivity from './js/submit-form.js'
+// if (location.pathname === '/submit-conversation/') {
+
+//     document.addEventListener('DOMContentLoaded', addSubmitFormInteractivity)
+
+// }
+
+
+/*
 *   Compiles Sass styles with Bulma framework.
 */
 

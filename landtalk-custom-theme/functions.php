@@ -50,25 +50,7 @@ require_once 'inc/rest.php';
 
 
 /*
-*   Enables auto-generation of the <title> tag.
+*   Defines other functionality used by the theme.
 */
 
-function theme_slug_setup() {
-    add_theme_support( 'title-tag' );
-}
-
-add_action( 'after_setup_theme', 'theme_slug_setup' );
-
-
-/*
-*   Extracts YouTube ID from link and creates embed code.
-*/
-
-function landtalk_get_youtube_embed( $url ) {
-
-    $re = "/(?:youtube(?:-nocookie)?\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^\"&?\/ ]{11})/";
-    $matches = array();
-    preg_match( $re, $url, $matches );
-    if ( isset( $matches[1] ) ) return $matches[1];
-
-}
+require_once 'inc/misc.php';

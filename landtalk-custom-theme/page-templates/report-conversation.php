@@ -46,10 +46,11 @@ $options = array(
 
     ),
 
-    'fields' => array( 'reason_for_report', 'more_details', 'reporter_email_address' ),
+    'fields' => array( 'reason_for_report', 'more_details', 'reporter_email_address', 'captcha' ),
     'post_title' => false,
     'submit_value' => 'Submit',
     'return' => '/report-conversation?conversation=' . $_GET['conversation'] . '&report=%post_id%',
+    'recaptcha' => true,
 
 );
 

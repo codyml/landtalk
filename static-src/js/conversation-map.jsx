@@ -14,7 +14,7 @@ import markerGroupIcon from '../img/marker-group.png'
 *   Returns a promise for loading the Google Maps JS API.
 */
 
-const loadGoogleMapsAPI = () => new Promise(resolve => {
+export const loadGoogleMapsAPI = () => new Promise(resolve => {
 
     if (window.google) resolve()
     else {
@@ -113,7 +113,7 @@ export default class ConversationMap extends React.Component {
 
         const markers = conversations.map(conversation => {
 
-            const position = new google.maps.LatLng(conversation.location.latitude, conversation.location.longitude)
+            const position = new google.maps.LatLng(conversation.location.lat_lng.latitude, conversation.location.lat_lng.longitude)
             const normalIcon = {
                 url: markerIcon,
                 scaledSize: { width: 32, height: 51 },
