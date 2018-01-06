@@ -49,7 +49,7 @@
         },
         {
             "key": "field_5a4be536821b6",
-            "label": "Enter your email address",
+            "label": "Enter your email address.",
             "name": "reporter_email_address",
             "type": "email",
             "instructions": "",
@@ -125,5 +125,5 @@
     "active": 1,
     "description": "",
     "recaptcha": 0,
-    "modified": 1515200356
+    "modified": 1515221741
 }

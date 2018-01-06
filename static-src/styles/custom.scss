@@ -323,6 +323,7 @@ hr {
 
 form.acf-form .acf-fields input[type="text"],
 form.acf-form .acf-fields input[type="number"],
+form.acf-form .acf-fields input[type="email"],
 form.acf-form .acf-fields textarea {
     border-radius: 3px;
     border: 1px solid #ccc;
@@ -350,6 +351,18 @@ form.acf-form .acf-fields textarea {
         top: 2px;
         left: 6px;
         font-size: .9em;
+    }
+
+}
+
+.acf-input ul.acf-radio-list li {
+    
+    margin: .5em 0;
+
+    input[type="radio"] {
+        position: relative;
+        top: -1px;
+        margin-right: 1em;
     }
 
 }
