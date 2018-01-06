@@ -122,14 +122,22 @@ const setupVideoPreview = () => {
 
 }
 
+
 /*
-*   Makes input fields prettier.
+*   Stops ACF from saving accordion position, so Google Maps embed
+*   correctly loads.
 */
 
+const clearAccordions = () => {
 
+    $(window).off('unload')
+    localStorage.setItem('acf', '')
+
+}
 
 
 export default () => {
     setupLocationPreview()
     setupVideoPreview()
+    clearAccordions()
 }
