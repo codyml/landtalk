@@ -131,3 +131,78 @@ function landtalk_register_latest_conversations_endpoint() {
 }
 
 add_action( 'rest_api_init', 'landtalk_register_latest_conversations_endpoint' );
+
+
+/*
+*   Adds REST endpoint for importing Conversations.  To import,
+*   move image files to the wp-content/uploads/YEAR/MONTH/import and POST a
+*   JSON file containing an array of objects following the Conversation
+*   field schema.
+*/
+
+require_once ABSPATH . 'wp-admin/includes/media.php';
+require_once ABSPATH . 'wp-admin/includes/file.php';
+require_once ABSPATH . 'wp-admin/includes/image.php';
+function landtalk_import_conversations( WP_REST_Request $request ) {
+
+    $conversations_data = json_decode( $request->get_body(), true );
+    foreach ( $conversations_data as $conversation_data ) {
+
+        $conversation_id = wp_insert_post( array(
+
+            'post_title' => $conversation_data['place_name'],
+            'post_status' => 'draft',
+            'post_type' => CONVERSATION_POST_TYPE,
+
+        ) );
+
+        print_r( wp_set_post_terms( $conversation_id, $conversation_data['keywords_to_import'], KEYWORDS_TAXONOMY ) );
+        print_r( landtalk_get_keywords( get_post( $conversation_id ) ) );
+        foreach ( $conversation_data as $key => $value ) {
+            
+            if ( $key === 'historical_image' || $key === 'current_image' ) {
+
+                $filename = $value['image_file'];
+                $path = wp_upload_dir()['path'] . '/import/' . $filename;
+                $url = wp_upload_dir()['url'] . '/import/' . $filename;
+                $filetype = wp_check_filetype( $path )['type'];
+                $attachment = array(
+
+                    'post_title' => 'Imported Image',
+                    'post_content' => '',
+                    'post_status' => 'inherit',
+                    'post_mime_type' => $filetype,
+
+                );
+
+                $attachment_id = wp_insert_attachment( $attachment, $path, $conversation_id );
+                $metadata = wp_generate_attachment_metadata( $attachment_id, $path );
+                wp_update_attachment_metadata( $attachment_id, $metadata );
+                $value['image_file'] = $attachment_id;
+
+            }
+
+            update_field( $key, $value, $conversation_id );
+        
+        }
+
+    }
+    
+    return array( 'created' => sizeof( $conversations_data ) );
+
+}
+
+function landtalk_register_import_conversations_endpoint() {
+  
+    register_rest_route( 'landtalk', '/conversations/import', array(
+        
+        'methods' => 'POST',
+        'callback' => 'landtalk_import_conversations',
+
+    ) );
+
+}
+
+if ( WP_DEBUG === true ) {
+    add_action( 'rest_api_init', 'landtalk_register_import_conversations_endpoint' );
+}
