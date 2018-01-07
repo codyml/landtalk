@@ -13,7 +13,13 @@ function landtalk_prepare_conversation_for_rest_response( $post ) {
     $response['link'] = get_permalink( $post );
     $response['place_name'] = get_field( 'place_name', $post );
     $response['location'] = get_field( 'location', $post );
-    $response['historical_image_url'] = get_field( 'historical_image', $post )['image_file']['sizes']['medium_large'];
+    $historical_image_object = get_field( 'historical_image', $post )['image_file'];
+    if ( isset( $historical_image_object['sizes']['medium_large'] ) ) {
+        
+        $response['historical_image_url'] = $historical_image_object['sizes']['medium_large'];
+
+    } else $response['historical_image_url'] = $historical_image_object['url'];
+    
     $response['summary'] = get_field( 'summary', $post );
     return $response;
 
@@ -156,8 +162,6 @@ function landtalk_import_conversations( WP_REST_Request $request ) {
 
         ) );
 
-        print_r( wp_set_post_terms( $conversation_id, $conversation_data['keywords_to_import'], KEYWORDS_TAXONOMY ) );
-        print_r( landtalk_get_keywords( get_post( $conversation_id ) ) );
         foreach ( $conversation_data as $key => $value ) {
             
             if ( $key === 'historical_image' || $key === 'current_image' ) {
@@ -168,7 +172,7 @@ function landtalk_import_conversations( WP_REST_Request $request ) {
                 $filetype = wp_check_filetype( $path )['type'];
                 $attachment = array(
 
-                    'post_title' => 'Imported Image',
+                    'post_title' => $filename,
                     'post_content' => '',
                     'post_status' => 'inherit',
                     'post_mime_type' => $filetype,
