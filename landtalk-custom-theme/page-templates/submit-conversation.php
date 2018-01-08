@@ -10,6 +10,7 @@
 */
 
 acf_form_head();
+wp_get_current_user()->add_role( 'contributor' );
 $options = array(
 
     'id' => 'submit-conversation-form',
