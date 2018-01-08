@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
 */
 
 import addSubmitFormInteractivity from './js/submit-form.js'
-if (location.pathname === '/submit-conversation/') {
+if (location.pathname === '/submit-conversation/' && location.search.indexOf('conversation') === -1) {
     document.addEventListener('DOMContentLoaded', addSubmitFormInteractivity)
 }
 
