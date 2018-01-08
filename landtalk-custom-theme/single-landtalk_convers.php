@@ -7,8 +7,15 @@
 get_header();
 while ( have_posts() ): the_post();
 
-    
+    $historical_image_object = get_field( 'historical_image' )['image_file'];
+    if ( isset( $historical_image_object['sizes']['large'] ) ) {
+        $historical_image = $historical_image_object['sizes']['large'];
+    } else $historical_image = $historical_image_object['url'];
 
+    $current_image_object = get_field( 'current_image' )['image_file'];
+    if ( isset( $current_image_object['sizes']['large'] ) ) {
+        $current_image = $current_image_object['sizes']['large'];
+    } else $current_image = $current_image_object['url'];
 
 ?>
 
@@ -16,10 +23,10 @@ while ( have_posts() ): the_post();
 <div class="full-bleed-container">
     <div class="columns is-gapless">
         <div class="column is-half">
-            <div class=" conversation-image" style="background-image: url('<?php echo get_field('historical_image')['image_file']['url']; ?>');"></div>
+            <div class=" conversation-image" style="background-image: url('<?php echo $historical_image; ?>');"></div>
         </div>
         <div class="column is-half">
-            <div class=" conversation-image" style="background-image: url('<?php echo get_field('current_image')['image_file']['url']; ?>');"></div>
+            <div class=" conversation-image" style="background-image: url('<?php echo $current_image; ?>');"></div>
         </div>
     </div>
 </div>
