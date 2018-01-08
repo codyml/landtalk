@@ -107,7 +107,7 @@ while ( have_posts() ): the_post();
         <div class="column is-one-third">
             <div class="level">
                 <div class="level-item">
-                    <div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button" data-size="large" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse">Share</a></div>
+                    <div class="fb-share-button" data-href="<?php the_permalink(); ?>" data-layout="button" data-size="large" data-mobile-iframe="true"></div>
                 </div>
                 <div class="level-item">
                     <a class="twitter-share-button" href="https://twitter.com/intent/tweet" data-size="large">Tweet</a>
