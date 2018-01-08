@@ -37,13 +37,16 @@ $options = array(
 $conversation = null;
 if ( isset( $_GET['conversation'] ) ) {
     
-    $conversation = get_post( $_GET['conversation'] );
+    $conversation_id = $_GET['conversation'];
+    $conversation = get_post( $conversation_id );
     wp_update_post( array(
          'ID' => $conversation->ID,
          'post_title' => get_field( 'place_name', $conversation ),
          'post_name' => sanitize_title( get_field( 'place_name', $conversation ) ),
      ) );
     
+    //  Retrieves again to get up-to-date object.
+    $conversation = get_post( $conversation_id );
     $permalink = get_permalink( $conversation );
     landtalk_conversation_send_emails( $conversation );
 
