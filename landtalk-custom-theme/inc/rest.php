@@ -162,6 +162,7 @@ function landtalk_import_conversations( WP_REST_Request $request ) {
 
         ) );
 
+        wp_set_post_terms( $conversation_id, $conversation_data['keywords_to_import'], KEYWORDS_TAXONOMY );
         foreach ( $conversation_data as $key => $value ) {
             
             if ( $key === 'historical_image' || $key === 'current_image' ) {
