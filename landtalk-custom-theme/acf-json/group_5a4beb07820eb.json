@@ -116,6 +116,43 @@
                     "toolbar": "full",
                     "media_upload": 1,
                     "delay": 0
+                },
+                {
+                    "key": "field_5a52f00b7e502",
+                    "label": "From Name",
+                    "name": "from_name",
+                    "type": "text",
+                    "instructions": "Enter the name that will appear in the From section of the email.",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "50",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": ""
+                },
+                {
+                    "key": "field_5a52f04e7e503",
+                    "label": "From Email",
+                    "name": "from_email",
+                    "type": "email",
+                    "instructions": "Enter the email address that will appear in the From section of the email.",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "50",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": ""
                 }
             ]
         }
@@ -138,5 +175,5 @@
     "active": 1,
     "description": "",
     "recaptcha": 0,
-    "modified": 1515196828
+    "modified": 1515384933
 }
