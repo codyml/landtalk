@@ -31,8 +31,6 @@ function landtalk_get_youtube_embed( $url ) {
 
 function landtalk_conversation_send_emails( $conversation ) {
 
-    print_r( get_fields( $conversation) );
-
     $recipients = array();
     if ( get_field( 'email_to_interviewer', $conversation ) ) {
         $recipients[] = get_field( 'interviewer_email_address', $conversation );
@@ -49,10 +47,6 @@ function landtalk_conversation_send_emails( $conversation ) {
             $subject = get_field( 'submission_message', 'options' )['subject'];
             $body = get_field( 'submission_message', 'options' )['body'];
             $message = str_replace( '%conversation_url%', get_permalink( $conversation ), $body );
-            print_r( $to );
-            print_r( $subject );
-            print_r( $message );
-            print_r( wp_mail( $to, $subject, $message, 'Content-type: text/html' ) );
 
         }
 
