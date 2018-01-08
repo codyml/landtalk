@@ -346,8 +346,8 @@
                     "min_size": "",
                     "max_width": "",
                     "max_height": "",
-                    "max_size": "",
-                    "mime_types": ""
+                    "max_size": 10,
+                    "mime_types": "jpg, jpeg, tif, tiff, png, gif, bmp"
                 },
                 {
                     "key": "field_5a4be1d000105",
@@ -427,8 +427,8 @@
                     "min_size": "",
                     "max_width": "",
                     "max_height": "",
-                    "max_size": "",
-                    "mime_types": ""
+                    "max_size": 10,
+                    "mime_types": "jpg, jpeg, tif, tiff, png, gif, bmp"
                 },
                 {
                     "key": "field_5a4be21f00109",
@@ -788,5 +788,5 @@
     "active": 1,
     "description": "",
     "recaptcha": 0,
-    "modified": 1515220681
+    "modified": 1515387572
 }
