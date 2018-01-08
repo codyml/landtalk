@@ -130,7 +130,7 @@ const setupVideoPreview = () => {
 
 const clearAccordions = () => {
 
-    $(window).off('unload')
+    jQuery(window).off('unload')
     localStorage.setItem('acf', '')
 
 }
