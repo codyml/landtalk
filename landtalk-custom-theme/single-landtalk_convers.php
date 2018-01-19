@@ -73,7 +73,11 @@ while ( have_posts() ): the_post();
                         <?php endif; ?>
                     </div>
                     <div class="conversation-meta"><strong>Interviewer: </strong><?php the_field('interviewer_full_name'); ?></div>
-                    <div class="conversation-meta"><strong>Interview Date: </strong><?php the_field('date'); ?></div>
+                    <div class="conversation-meta">
+                        <?php if ( strlen( get_field('date', false, false) ) === 8 ): ?>
+                            <strong>Interview Date: </strong><?php the_field('date'); ?>
+                        <?php endif; ?>
+                    </div>
                     <div class="conversation-meta"><strong>Submission Date: </strong><?php the_date(); ?></div>
                     <div class="conversation-meta"><strong>Keywords: </strong><? echo implode( ', ', landtalk_get_keywords( $post ) ); ?></div>
                 </div>
