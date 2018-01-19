@@ -46,14 +46,8 @@ function landtalk_conversation_send_emails( $conversation ) {
 
             $subject = get_field( 'submission_message', 'options' )['subject'];
             $body = get_field( 'submission_message', 'options' )['body'];
-            $from_name = get_field( 'submission_message', 'options' )['from_name'];
-            $from_email = get_field( 'submission_message', 'options' )['from_email'];
             $message = str_replace( '%conversation_url%', get_permalink( $conversation ), $body );
-            $headers = array(
-                'Content-type: text/html',
-                htmlspecialchars( 'From:' . $from_name . ' <' . $from_email . '>' ),
-            );
-            
+            $headers = array( 'Content-type: text/html' );
             wp_mail( $to, $subject, $message, $headers );
 
         }
@@ -61,3 +55,19 @@ function landtalk_conversation_send_emails( $conversation ) {
     }
 
 }
+
+
+/*
+*   Modifies 'From' header of sent emails.
+*/
+ 
+function landtalk_modify_from_email( $original_email_address ) {
+    return get_field( 'submission_message', 'options' )['from_email'];
+}
+ 
+function landtalk_modify_from_name( $original_email_from ) {
+    return get_field( 'submission_message', 'options' )['from_name'];
+}
+ 
+add_filter( 'wp_mail_from', 'landtalk_modify_from_email' );
+add_filter( 'wp_mail_from_name', 'landtalk_modify_from_name' );
