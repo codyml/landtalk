@@ -16,11 +16,11 @@ get_header();
     </div>
 </div>
 <div class="full-bleed-container">
-    <div class="react-component" data-component-name="ConversationMap">React Component</div>
+    <div class="react-component" data-component-name="ConversationMap"></div>
 </div>
 <div class="container">
     <h3 class="is-size-5 has-text-weight-bold has-text-centered has-text-grey has-space-below">Featured Conversations</h3>
-    <div class="react-component" data-component-name="FeaturedConversations">React Component</div>
+    <div class="react-component" data-component-name="FeaturedConversations"></div>
 </div>
 <div class="container">
     <div class="columns is-centered">
