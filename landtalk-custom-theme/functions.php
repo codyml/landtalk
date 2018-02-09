@@ -50,7 +50,22 @@ require_once 'inc/rest.php';
 
 
 /*
-*   Defines other functionality used by the theme.
+*   Enables automatic page titles.
 */
 
-require_once 'inc/misc.php';
+require_once 'inc/title.php';
+
+
+/*
+*   Defines utility functions.
+*/
+
+require_once 'inc/util.php';
+
+
+/*
+*   Sets up custom email notification messages for conversations,
+*   reports and contact messages.
+*/
+
+require_once 'inc/email.php';
