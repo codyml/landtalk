@@ -1,7 +1,7 @@
 Land Talk on WordPress
 ======================
 
-Introduction
+About
 ------------
 This repository contains the custom code for the [Land Talk](http://www.landtalk.org) website.  The site is packaged as a WordPress theme, which must be installed and activated in a WordPress installation running a recent version of WordPress.
 
@@ -37,3 +37,7 @@ If you don't have FTP access to the server, do the following:
 3.  Click on the Land Talk custom theme and click the Delete button in the lower-right.
 4.  Click the Add New button, click the Upload Theme button, and navigate to the Zip archive created in step 1.
 5.  Activate the newly-uploaded theme.
+
+Note about `./landtalk-custom-theme/class-acf-field-taxonomy_hacked.php`
+------------------------------------------------------------------------
+To enable ACF's front-end form to allow unauthenticated users to add taxonomy terms, the only solution I could find was to hack one of ACF's internal classes.  This file is the modified version of `wp-content/advanced-custom-fields-pro/includes/fields/class-acf-field-taxonomy.php`; if reinstalling ACF Pro, you'll need to replace the original version of the file with this hacked version.  This has only been found to work on ACF Pro version 5.6.7.
