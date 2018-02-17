@@ -24,7 +24,7 @@
             "label": "Place Name (Required)",
             "name": "place_name",
             "type": "text",
-            "instructions": "Include the name of the city, state\/province if applicable, and country.",
+            "instructions": "Include the name of the city, state\/province, and country. Avoid local abbreviations.",
             "required": 1,
             "conditional_logic": 0,
             "wrapper": {
@@ -33,7 +33,7 @@
                 "id": ""
             },
             "default_value": "",
-            "placeholder": "Example: Central Park, New York, NY, United States",
+            "placeholder": "Example: Alton, Illinois, USA",
             "prepend": "",
             "append": "",
             "maxlength": ""
@@ -788,5 +788,5 @@
     "active": 1,
     "description": "",
     "recaptcha": 0,
-    "modified": 1515389142
+    "modified": 1518908745
 }
