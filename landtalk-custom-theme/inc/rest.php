@@ -140,6 +140,39 @@ add_action( 'rest_api_init', 'landtalk_register_latest_conversations_endpoint' )
 
 
 /*
+*   Adds REST endpoint for retrieving the Featured Conversations.
+*/
+
+function landtalk_get_related_conversations( WP_REST_Request $request ) {
+
+    $id = $request['id'];
+    $conversations = get_posts( array( 'post_type' => CONVERSATION_POST_TYPE, 'posts_per_page' => 3 ) );
+    $response = array();
+    foreach ( $conversations as $conversation ) {
+
+        $response[] = landtalk_prepare_conversation_for_rest_response( $conversation );
+
+    }
+
+    return $response;
+
+}
+
+function landtalk_register_related_conversations_endpoint() {
+  
+    register_rest_route( 'landtalk', '/conversations/related', array(
+        
+        'methods' => 'GET',
+        'callback' => 'landtalk_get_related_conversations',
+
+    ) );
+
+}
+
+add_action( 'rest_api_init', 'landtalk_register_related_conversations_endpoint' );
+
+
+/*
 *   Adds REST endpoint for importing Conversations.  To import,
 *   move image files to the wp-content/uploads/YEAR/MONTH/import and POST a
 *   JSON file containing an array of objects following the Conversation

@@ -95,7 +95,7 @@ export const downloadRelatedConversations = async (conversationId) => {
 
     if (!relatedConversations) {
 
-        const response = await fetch(`/wp-json/landtalk/conversations/related/${ conversationId }`)
+        const response = await fetch(`/wp-json/landtalk/conversations/related?id=${ conversationId }`)
         relatedConversations = await response.json()
 
     }
