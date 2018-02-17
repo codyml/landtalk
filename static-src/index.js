@@ -11,11 +11,13 @@ import ConversationMap from './js/conversation-map.jsx'
 import FeaturedConversations from './js/featured-conversations.jsx'
 import ConversationArchive from './js/conversation-archive.jsx'
 import MiniConversationMap from './js/mini-conversation-map.jsx'
+import RelatedConversations from './js/related-conversations.jsx'
 const components = {
     ConversationMap,
     FeaturedConversations,
     ConversationArchive,
     MiniConversationMap,
+    RelatedConversations,
 }
 
 

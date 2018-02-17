@@ -84,3 +84,22 @@ export const downloadPageOfConversations = async (pageNumber, searchTerm) => {
     return pagesOfConversations[pageNumber]
 
 }
+
+
+/*
+*   Downloads or returns cache of Latest Conversations.
+*/
+
+let relatedConversations
+export const downloadRelatedConversations = async (conversationId) => {
+
+    if (!relatedConversations) {
+
+        const response = await fetch(`/wp-json/landtalk/conversations/related/${ conversationId }`)
+        relatedConversations = await response.json()
+
+    }
+
+    return relatedConversations
+
+}
