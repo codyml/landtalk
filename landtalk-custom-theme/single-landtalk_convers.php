@@ -74,7 +74,7 @@ while ( have_posts() ): the_post();
                     </div>
                     <div class="conversation-meta"><strong>Interviewer: </strong><?php the_field('interviewer_full_name'); ?></div>
                     <div class="conversation-meta">
-                        <?php if ( strlen( get_field('date', false, false) ) === 8 ): ?>
+                        <?php if ( null !== get_field('date', false, false) && strlen( get_field('date', false, false) ) === 8 ): ?>
                             <strong>Interview Date: </strong><?php the_field('date'); ?>
                         <?php endif; ?>
                     </div>
