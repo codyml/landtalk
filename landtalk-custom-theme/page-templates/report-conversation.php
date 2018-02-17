@@ -62,10 +62,10 @@ $options = array(
 $report = null;
 if ( isset( $_GET['report'] ) ) {
     
-   $report = get_post( $_GET['report'] );
-   update_field( 'conversation', $conversation->ID, $report->ID );
-   wp_update_post( array( 'ID' => $conversation->ID, 'post_status' => 'pending' ) );
-   landtalk_send_report_notification( $report );
+    $report = get_post( $_GET['report'] );
+    update_field( 'conversation', $conversation->ID, $report->ID );
+    wp_update_post( array( 'ID' => $conversation->ID, 'post_status' => 'pending' ) );
+    landtalk_send_report_notification( $report );
 
 }
 

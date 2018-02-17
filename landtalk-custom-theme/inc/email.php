@@ -34,7 +34,7 @@ function landtalk_conversation_send_emails( $conversation ) {
 
 /*
 *   Sends a notification to the registered notification addresses
-*   when a Report or Contact message is submitted.
+*   when a Report is submitted.
 */
 
 function landtalk_send_report_notification( $report ) {
@@ -69,13 +69,48 @@ function landtalk_send_report_notification( $report ) {
 
 /*
 *   Sends a notification to the registered notification addresses
+*   when a Contact message is submitted.
+*/
+
+function landtalk_send_contact_notification( $message_object ) {
+
+    $subject = 'New Land Talk Contact Message';
+    $name = get_field( 'name', $message_object );
+    $email_address = get_field( 'email_address', $message_object );
+    $submitted_message = get_field( 'message', $message_object );
+    ob_start();
+
+    ?>
+
+        <h1>A Land Talk visitor sent a Contact message.</h1>
+        <p>
+            <strong>From</strong>: <a href="mailto:<?php echo $email_address; ?>"><?php echo $name; ?> &lt;<?php echo $email_address; ?>&gt;</a>
+        </p>
+        <p>
+            <strong>Message</strong>: <?php echo $submitted_message; ?>
+        </p>
+        <br>
+        <p>
+            <em>To reply to this message, compose a new email to the "From" address.  Replies to this email will be discarded.</em>
+        </p>
+
+    <?php
+
+    $message = ob_get_clean();
+    landtalk_send_notification( $subject, $message, 'contact' );
+
+}
+
+
+/*
+*   Sends a notification to the registered notification addresses
 *   when a Report or Contact message is submitted.
 */
 
 function landtalk_send_notification( $subject, $message, $notification_type ) {
 
     $notification_addresses = get_field( 'notifications', 'options' );
-    foreach ( $notification_addresses as $address ) {
+    if ( isset( $notification_addresses ) ) foreach ( $notification_addresses as $address ) {
 
         if ( in_array( $notification_type, $address['notification_types'] ) ) {
 

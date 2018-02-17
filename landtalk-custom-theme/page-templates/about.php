@@ -38,8 +38,9 @@ $options = array(
 $message = null;
 if ( isset( $_GET['message'] ) ) {
     
-   $message = get_post( $_GET['message'] );
-   wp_update_post( array( 'ID' => $message->ID, 'post_title' => 'Message from ' . get_field( 'name', $message ) ) );
+    $message = get_post( $_GET['message'] );
+    wp_update_post( array( 'ID' => $message->ID, 'post_title' => 'Message from ' . get_field( 'name', $message ) ) );
+    landtalk_send_contact_notification( $message );
 
 }
 
