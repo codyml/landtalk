@@ -31,13 +31,14 @@ function landtalk_prepare_conversation_for_rest_response( $post ) {
 *   by page or all at once.
 */
 
+define( 'POSTS_PER_PAGE', 6 );
 function landtalk_get_all_conversations( WP_REST_Request $request ) {
 
     $args = array( 'post_type' => CONVERSATION_POST_TYPE );
     if ( isset( $request['page'] ) ) {
 
-        $args['posts_per_page'] = 3;
-        $args['offset'] = $request['page'] * 3;
+        $args['posts_per_page'] = POSTS_PER_PAGE;
+        $args['offset'] = $request['page'] * POSTS_PER_PAGE;
 
     } else $args['posts_per_page'] = -1;
 

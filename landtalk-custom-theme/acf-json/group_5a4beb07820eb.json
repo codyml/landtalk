@@ -174,6 +174,72 @@
             "toolbar": "full",
             "media_upload": 1,
             "delay": 0
+        },
+        {
+            "key": "field_5a7d05538203a",
+            "label": "Notifications",
+            "name": "notifications",
+            "type": "repeater",
+            "instructions": "Add email addresses here that will be sent a notification each time a Report and\/or Contact message is submitted.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "collapsed": "field_5a7d05a18203b",
+            "min": 0,
+            "max": 0,
+            "layout": "block",
+            "button_label": "",
+            "sub_fields": [
+                {
+                    "key": "field_5a7d05a18203b",
+                    "label": "Email Address",
+                    "name": "email_address",
+                    "type": "email",
+                    "instructions": "",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "50",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": ""
+                },
+                {
+                    "key": "field_5a7d05f3b2902",
+                    "label": "Notification Types",
+                    "name": "notification_types",
+                    "type": "checkbox",
+                    "instructions": "Choose the notifications that will be sent to this address.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "50",
+                        "class": "",
+                        "id": ""
+                    },
+                    "choices": {
+                        "report": "Reports",
+                        "contact": "Contact Messages"
+                    },
+                    "allow_custom": 0,
+                    "save_custom": 0,
+                    "default_value": [
+                        "report",
+                        "contact"
+                    ],
+                    "layout": "vertical",
+                    "toggle": 0,
+                    "return_format": "value"
+                }
+            ]
         }
     ],
     "location": [
@@ -194,5 +260,5 @@
     "active": 1,
     "description": "",
     "recaptcha": 0,
-    "modified": 1515387065
+    "modified": 1518145713
 }

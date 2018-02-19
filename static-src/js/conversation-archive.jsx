@@ -32,13 +32,6 @@ const SECTIONS = [
     },
 
     {
-        key: 'latestConversations',
-        title: 'Latest Conversations',
-        Component: ExcerptGallery,
-        request: downloadLatestConversations,
-    },
-
-    {
         key: 'conversationMap',
         title: 'Map',
         Component: ConversationMap,
