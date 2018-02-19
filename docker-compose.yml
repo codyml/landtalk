@@ -27,5 +27,3 @@ services:
             WORDPRESS_DB_HOST: mysql:3306
             WORDPRESS_DB_USER: wordpress
             WORDPRESS_DB_PASSWORD: wordpress
-volumes:
-    db_data:
