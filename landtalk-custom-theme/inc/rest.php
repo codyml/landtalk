@@ -144,15 +144,43 @@ add_action( 'rest_api_init', 'landtalk_register_latest_conversations_endpoint' )
 *   Adds REST endpoint for retrieving the Featured Conversations.
 */
 
+define( 'N_RELATED_CONVERSATIONS', 3 );
 function landtalk_get_related_conversations( WP_REST_Request $request ) {
 
     $id = $request['id'];
-    $conversations = get_posts( array( 'post_type' => CONVERSATION_POST_TYPE, 'posts_per_page' => 3 ) );
+    $terms = get_the_terms( $id, KEYWORDS_TAXONOMY );
+    $conversations = get_posts( array(
+        'post_type' => CONVERSATION_POST_TYPE,
+        'posts_per_page' => N_RELATED_CONVERSATIONS,
+        'post__not_in' => array($id),
+        'orderby' => 'rand',
+        'tax_query' => array(
+            'relation' => 'OR',
+            array(
+                'taxonomy' => KEYWORDS_TAXONOMY,
+                'field' => 'term_id',
+                'terms' => array_map(function($term) { return $term->term_id; }, $terms),
+            ),
+        ),
+    ) );
+    
+    $count = count( $conversations );
+    if ( $count < N_RELATED_CONVERSATIONS ) {
+
+        $addl_conversations = get_posts( array(
+            'post_type' => CONVERSATION_POST_TYPE,
+            'posts_per_page' => N_RELATED_CONVERSATIONS - $count,
+            'post__not_in' => array($id),
+            'orderby' => 'rand',
+        ) );
+
+        $conversations = array_merge($conversations, $addl_conversations);
+
+    }
+    
     $response = array();
     foreach ( $conversations as $conversation ) {
-
         $response[] = landtalk_prepare_conversation_for_rest_response( $conversation );
-
     }
 
     return $response;
