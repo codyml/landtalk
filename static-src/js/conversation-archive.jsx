@@ -4,48 +4,10 @@
 
 import React from 'react'
 import debounce from 'lodash.debounce'
-import {
-    downloadFeaturedConversations,
-    downloadLatestConversations,
-    downloadAllConversations,
-    downloadPageOfConversations,
-} from './rest.js'
-
 import CollapsibleSection from './collapsible-section.jsx'
-import ExcerptGallery from './excerpt-gallery.jsx'
-import ConversationMap from './conversation-map.jsx'
-
-
-/*
-*   Constants
-*/
-
-const GALLERY = 'gallery'
-const MAP = 'map'
-const SECTIONS = [
-    
-    {
-        key: 'featuredConversations',
-        title: 'Featured Conversations',
-        Component: ExcerptGallery,
-        request: downloadFeaturedConversations,
-    },
-
-    {
-        key: 'conversationMap',
-        title: 'Map',
-        Component: ConversationMap,
-        request: downloadAllConversations,
-    },
-
-    {
-        key: 'allConversations',
-        title: 'All Conversations',
-        Component: ExcerptGallery,
-        request: downloadPageOfConversations.bind(null, 0),
-    },
-
-]
+import SearchBar from './search-bar.jsx'
+import Conversations from './conversations.jsx'
+import ConversatioNMap from './conversation-map.jsx'
 
 
 /*
@@ -59,12 +21,7 @@ export default class ConversationArchive extends React.Component {
         super(props)
         this.state = {
             collapsed: {},
-            conversations: {},
-            allConversationsCurrentPage: 0,
-            allConversationsLoading: false,
-            allConversationsMoreToLoad: false,
-            allConversationsSearching: false,
-            allConversationsSearchValue: '',
+            searchBarValue: ''
         }
 
         //  Parses hash to determine ID of selected marker, if applicable
@@ -72,50 +29,14 @@ export default class ConversationArchive extends React.Component {
             const id = location.hash.match(/#(\d+)/)
             if (id) {
                 this.state.selectedMarker = +id[1]
-                this.state.collapsed.featuredConversations = true
                 this.state.collapsed.latestConversations = true
                 this.state.collapsed.allConversations = true
             }
         }
         
-        this.componentDidMount = this.componentDidMount.bind(this)
         this.toggleCollapsibleSection = this.toggleCollapsibleSection.bind(this)
-        this.loadMoreConversations = debounce(this.loadMoreConversations.bind(this), 500)
-        this.handleSearchBarChange = this.handleSearchBarChange.bind(this)
+        this.handleSearchBarChange = debounce(this.handleSearchBarChange.bind(this))
 
-    }
-
-
-    /*
-    *   Downloads Conversation data for each section and adds listener
-    *   for lazy-loading in the All Conversations section.
-    */
-
-    componentDidMount() {
-        
-        SECTIONS.forEach(section => {
-
-            section.request()
-            .then(response => {
-
-                this.setState({
-                    conversations: {
-                        ...this.state.conversations,
-                        [section.key]: response,
-                    }
-                })
-
-                if (section.key === 'allConversations') this.setState({
-                    allConversationsMoreToLoad: this.state.allConversationsCurrentPage + 1 !== response.nPages
-                })
-
-            })
-            .catch(console.error.bind(console))
-
-        })
-
-        document.addEventListener('scroll', this.handleScroll)
-    
     }
 
 
@@ -136,43 +57,6 @@ export default class ConversationArchive extends React.Component {
 
 
     /*
-    *   Loads additional conversations in the All Conversations.
-    */
-
-    loadMoreConversations() {
-
-        const nextPage = this.state.allConversationsCurrentPage + 1
-        this.setState({
-            allConversationsLoading: true,
-            allConversationsCurrentPage: nextPage,
-        })
-        
-        downloadPageOfConversations(nextPage, this.state.allConversationsSearchValue)
-        .then(response => {
-
-            this.setState({
-                
-                conversations: {
-                    ...this.state.conversations,
-                    allConversations: [
-                        ...this.state.conversations.allConversations,
-                        ...response,
-                    ],
-                },
-
-                allConversationsLoading: false,
-                allConversationsMoreToLoad: nextPage + 1 !== response.nPages,
-                allConversationsSearching: false,
-
-            })
-
-        })
-        .catch(console.error.bind(console))
-
-    }
-
-
-    /*
     *   Handles a change to the All Conversations search bar.
     */
 
@@ -182,14 +66,9 @@ export default class ConversationArchive extends React.Component {
         this.setState({
 
             collapsed: { ...this.state.collapsed, allConversations: false },
-            conversations: { ...this.state.conversations, allConversations: [] },
-            allConversationsSearchValue: searchValue,
-            allConversationsSearching: searchValue,
-            allConversationsCurrentPage: -1,
-            allConversationsLoading: true,
+            searchBarValue: searchBarValue,
 
-
-        }, this.loadMoreConversations)
+        })
 
     }
 
