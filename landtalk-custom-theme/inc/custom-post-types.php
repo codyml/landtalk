@@ -44,7 +44,7 @@ function landtalk_register_conversation_post_type() {
         'show_in_rest' => true,
         'rest_base' => 'conversations',
         'supports' => array( 'title' ),
-        'taxonomies' => array( KEYWORDS_TAXONOMY ),
+        'taxonomies' => array( KEYWORDS_TAXONOMY, 'category' ),
     ) );
 
 }
