@@ -5,9 +5,8 @@
 import React from 'react'
 import debounce from 'lodash.debounce'
 import CollapsibleSection from './collapsible-section.jsx'
-import SearchBar from './search-bar.jsx'
 import Conversations from './conversations.jsx'
-import ConversatioNMap from './conversation-map.jsx'
+import ConversationMap from './conversation-map.jsx'
 
 
 /*
@@ -20,7 +19,7 @@ export default class ConversationArchive extends React.Component {
 
         super(props)
         this.state = {
-            collapsed: {},
+            collapsed: { latest: false, map: false, all: false },
             searchBarValue: ''
         }
 
@@ -29,13 +28,13 @@ export default class ConversationArchive extends React.Component {
             const id = location.hash.match(/#(\d+)/)
             if (id) {
                 this.state.selectedMarker = +id[1]
-                this.state.collapsed.latestConversations = true
-                this.state.collapsed.allConversations = true
+                this.state.collapsed.latest = true
+                this.state.collapsed.all = true
             }
         }
         
         this.toggleCollapsibleSection = this.toggleCollapsibleSection.bind(this)
-        this.handleSearchBarChange = debounce(this.handleSearchBarChange.bind(this))
+        this.handleSearchBarChange = this.handleSearchBarChange.bind(this)
 
     }
 
@@ -44,12 +43,12 @@ export default class ConversationArchive extends React.Component {
     *   Collapses or expands a section.
     */
 
-    toggleCollapsibleSection(section) {
+    toggleCollapsibleSection(key) {
         
         this.setState({
             collapsed: {
                 ...this.state.collapsed,
-                [section.key]: !this.state.collapsed[section.key],
+                [key]: !this.state.collapsed[key],
             }
         })
     
@@ -62,11 +61,10 @@ export default class ConversationArchive extends React.Component {
 
     handleSearchBarChange(event) {
 
-        const searchValue = event.target.value
         this.setState({
 
-            collapsed: { ...this.state.collapsed, allConversations: false },
-            searchBarValue: searchBarValue,
+            collapsed: { ...this.state.collapsed, all: false },
+            searchBarValue: event.target.value,
 
         })
 
@@ -75,13 +73,12 @@ export default class ConversationArchive extends React.Component {
     render() {
         
         //  Sets up the All Conversations search bar
-        const searching = this.state.allConversationsSearching
-        const allConversationsSearchBar = <div className={ `control is-small has-icons-left ${ searching ? 'is-loading' : '' }` }>
+        const allConversationsSearchBar = <div className={ 'control is-small has-icons-left' }>
             <input
                 type='text'
                 className='input is-small'
                 placeholder='search conversations'
-                value={ this.state.allConversationsSearchValue }
+                value={ this.state.searchBarValue }
                 onChange={ this.handleSearchBarChange }
             />
             <span className="icon is-small is-left">
@@ -92,31 +89,34 @@ export default class ConversationArchive extends React.Component {
         return (
 
             <React.Fragment>
-                {
-                    SECTIONS.map(section => (
-
-                        <div className='container' key={ section.key }>
-                            <CollapsibleSection
-                                collapsed={ this.state.collapsed[section.key]}
-                                title={ section.title }
-                                titleContent={ section.key === 'allConversations' && allConversationsSearchBar }
-                                toggleCollapsed={ this.toggleCollapsibleSection.bind(this, section) }
-                            >
-                                <section.Component
-                                    conversations={ this.state.conversations[section.key] }
-                                    selectedMarker={ section.key === 'conversationMap' && this.state.selectedMarker }
-                                    loading={ section.key === 'allConversations' && this.state.allConversationsLoading }
-                                    loadMoreConversations={
-                                        (section.key === 'allConversations' && this.state.allConversationsMoreToLoad)
-                                        ? this.loadMoreConversations
-                                        : null
-                                    }
-                                />
-                            </CollapsibleSection>
-                        </div>
-
-                    ))
-                }
+                <div className='container'>
+                    <CollapsibleSection
+                        collapsed={ this.state.collapsed.latest }
+                        title='Latest Conversations'
+                        toggleCollapsed={ this.toggleCollapsibleSection.bind(this, 'latest') }
+                    >
+                        <Conversations perPage={3} paged={true}/>
+                    </CollapsibleSection>
+                </div>
+                <div className='container'>
+                    <CollapsibleSection
+                        collapsed={ this.state.collapsed.map }
+                        title='Map'
+                        toggleCollapsed={ this.toggleCollapsibleSection.bind(this, 'map') }
+                    >
+                        <ConversationMap selectedMarker={ this.state.selectedMarker } />
+                    </CollapsibleSection>
+                </div>
+                <div className='container'>
+                    <CollapsibleSection
+                        collapsed={ this.state.collapsed.all }
+                        title='All Conversations'
+                        titleContent={ allConversationsSearchBar }
+                        toggleCollapsed={ this.toggleCollapsibleSection.bind(this, 'all') }
+                    >
+                        <Conversations orderBy='rand' perPage={6} paged={true} searchTerm={ this.state.searchBarValue } />
+                    </CollapsibleSection>
+                </div>
             </React.Fragment>
 
         )

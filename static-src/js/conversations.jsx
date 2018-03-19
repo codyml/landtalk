@@ -18,7 +18,7 @@ export default class Conversations extends React.Component {
         super(props)
         this.state = { conversations: [], loading: false }
         if (this.props.paged) {
-            this.state.currentPage = -1
+            this.state.currentPage = 0
             this.state.morePages = true
         }
 
@@ -28,46 +28,79 @@ export default class Conversations extends React.Component {
     }
 
     componentDidMount() { this.loadMore() }
+    componentWillReceiveProps(newProps) {
+        
+        if (this.props.searchTerm !== newProps.searchTerm) {
+
+            const newState = { conversations: [], loading: false }
+            if (this.props.paged) {
+                newState.currentPage = 0
+                newState.morePages = true
+            }
+
+            this.setState(newState, this.loadMore)
+
+        }
+
+    }
+    
     loadMore() {
 
         this.setState({ loading: true })
+        const thisRequest = {}
+        this.latestRequest = thisRequest
         downloadConversations({
             orderBy: this.props.orderBy,
             perPage: this.props.perPage,
-            page: this.state.currentPage + 1,
+            page: this.state.currentPage,
+            searchTerm: this.props.searchTerm,
             featured: this.props.featured,
             relatedId: this.props.relatedId,
         })
-        .then({ nPages, conversations } => {
+        .then(response => {
+
+            if (this.latestRequest !== thisRequest) {
+                
+                throw 'Obsolete request.'
+            
+            } else return response
+
+        })
+        .then(({ nPages, conversations }) => {
             this.setState({
                 loading: false,
-                conversations: [ ...this.state.conversations, conversations ],
+                conversations: [ ...this.state.conversations, ...conversations ],
                 currentPage: this.state.currentPage + 1,
-                morePages: this.state.currentPage + 1 <= nPages,
+                morePages: this.state.currentPage < nPages - 1,
             })
         })
-        .catch(console.error.bind(console))
+        .catch(error => {
+            if (error !== 'Obsolete request.') console.error(error)
+        })
 
     }
 
     render() {
-        return 
-            <ExcerptGallery conversations={ this.state.conversations } />
-            {
-                this.state.loading
-                ? <div className='column is-size-4 has-text-weight-light has-text-centered has-text-grey'>Loading...</div>
-                : null
-            }
-            {
-                !this.state.loading && !this.state.conversations.length
-                ? <div className='column is-size-4 has-text-weight-light has-text-centered has-text-grey'>No Results</div>
-                : null
-            }
-            {
-                this.props.paged && !this.state.loading && this.state.conversations.length && this.state.morePages 
-                ? <a className='column is-size-4 has-text-weight-light has-text-centered has-text-grey block' onClick={ loadMoreConversations }>Load More</a>
-                : null
-            }
+        return (
+            <React.Fragment>
+                <ExcerptGallery conversations={ this.state.conversations } />
+                {
+                    this.state.loading
+                    ? <div className='column is-size-4 has-text-weight-light has-text-centered has-text-grey'>Loading...</div>
+                    : null
+                }
+                {
+                    !this.state.loading && !this.state.conversations.length
+                    ? <div className='column is-size-4 has-text-weight-light has-text-centered has-text-grey'>No Results</div>
+                    : null
+                }
+                {
+                    this.props.perPage && !this.state.loading && this.state.conversations.length && this.state.morePages 
+                    ? <a className='column is-size-4 has-text-weight-light has-text-centered has-text-grey block' onClick={ this.loadMore }>Load More</a>
+                    : null
+                }
+            </React.Fragment>
+        )
     }
 
 }

@@ -3,7 +3,7 @@
 */
 
 import React from 'react'
-import { downloadAllConversations } from './rest.js'
+import { downloadConversations } from './rest.js'
 import { GOOGLE_MAPS_JS_API_KEY } from '../.env.js'
 import markerIcon from '../img/marker.png'
 import selectedMarkerIcon from '../img/selected-marker.png'
@@ -95,8 +95,8 @@ export default class ConversationMap extends React.Component {
                 this.infoWindow = new google.maps.InfoWindow()
 
             })
-            .then(downloadAllConversations)
-            .then(conversations => this.addMarkers(conversations))
+            .then(downloadConversations)
+            .then(({ conversations }) => this.addMarkers(conversations))
             .then(this.handleSelectedMarker)
             .catch(console.error.bind(console))
 

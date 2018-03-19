@@ -10,8 +10,8 @@ import Conversations from './conversations.jsx'
 *   React component for rendering the Featured Conversations.
 */
 
-const RelatedConversations = ({ postId }) => (
-    <Conversations relatedId={postId} perPage={3} orderBy='rand' />
+const FeaturedConversations = () => (
+    <Conversations featured={true} />
 )
 
-export default RelatedConversations
+export default FeaturedConversations

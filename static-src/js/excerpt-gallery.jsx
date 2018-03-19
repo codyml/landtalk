@@ -21,7 +21,7 @@ const ExcerptGallery = ({ conversations }) => (
 
     <div className='columns is-multiline'>
         {
-            conversations ? COLUMNS.map(columnIndex =>
+            conversations && conversations.length ? COLUMNS.map(columnIndex =>
                 <div className='column is-one-third' key={ columnIndex }>
                     {
                         conversations.filter((c, i) => i % COLUMNS.length === columnIndex).map(conversation =>

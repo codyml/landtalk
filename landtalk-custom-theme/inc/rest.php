@@ -56,7 +56,7 @@ function landtalk_get_conversations( WP_REST_Request $request ) {
         
         $args['posts_per_page'] = $request['perPage'];
     
-    } else $args['posts_per_page'] = -1
+    } else $args['posts_per_page'] = -1;
 
     //  Retrieve the corect page of conversations
     if ( isset( $request['page'] ) && isset( $request['perPage'] ) ) {
@@ -89,14 +89,13 @@ function landtalk_get_conversations( WP_REST_Request $request ) {
     }
     
     $query = new WP_Query( $args );
-    $query->query();
     $conversations = $query->get_posts();
     
     //  Pad with random conversations
     if ( isset( $request['relatedId'] ) && isset( $request['perPage'] ) ) {
 
         $count = count( $conversations );
-        if ( $count < N_RELATED_CONVERSATIONS ) {
+        if ( $count < $request['perPage'] ) {
 
             $addl_conversations_query = new WP_Query( array(
                 'post_type' => CONVERSATION_POST_TYPE,
@@ -105,7 +104,6 @@ function landtalk_get_conversations( WP_REST_Request $request ) {
                 'orderby' => 'rand',
             ) );
 
-            $addl_conversations_query->query();
             $conversations = array_merge($conversations, $addl_conversations_query->get_posts());
 
         }
@@ -121,7 +119,7 @@ function landtalk_get_conversations( WP_REST_Request $request ) {
 
     return array(
         'conversations' => $prepared_conversations,
-        'nPages' => $query->max_num_page,
+        'nPages' => $query->max_num_pages,
     );
 
 }
@@ -137,7 +135,7 @@ function landtalk_register_conversations_endpoint() {
 
 }
 
-add_action( 'rest_api_init', 'landtalk_register_all_conversations_endpoint' );
+add_action( 'rest_api_init', 'landtalk_register_conversations_endpoint' );
 
 
 /*
