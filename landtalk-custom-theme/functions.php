@@ -69,3 +69,10 @@ require_once 'inc/util.php';
 */
 
 require_once 'inc/email.php';
+
+
+/*
+*   Includes environmental variables.
+*/
+
+include_once 'inc/.env.php';
