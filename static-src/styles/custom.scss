@@ -262,6 +262,11 @@ hr {
 
 }
 
+.conversation-transcript {
+    overflow-y: scroll;
+    max-height: 15em;
+}
+
 .about-images .image {
     background-repeat: no-repeat;
     background-size: cover;

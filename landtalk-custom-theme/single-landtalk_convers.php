@@ -112,6 +112,19 @@ while ( have_posts() ): the_post();
     </div>
 </div>
 
+<!-- Conversation Transcript Section -->
+<?php if ( get_field( 'transcript' ) ) : ?>
+    <div class="container">
+        <div class="columns is-centered">
+            <div class="column is-10 collapsible-section">
+                <div class="section-title is-size-4 has-text-weight-light">Conversation Transcript</div>
+                <hr>
+                <div class="content conversation-transcript"><?php the_field( 'transcript' ); ?></div>
+            </div>
+        </div>
+    </div>
+<?php endif; ?>
+
 <!-- Share & Report -->
 <div class="container">
     <div class="columns is-centered">

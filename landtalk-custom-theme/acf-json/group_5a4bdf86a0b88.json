@@ -558,6 +558,25 @@
             "new_lines": "wpautop"
         },
         {
+            "key": "field_5aaf37a67b943",
+            "label": "Conversation Transcript (Optional)",
+            "name": "transcript",
+            "type": "wysiwyg",
+            "instructions": "Include the transcript of the conversation, if available.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "tabs": "all",
+            "toolbar": "full",
+            "media_upload": 1,
+            "delay": 0
+        },
+        {
             "key": "field_5a4be27d0010e",
             "label": "Date",
             "name": "date",
@@ -788,5 +807,5 @@
     "active": 1,
     "description": "",
     "recaptcha": 0,
-    "modified": 1518908982
+    "modified": 1521432571
 }
