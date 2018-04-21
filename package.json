@@ -28,8 +28,8 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "watch": "webpack --watch --devtool source-map",
-    "build": "rm -f landtalk-custom-theme/static/script.js.map && rm -f landtalk-custom-theme/static/styles.css.map && webpack -p"
+    "watch": "rm -rf landtalk-custom-theme/static && webpack --watch --devtool source-map",
+    "build": "rm -rf landtalk-custom-theme/static && webpack -p"
   },
   "repository": {
     "type": "git",
