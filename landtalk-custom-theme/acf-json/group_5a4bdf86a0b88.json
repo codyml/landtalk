@@ -753,6 +753,29 @@
             "append": ""
         },
         {
+            "key": "field_5adb90c66e5ab",
+            "label": "Publication Confirmation",
+            "name": "publication_confirmation",
+            "type": "checkbox",
+            "instructions": "Land Talk submissions are immediately visible to the general public.  Please be sure that your submission does not contain sensitive or private content.",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "I consent to this submission being posted in full on a public webpage.": "I consent to this submission being posted in full on a public webpage."
+            },
+            "allow_custom": 0,
+            "save_custom": 0,
+            "default_value": [],
+            "layout": "vertical",
+            "toggle": 0,
+            "return_format": "value"
+        },
+        {
             "key": "field_5a500ab4ab9b7",
             "label": "",
             "name": "captcha",
@@ -807,5 +830,5 @@
     "active": 1,
     "description": "",
     "recaptcha": 0,
-    "modified": 1521432571
+    "modified": 1524339034
 }
