@@ -50,7 +50,7 @@ while ( have_posts() ): the_post();
 <div class="container">
     <div class="columns level">
         <div class="column is-7 level-item is-size-2 has-text-weight-light"><?php the_field('place_name'); ?></div>
-        <a href="/conversations/#<?php the_ID(); ?>" class="column is-5 level-item react-component mini-conversation-map" data-component-name="MiniConversationMap" data-post-id="<?php the_ID(); ?>"></a>
+        <a href="../#<?php the_ID(); ?>" class="column is-5 level-item react-component mini-conversation-map" data-component-name="MiniConversationMap" data-post-id="<?php the_ID(); ?>"></a>
     </div>
 </div>
 

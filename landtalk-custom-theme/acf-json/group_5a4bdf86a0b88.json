@@ -595,11 +595,11 @@
         },
         {
             "key": "field_5a4be2b70010f",
-            "label": "Your Full Name (Required)",
+            "label": "Your Full Name (Optional)",
             "name": "interviewer_full_name",
             "type": "text",
-            "instructions": "",
-            "required": 1,
+            "instructions": "If you prefer to remain anonymous, leave this field blank.",
+            "required": 0,
             "conditional_logic": 0,
             "wrapper": {
                 "width": "",
