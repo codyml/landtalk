@@ -7,7 +7,7 @@
 }
 
 .menu-main-nav-menu-container > ul {
-    
+
     display: flex;
     justify-content: center;
     align-items: flex-start;
@@ -25,7 +25,7 @@
     }
 
     .menu-item {
-        
+
         > a {
             padding: .5em;
             line-height: 1;
@@ -42,7 +42,7 @@
             margin: .5em;
             border-right: 1px solid $medium-light;
         }
-    
+
     }
 
     .menu-item:last-child::after {
@@ -60,7 +60,7 @@
         }
 
         > .sub-menu {
-            
+
             display: none;
             position: absolute;
             top: 100%;
@@ -69,7 +69,7 @@
             background-color: whitesmoke;
             white-space: nowrap;
             padding: .5em 0;
-            
+
             .menu-item::after {
                 display: none;
             }
@@ -88,10 +88,43 @@
     width: 200px;
 }
 
-.home-page-intro-text {
-    font-size: 1.15em;
-    line-height: 1.5;
-    font-weight: lighter;
+.homepage-intro {
+    text-align: right;
+}
+
+.homepage-map {
+    text-align: center;
+}
+
+.homepage-body {
+    text-align: left;
+}
+
+.homepage-intro, .homepage-map, .homepage-body {
+    display: flex;
+    flex-flow: column;
+
+    justify-content: center;
+}
+
+.homepage-heading {
+    font-size: 1.5rem;
+    line-height: 3;
+}
+
+.homepage-button {
+    background-color: #f0f0f0;
+    color: black;
+    display: inline-block;
+    padding: 10px 20px;
+    margin-top: 25px;
+}
+
+.homepage-image {
+    width: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .section {
@@ -167,21 +200,39 @@ hr {
     }
 
     .card {
-
-        border-radius: 6px;
+        box-shadow: none;
 
         .card-image figure {
             background-repeat: no-repeat;
             background-size: cover;
             background-position: center;
-            border-top-left-radius: 6px;
-            border-top-right-radius: 6px;
         }
 
         .link {
             color: $dark;
             font-style: italic;
             text-decoration: underline;
+        }
+
+        .card-content {
+          background-color: black;
+          color: white;
+
+          .has-space-below {
+            font-weight: bold;
+            margin-bottom: 10px;
+          }
+
+          .content {
+            font-size: .85rem;
+          }
+
+          .content:not(:last-child) {
+            margin-bottom: .67rem;
+          }
+        }
+        .link {
+          color: white;
         }
 
     }
@@ -193,7 +244,7 @@ hr {
     .section-title {
 
         margin-bottom: 0;
-    
+
         .disclosure-triangle {
             position: absolute;
             cursor: pointer;
@@ -221,7 +272,7 @@ hr {
 }
 
 .conversation-image-titles {
-    
+
     margin-top: 1em;
 
     .conversation-image-description {
@@ -290,7 +341,7 @@ hr {
 }
 
 #submit-form-youtube-preview-embed {
-    
+
     padding-bottom: 50%;
     height: 0;
     position: relative;
@@ -361,7 +412,7 @@ form.acf-form .acf-fields textarea {
 }
 
 .acf-input ul.acf-radio-list li {
-    
+
     margin: .5em 0;
 
     input[type="radio"] {

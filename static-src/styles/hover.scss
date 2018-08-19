@@ -1,0 +1,42 @@
+@media (hover: hover) and (pointer: fine) {
+  body {
+    .columns.is-multiline {
+      margin: -0.25rem;
+    }
+    .is-one-third {
+      padding: .25rem;
+    }
+
+    .conversation-excerpt {
+
+      + .conversation-excerpt {
+        margin: 7.5px 0;
+      }
+
+      .card {
+
+        .card-image figure {
+          border-radius: 0px;
+          z-index: 100;
+        }
+
+        .card-content {
+          background-color: rgba(0, 0, 0, .7);
+          display: none;
+          position: absolute;
+          top: 0;
+          z-index: 101;
+          width: 100%;
+          height: 100%;
+        }
+      }
+      .card:hover .card-content {
+        display: block;
+      }
+    }
+    .homepage-button:hover {
+      background-color: $medium-dark;
+      color: white;
+    }
+  }
+}

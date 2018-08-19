@@ -7,7 +7,7 @@
             "label": "Intro Text",
             "name": "intro_text",
             "type": "wysiwyg",
-            "instructions": "Enter the text that will appear at the top of the page, above the map.",
+            "instructions": "Enter the text that will appear at the top of the page.",
             "required": 1,
             "conditional_logic": 0,
             "wrapper": {
@@ -20,6 +20,73 @@
             "toolbar": "full",
             "media_upload": 1,
             "delay": 0
+        },
+        {
+            "key": "field_5b7742706c390",
+            "label": "Intro Image",
+            "name": "intro_image",
+            "type": "image",
+            "instructions": "Insert the image that will appear at the top of the page.",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "url",
+            "preview_size": "thumbnail",
+            "library": "all",
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": ""
+        },
+        {
+            "key": "field_5b7748a725f6c",
+            "label": "Map Text",
+            "name": "map_text",
+            "type": "wysiwyg",
+            "instructions": "Enter the text that will appear above the map.",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "tabs": "all",
+            "toolbar": "full",
+            "media_upload": 1,
+            "delay": 0
+        },
+        {
+            "key": "field_5b774562f31e8",
+            "label": "Body Image",
+            "name": "body_image",
+            "type": "image",
+            "instructions": "Insert the image that will appear below the map.",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "url",
+            "preview_size": "thumbnail",
+            "library": "all",
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": ""
         },
         {
             "key": "field_5a4beca924912",
@@ -62,13 +129,12 @@
         "discussion",
         "comments",
         "format",
-        "page_attributes",
-        "featured_image",
         "categories",
         "tags",
         "send-trackbacks"
     ],
     "active": 1,
     "description": "",
-    "modified": 1514925313
+    "recaptcha": 0,
+    "modified": 1534544103
 }
