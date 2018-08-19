@@ -7,7 +7,7 @@
 }
 
 .menu-main-nav-menu-container > ul {
-    
+
     display: flex;
     justify-content: center;
     align-items: flex-start;
@@ -25,7 +25,7 @@
     }
 
     .menu-item {
-        
+
         > a {
             padding: .5em;
             line-height: 1;
@@ -42,7 +42,7 @@
             margin: .5em;
             border-right: 1px solid $medium-light;
         }
-    
+
     }
 
     .menu-item:last-child::after {
@@ -60,7 +60,7 @@
         }
 
         > .sub-menu {
-            
+
             display: none;
             position: absolute;
             top: 100%;
@@ -69,7 +69,7 @@
             background-color: whitesmoke;
             white-space: nowrap;
             padding: .5em 0;
-            
+
             .menu-item::after {
                 display: none;
             }
@@ -82,6 +82,12 @@
 
     }
 
+}
+
+@media screen and (max-width: $tablet) {
+  body .menu-main-nav-menu-container > ul .menu-item::after {
+    border: none;
+  }
 }
 
 .normal-header-logo {
@@ -193,7 +199,7 @@ hr {
     .section-title {
 
         margin-bottom: 0;
-    
+
         .disclosure-triangle {
             position: absolute;
             cursor: pointer;
@@ -221,7 +227,7 @@ hr {
 }
 
 .conversation-image-titles {
-    
+
     margin-top: 1em;
 
     .conversation-image-description {
@@ -290,7 +296,7 @@ hr {
 }
 
 #submit-form-youtube-preview-embed {
-    
+
     padding-bottom: 50%;
     height: 0;
     position: relative;
@@ -361,7 +367,7 @@ form.acf-form .acf-fields textarea {
 }
 
 .acf-input ul.acf-radio-list li {
-    
+
     margin: .5em 0;
 
     input[type="radio"] {
