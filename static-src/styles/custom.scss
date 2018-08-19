@@ -84,6 +84,12 @@
 
 }
 
+@media screen and (max-width: $tablet) {
+  body .menu-main-nav-menu-container > ul .menu-item::after {
+    border: none;
+  }
+}
+
 .normal-header-logo {
     width: 200px;
 }
