@@ -25,7 +25,7 @@ $options = array(
 
     'post_title' => false,
     'submit_value' => 'Submit',
-    'return' => '/submit-conversation?conversation=%post_id%',
+    'return' => 'https://web.stanford.edu/group/spatialhistory/cgi-bin/landtalk/submit-conversation?conversation=%post_id%',
     'recaptcha' => true,
 
 );
@@ -37,7 +37,7 @@ $options = array(
 
 $conversation = null;
 if ( isset( $_GET['conversation'] ) ) {
-    
+
     $conversation_id = $_GET['conversation'];
     $conversation = get_post( $conversation_id );
     wp_update_post( array(
@@ -45,7 +45,7 @@ if ( isset( $_GET['conversation'] ) ) {
          'post_title' => get_field( 'place_name', $conversation ),
          'post_name' => sanitize_title( get_field( 'place_name', $conversation ) ),
      ) );
-    
+
     //  Retrieves again to get up-to-date object.
     $conversation = get_post( $conversation_id );
     $permalink = get_permalink( $conversation );
