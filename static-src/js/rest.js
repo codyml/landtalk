@@ -24,9 +24,9 @@ const cache = {}
 let randomSeed
 export const downloadConversations = async (params = {}) => {
 
-    let url = '/wp-json/landtalk/conversations?'
+    let url = 'https://web.stanford.edu/group/spatialhistory/cgi-bin/landtalk/wp-json/landtalk/conversations?'
     if (params.orderBy) {
-        
+
         if (params.orderBy === 'rand') {
 
             if (params.page === 0) {
@@ -38,7 +38,7 @@ export const downloadConversations = async (params = {}) => {
         } else url += `orderBy=${params.orderBy}&`
 
     }
-    
+
     if (params.perPage) url += `perPage=${params.perPage}&`
     if (params.page) url += `page=${params.page}&`
     if (params.searchTerm) url += `searchTerm=${encodeURIComponent(params.searchTerm)}&`

@@ -2,7 +2,7 @@ const path = require('path')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 module.exports = {
-    
+
     entry: [
         './static-src/lib/markerclusterer.js',
         'babel-polyfill',
@@ -13,7 +13,7 @@ module.exports = {
     output: {
         filename: 'script.js',
         path: path.resolve(__dirname, 'landtalk-custom-theme/static'),
-        publicPath: '/wp-content/themes/landtalk-custom-theme/static/',
+        publicPath: 'https://web.stanford.edu/group/spatialhistory/cgi-bin/landtalk/wp-content/themes/landtalk-custom-theme/static/',
     },
 
     module: {
@@ -49,5 +49,5 @@ module.exports = {
     plugins: [
         new ExtractTextPlugin('styles.css'),
     ],
-    
+
 }

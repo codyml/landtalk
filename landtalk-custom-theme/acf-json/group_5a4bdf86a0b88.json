@@ -85,7 +85,7 @@
                         "class": "",
                         "id": ""
                     },
-                    "message": "Enter the latitude and longitude of the place in decimal format.  Be sure to include any negative signs (-).  If possible, include 4 digits after the decimal point (for example, 48.4085).\r\n\r\nTo convert from hours-minutes-seconds format, use <a href=\"https:\/\/www.fcc.gov\/media\/radio\/dms-decimal\">this tool<\/a>.\r\n\r\nTo find coordinates of a location from Google Maps, zoom in until the place is easily distinguishable, then right-click on the place and select “What’s here?”.  Then, copy and paste the latitude and longitude values from the resulting pop-up at the bottom of the screen.",
+                    "message": "Enter the latitude and longitude of the place in decimal format.  Be sure to include any negative signs (-).  If possible, include 4 digits after the decimal point (for example, 48.4085).\r\n\r\nTo convert from hours-minutes-seconds format, use <a href=\"https:\/\/www.fcc.gov\/media\/radio\/dms-decimal\" target=\"_blank\" rel=\"noopener noreferrer\">this tool<\/a>.\r\n\r\nTo find coordinates of a location from Google Maps, zoom in until the place is easily distinguishable, then right-click on the place and select “What’s here?”.  Then, copy and paste the latitude and longitude values from the resulting pop-up at the bottom of the screen.",
                     "new_lines": "wpautop",
                     "esc_html": 0
                 },
@@ -214,7 +214,7 @@
                 "id": ""
             },
             "default_value": "",
-            "placeholder": "10-1000 characters",
+            "placeholder": "100-1000 characters",
             "maxlength": 1000,
             "rows": "",
             "new_lines": "wpautop"
@@ -233,7 +233,7 @@
                 "id": ""
             },
             "default_value": "",
-            "placeholder": "10-1000 characters",
+            "placeholder": "100-1000 characters",
             "maxlength": 1000,
             "rows": "",
             "new_lines": "wpautop"
@@ -252,7 +252,7 @@
                 "id": ""
             },
             "default_value": "",
-            "placeholder": "10-1000 characters",
+            "placeholder": "100-1000 characters",
             "maxlength": 1000,
             "rows": "",
             "new_lines": "wpautop"
@@ -271,7 +271,7 @@
                 "id": ""
             },
             "default_value": "",
-            "placeholder": "10-1000 characters",
+            "placeholder": "100-1000 characters",
             "maxlength": 1000,
             "rows": "",
             "new_lines": "wpautop"
