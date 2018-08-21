@@ -1,4 +1,4 @@
-@media (hover: hover) and (pointer: fine) {
+@media screen and (min-width: $widescreen) and (hover: hover) and (pointer: fine) {
   body {
     .columns.is-multiline {
       margin: -0.25rem;
