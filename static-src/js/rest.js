@@ -24,7 +24,7 @@ const cache = {}
 let randomSeed
 export const downloadConversations = async (params = {}) => {
 
-    let url = 'https://web.stanford.edu/group/spatialhistory/cgi-bin/landtalk/wp-json/landtalk/conversations?'
+    let url = '/wp-json/landtalk/conversations?'
     if (params.orderBy) {
 
         if (params.orderBy === 'rand') {

@@ -25,7 +25,7 @@ $options = array(
 
     'post_title' => false,
     'submit_value' => 'Submit',
-    'return' => 'https://web.stanford.edu/group/spatialhistory/cgi-bin/landtalk/submit-conversation?conversation=%post_id%',
+    'return' => '/submit-conversation?conversation=%post_id%',
     'recaptcha' => true,
 
 );

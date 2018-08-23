@@ -13,7 +13,7 @@ module.exports = {
     output: {
         filename: 'script.js',
         path: path.resolve(__dirname, 'landtalk-custom-theme/static'),
-        publicPath: 'https://web.stanford.edu/group/spatialhistory/cgi-bin/landtalk/wp-content/themes/landtalk-custom-theme/static/',
+        publicPath: '/wp-content/themes/landtalk-custom-theme/static/',
     },
 
     module: {
