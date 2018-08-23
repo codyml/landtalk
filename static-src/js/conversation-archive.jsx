@@ -32,7 +32,7 @@ export default class ConversationArchive extends React.Component {
                 this.state.collapsed.all = true
             }
         }
-        
+
         this.toggleCollapsibleSection = this.toggleCollapsibleSection.bind(this)
         this.handleSearchBarChange = this.handleSearchBarChange.bind(this)
 
@@ -44,14 +44,14 @@ export default class ConversationArchive extends React.Component {
     */
 
     toggleCollapsibleSection(key) {
-        
+
         this.setState({
             collapsed: {
                 ...this.state.collapsed,
                 [key]: !this.state.collapsed[key],
             }
         })
-    
+
     }
 
 
@@ -71,7 +71,7 @@ export default class ConversationArchive extends React.Component {
     }
 
     render() {
-        
+
         //  Sets up the All Conversations search bar
         const allConversationsSearchBar = <div className={ 'control is-small has-icons-left' }>
             <input
@@ -91,11 +91,11 @@ export default class ConversationArchive extends React.Component {
             <React.Fragment>
                 <div className='container'>
                     <CollapsibleSection
-                        collapsed={ this.state.collapsed.latest }
-                        title='Latest Conversations'
-                        toggleCollapsed={ this.toggleCollapsibleSection.bind(this, 'latest') }
+                        collapsed={ this.state.collapsed.featured }
+                        title='Featured Conversations'
+                        toggleCollapsed={ this.toggleCollapsibleSection.bind(this, 'featured') }
                     >
-                        <Conversations perPage={3} paged={true}/>
+                        <Conversations featured={true}/>
                     </CollapsibleSection>
                 </div>
                 <div className='container'>
@@ -114,13 +114,13 @@ export default class ConversationArchive extends React.Component {
                         titleContent={ allConversationsSearchBar }
                         toggleCollapsed={ this.toggleCollapsibleSection.bind(this, 'all') }
                     >
-                        <Conversations orderBy='rand' perPage={6} paged={true} searchTerm={ this.state.searchBarValue } />
+                        <Conversations orderBy='name' perPage={6} paged={true} searchTerm={ this.state.searchBarValue } />
                     </CollapsibleSection>
                 </div>
             </React.Fragment>
 
         )
-    
+
     }
 
 }

@@ -37,6 +37,7 @@
     .homepage-button:hover {
       background-color: $medium-dark;
       color: white;
+      transition: .25s;
     }
   }
 }
