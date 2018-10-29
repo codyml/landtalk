@@ -7,7 +7,7 @@ import Conversations from './conversations.jsx'
 
 
 /*
-*   React component for rendering the Featured Conversations.
+*   React component for rendering the Related Conversations.
 */
 
 const RelatedConversations = ({ postId }) => (

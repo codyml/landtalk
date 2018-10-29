@@ -54,3 +54,34 @@ export const downloadConversations = async (params = {}) => {
     return cache[url]
 
 }
+
+export const downloadLessons = async (params = {}) => {
+
+    let url = '/wp-json/landtalk/lessons?'
+    if (params.orderBy) {
+
+        if (params.orderBy === 'rand') {
+
+            if (params.page === 0) {
+                randomSeed = Math.floor(Math.random() * 4294967295)
+            }
+
+            url += `orderBy=RAND(${randomSeed})&`
+
+        } else url += `orderBy=${params.orderBy}&`
+
+    }
+
+    if (params.perPage) url += `perPage=${params.perPage}&`
+    if (params.page) url += `page=${params.page}&`
+    if (params.searchTerm) url += `searchTerm=${encodeURIComponent(params.searchTerm)}&`
+    if (!cache[url]) {
+
+        const response = await fetch(url)
+        cache[url] = await response.json()
+
+    }
+
+    return cache[url]
+
+}

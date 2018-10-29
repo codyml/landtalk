@@ -1,13 +1,13 @@
 <?php
 
 /*
-*   Retrieves the appropriate fields from a Conversation object 
+*   Retrieves the appropriate fields from a Conversation object
 *   for a REST response.  Includes fields necessary for rendering
 *   on the Conversation Map and as a Conversation Excerpt.
 */
 
-function landtalk_prepare_conversation_for_rest_response( $post ) {  
-    
+function landtalk_prepare_conversation_for_rest_response( $post ) {
+
     $response = array();
     $response['id'] = $post->ID;
     $response['link'] = get_permalink( $post );
@@ -15,12 +15,50 @@ function landtalk_prepare_conversation_for_rest_response( $post ) {
     $response['location'] = get_field( 'location', $post );
     $historical_image_object = get_field( 'historical_image', $post )['image_file'];
     if ( isset( $historical_image_object['sizes']['medium_large'] ) ) {
-        
+
         $response['historical_image_url'] = $historical_image_object['sizes']['medium_large'];
 
     } else $response['historical_image_url'] = $historical_image_object['url'];
-    
+
     $response['summary'] = get_field( 'summary', $post );
+    return $response;
+
+}
+
+function landtalk_prepare_lesson_for_rest_response( $post ) {
+
+    $response = array();
+    $response['id'] = $post->ID;
+    $response['link'] = get_permalink( $post );
+    $response['lesson_title'] = get_field( 'lesson_title', $post );
+    $image_object = get_field( 'image', $post );
+    if ( isset( $image_object['sizes']['medium_large'] ) ) {
+
+        $response['image_url'] = $image_object['sizes']['medium_large'];
+
+    } else $response['image_url'] = $image_object['url'];
+    $response['subject'] = get_field( 'subject', $post );
+    $response['subject_2'] = get_field( 'subject_2', $post );
+    $response['grade'] = get_field( 'grade', $post );
+    $response['synopsis'] = get_field( 'synopsis', $post );
+    return $response;
+
+}
+
+
+function landtalk_prepare_blog_for_rest_response( $post ) {
+
+    $response = array();
+    $response['id'] = $post->ID;
+    $response['link'] = get_permalink( $post );
+    $response['blog_title'] = get_field( 'blog_title', $post );
+    $image_object = get_field( 'image', $post );
+    if ( isset( $image_object['sizes']['medium_large'] ) ) {
+
+        $response['image_url'] = $image_object['sizes']['medium_large'];
+
+    } else $response['image_url'] = $image_object['url'];
+    // You can add more fields here
     return $response;
 
 }
@@ -34,12 +72,12 @@ function landtalk_get_conversations( WP_REST_Request $request ) {
 
     //  Retrieve Featured Conversations
     if ( isset( $request['featured'] ) ) {
-        
+
         return array(
             'conversations' => landtalk_get_featured_conversations(),
             'nPages' => 1
         );
-    
+
     }
 
     $args = array( 'post_type' => CONVERSATION_POST_TYPE );
@@ -50,12 +88,12 @@ function landtalk_get_conversations( WP_REST_Request $request ) {
         $args['orderby'] = $request['orderBy'];
 
     }
-    
+
     //  Retrieve the correct number of conversations per page
     if ( isset( $request['perPage'] ) ) {
-        
+
         $args['posts_per_page'] = $request['perPage'];
-    
+
     } else $args['posts_per_page'] = -1;
 
     //  Retrieve the corect page of conversations
@@ -87,10 +125,10 @@ function landtalk_get_conversations( WP_REST_Request $request ) {
         );
 
     }
-    
+
     $query = new WP_Query( $args );
     $conversations = $query->get_posts();
-    
+
     //  Pad with random conversations
     if ( isset( $request['relatedId'] ) && isset( $request['perPage'] ) ) {
 
@@ -109,7 +147,7 @@ function landtalk_get_conversations( WP_REST_Request $request ) {
         }
 
     }
-    
+
     $prepared_conversations = array();
     foreach ( $conversations as $conversation ) {
 
@@ -124,10 +162,108 @@ function landtalk_get_conversations( WP_REST_Request $request ) {
 
 }
 
+function landtalk_get_lessons( WP_REST_Request $request ) {
+
+    $args = array( 'post_type' => LESSON_POST_TYPE );
+
+    //  Order the pages correctly
+    if ( isset( $request['orderBy'] ) ) {
+
+        $args['orderby'] = $request['orderBy'];
+
+    }
+
+    //  Retrieve the correct number of lessons per page
+    if ( isset( $request['perPage'] ) ) {
+
+        $args['posts_per_page'] = $request['perPage'];
+
+    } else $args['posts_per_page'] = -1;
+
+    //  Retrieve the corect page of lessons
+    if ( isset( $request['page'] ) && isset( $request['perPage'] ) ) {
+
+        $args['offset'] = $request['page'] * $request['perPage'];
+
+    }
+
+    //  Retrieve search term results
+    if ( isset( $request['searchTerm'] ) ) {
+
+        $args['s'] = $request['searchTerm'];
+
+    }
+
+    $query = new WP_Query( $args );
+    $lessons = $query->get_posts();
+
+    $prepared_lessons = array();
+    foreach ( $lessons as $lesson ) {
+
+        $prepared_lessons[] = landtalk_prepare_lesson_for_rest_response( $lesson );
+
+    }
+
+    return array(
+        'lessons' => $prepared_lessons,
+        'nPages' => $query->max_num_pages,
+    );
+
+}
+
+function landtalk_get_blogs( WP_REST_Request $request ) {
+
+    $args = array( 'post_type' => BLOG_POST_TYPE );
+
+    //  Order the pages correctly
+    if ( isset( $request['orderBy'] ) ) {
+
+        $args['orderby'] = $request['orderBy'];
+
+    }
+
+    //  Retrieve the correct number of lessons per page
+    if ( isset( $request['perPage'] ) ) {
+
+        $args['posts_per_page'] = $request['perPage'];
+
+    } else $args['posts_per_page'] = -1;
+
+    //  Retrieve the corect page of lessons
+    if ( isset( $request['page'] ) && isset( $request['perPage'] ) ) {
+
+        $args['offset'] = $request['page'] * $request['perPage'];
+
+    }
+
+    //  Retrieve search term results
+    if ( isset( $request['searchTerm'] ) ) {
+
+        $args['s'] = $request['searchTerm'];
+
+    }
+
+    $query = new WP_Query( $args );
+    $blog = $query->get_posts();
+
+    $prepared_blogs = array();
+    foreach ( $blogs as $blog ) {
+
+        $prepared_blogs[] = landtalk_prepare_blog_for_rest_response( $blog );
+
+    }
+
+    return array(
+        'blogs' => $prepared_blogs,
+        'nPages' => $query->max_num_pages,
+    );
+
+}
+
 function landtalk_register_conversations_endpoint() {
-  
+
     register_rest_route( 'landtalk', '/conversations', array(
-        
+
         'methods' => 'GET',
         'callback' => 'landtalk_get_conversations',
 
@@ -137,6 +273,33 @@ function landtalk_register_conversations_endpoint() {
 
 add_action( 'rest_api_init', 'landtalk_register_conversations_endpoint' );
 
+
+function landtalk_register_lessons_endpoint() {
+
+    register_rest_route( 'landtalk', '/lessons', array(
+
+        'methods' => 'GET',
+        'callback' => 'landtalk_get_lessons',
+
+    ) );
+
+}
+
+add_action( 'rest_api_init', 'landtalk_register_lessons_endpoint' );
+
+
+function landtalk_register_blogs_endpoint() {
+
+    register_rest_route( 'landtalk', '/blogs', array(
+
+        'methods' => 'GET',
+        'callback' => 'landtalk_get_blogs',
+
+    ) );
+
+}
+
+add_action( 'rest_api_init', 'landtalk_register_blogs_endpoint' );
 
 /*
 *   Retrieves the Featured Conversations.

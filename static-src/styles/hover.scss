@@ -22,22 +22,35 @@
 
         .card-content {
           background-color: rgba(0, 0, 0, .7);
-          display: none;
+          opacity: 0;
           position: absolute;
           top: 0;
           z-index: 101;
           width: 100%;
           height: 100%;
+          transition: opacity .5s;
         }
       }
       .card:hover .card-content {
-        display: block;
+        opacity: 1;
       }
     }
     .homepage-button:hover {
       background-color: $medium-dark;
       color: white;
-      transition: .25s;
+      transition: background-color .5s, color .5s;
+    }
+
+    .lesson-excerpt:hover {
+      background-color: #f0f0f0;
+
+      .card-content {
+        background-color: #f0f0f0;
+      }
+    }
+    .access-lesson a:hover {
+      background-color: $medium-dark;
+      color: white;
     }
   }
 }

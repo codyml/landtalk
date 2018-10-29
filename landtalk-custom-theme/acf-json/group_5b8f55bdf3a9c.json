@@ -1,0 +1,236 @@
+{
+    "key": "group_5b8f55bdf3a9c",
+    "title": "Post Type: Lesson",
+    "fields": [
+        {
+            "key": "field_5b8f55d8657f9",
+            "label": "Lesson Title",
+            "name": "lesson_title",
+            "type": "text",
+            "instructions": "",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": 80
+        },
+        {
+            "key": "field_5b8f56c6657fa",
+            "label": "Applicable Grade Level(s)",
+            "name": "grade",
+            "type": "text",
+            "instructions": "Please enter the grade level(s) to which this lesson is applicable. This may be a number or a range of numbers.",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": 20
+        },
+        {
+            "key": "field_5b9035648ea25",
+            "label": "Subject",
+            "name": "subject",
+            "type": "text",
+            "instructions": "Please enter the subject this lesson applies to.",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": 24
+        },
+        {
+            "key": "field_5b904ca61e3c4",
+            "label": "Subject 2",
+            "name": "subject_2",
+            "type": "text",
+            "instructions": "If this lesson applies to another subject, please enter it here.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": 24
+        },
+        {
+            "key": "field_5b8f59db8b77e",
+            "label": "Image",
+            "name": "image",
+            "type": "image",
+            "instructions": "Please add a relevant thumbnail image for the lesson plan.",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array",
+            "preview_size": "thumbnail",
+            "library": "all",
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": ""
+        },
+        {
+            "key": "field_5b8f5876657fc",
+            "label": "Synopsis",
+            "name": "synopsis",
+            "type": "wysiwyg",
+            "instructions": "",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "tabs": "all",
+            "toolbar": "full",
+            "media_upload": 0,
+            "delay": 0
+        },
+        {
+            "key": "field_5b8f5918657fe",
+            "label": "Teachers' Notes",
+            "name": "teachers_notes",
+            "type": "wysiwyg",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "tabs": "all",
+            "toolbar": "full",
+            "media_upload": 0,
+            "delay": 0
+        },
+        {
+            "key": "field_5b8f5939657ff",
+            "label": "Learning Objectives and Curriculum Standards",
+            "name": "standards",
+            "type": "wysiwyg",
+            "instructions": "",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "tabs": "all",
+            "toolbar": "full",
+            "media_upload": 0,
+            "delay": 0
+        },
+        {
+            "key": "field_5b8f596265800",
+            "label": "Preparation",
+            "name": "preparation",
+            "type": "wysiwyg",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "tabs": "all",
+            "toolbar": "full",
+            "media_upload": 0,
+            "delay": 0
+        },
+        {
+            "key": "field_5b8f5a6120011",
+            "label": "Link",
+            "name": "link",
+            "type": "url",
+            "instructions": "If submitting a link to a Google Doc, please specify the link to the document. To get the proper link, open the relevant Google Doc, open the 'File' menu, select the option labeled 'Publish to the web...,' click 'Publish,' and copy the link provided.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": ""
+        },
+        {
+            "key": "field_5b8f5b1720012",
+            "label": "Document File",
+            "name": "document_file",
+            "type": "file",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "url",
+            "library": "all",
+            "min_size": "",
+            "max_size": 10,
+            "mime_types": "pdf, doc, docx, pages"
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "landtalk_lesson"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "seamless",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "",
+    "recaptcha": 0,
+    "modified": 1536276867
+}

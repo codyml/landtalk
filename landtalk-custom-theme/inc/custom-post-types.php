@@ -124,37 +124,73 @@ function landtalk_register_contact_message_post_type() {
 add_action( 'init', 'landtalk_register_contact_message_post_type' );
 
 /*
-*   Registers Resource custom post type.
+*   Registers Lesson custom post type.
 */
 
-function landtalk_register_resource_post_type() {
+function landtalk_register_lesson_post_type() {
 
-    register_post_type( RESOURCE_POST_TYPE, array(
+    register_post_type( LESSON_POST_TYPE, array(
         'labels' => array(
-            'name' => 'Resources',
-            'singular_name' => 'Resource',
-            'add_new_item' => 'Add New Resource',
-            'edit_item' => 'Edit Resource',
-            'new_item' => 'New Resource',
-            'view_item' => 'View Resource',
-            'view_items' => 'View Resources',
-            'search_items' => 'Search Resources',
-            'not_found' => 'No Resources Found',
-            'not_found_in_trash' => 'No Resources found in Trash',
-            'all_items' => 'All Resources',
-            'archives' => 'Resource Archives',
-            'attributes' => 'Resource Attributes',
-            'insert_into_item' => 'Insert into Resource',
-            'uploaded_to_this_item' => 'Uploaded to this Resource',
+            'name' => 'Lessons',
+            'singular_name' => 'Lesson',
+            'add_new_item' => 'Add New Lesson',
+            'edit_item' => 'Edit Lesson',
+            'new_item' => 'New Lesson',
+            'view_item' => 'View Lesson',
+            'view_items' => 'View Lessons',
+            'search_items' => 'Search Lessons',
+            'not_found' => 'No Lessons Found',
+            'not_found_in_trash' => 'No Lessons found in Trash',
+            'all_items' => 'All Lessons',
+            'archives' => 'Lesson Archives',
+            'attributes' => 'Lesson Attributes',
+            'insert_into_item' => 'Insert into Lesson',
+            'uploaded_to_this_item' => 'Uploaded to this Lesson',
         ),
         'menu_icon' => 'dashicons-book-alt',
         'public' => true,
-        'rewrite' => array( 'slug' => 'resources' ),
+        'rewrite' => array( 'slug' => 'lessons' ),
         'show_in_rest' => true,
-        'rest_base' => 'resources',
+        'rest_base' => 'lessons',
         'supports' => array( 'title' ),
     ) );
 
 }
 
-add_action( 'init', 'landtalk_register_resource_post_type' );
+add_action( 'init', 'landtalk_register_lesson_post_type' );
+
+/*
+*   Registers Blog custom post type.
+*/
+
+function landtalk_register_blog_post_type() {
+
+    register_post_type( BLOG_POST_TYPE, array(
+        'labels' => array(
+            'name' => 'Blogs',
+            'singular_name' => 'Blog',
+            'add_new_item' => 'Add New Blog',
+            'edit_item' => 'Edit Blog',
+            'new_item' => 'New Blog',
+            'view_item' => 'View Blog',
+            'view_items' => 'View Blogs',
+            'search_items' => 'Search Blogs',
+            'not_found' => 'No Blogs Found',
+            'not_found_in_trash' => 'No Blogs found in Trash',
+            'all_items' => 'All Blogs',
+            'archives' => 'Blog Archives',
+            'attributes' => 'Blog Attributes',
+            'insert_into_item' => 'Insert into Blog',
+            'uploaded_to_this_item' => 'Uploaded to this Blog',
+        ),
+        'menu_icon' => 'dashicons-book-alt',
+        'public' => true,
+        'rewrite' => array( 'slug' => 'Blogs' ),
+        'show_in_rest' => true,
+        'rest_base' => 'blogs',
+        'supports' => array( 'title' ),
+    ) );
+
+}
+
+add_action( 'init', 'landtalk_register_blog_post_type' );
