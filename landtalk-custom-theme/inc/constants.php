@@ -8,7 +8,7 @@ define( 'CONVERSATION_POST_TYPE', 'landtalk_convers' );
 define( 'REPORT_POST_TYPE', 'landtalk_report' );
 define( 'CONTACT_MESSAGE_POST_TYPE', 'landtalk_contact' );
 define( 'LESSON_POST_TYPE', 'landtalk_lesson' );
-define( 'LESSON_POST_TYPE', 'landtalk_blog' );
+define( 'BLOG_POST_TYPE', 'landtalk_blog' );
 
 /*
 *   Defines taxonomy identifiers.

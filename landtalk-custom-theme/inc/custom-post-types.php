@@ -183,7 +183,7 @@ function landtalk_register_blog_post_type() {
             'insert_into_item' => 'Insert into Blog',
             'uploaded_to_this_item' => 'Uploaded to this Blog',
         ),
-        'menu_icon' => 'dashicons-book-alt',
+        'menu_icon' => 'dashicons-format-aside',
         'public' => true,
         'rewrite' => array( 'slug' => 'Blogs' ),
         'show_in_rest' => true,
