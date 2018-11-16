@@ -33,12 +33,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/codyml/landtalk-wordpress.git"
+    "url": "git+https://github.com/cestastanford/landtalk.git"
   },
   "author": "Cody M Leff <mail@codymleff.com>",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/codyml/landtalk-wordpress/issues"
+    "url": "https://github.com/cestastanford/landtalk/issues"
   },
-  "homepage": "https://github.com/codyml/landtalk-wordpress#readme"
+  "homepage": "https://github.com/cestastanford/landtalk#readme"
 }

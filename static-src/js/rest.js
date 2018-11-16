@@ -19,12 +19,13 @@
 *    - relatedId: will return posts that share a keyword with the
 *       post matching the passed post ID.
 */
+let absPath = 'https://web.stanford.edu/group/spatialhistory/cgi-bin/landtalk'
 
 const cache = {}
 let randomSeed
 export const downloadConversations = async (params = {}) => {
 
-    let url = '/wp-json/landtalk/conversations?'
+    let url = absPath + '/wp-json/landtalk/conversations?'
     if (params.orderBy) {
 
         if (params.orderBy === 'rand') {
@@ -57,7 +58,7 @@ export const downloadConversations = async (params = {}) => {
 
 export const downloadLessons = async (params = {}) => {
 
-    let url = '/wp-json/landtalk/lessons?'
+    let url = absPath + '/wp-json/landtalk/lessons?'
     if (params.orderBy) {
 
         if (params.orderBy === 'rand') {
