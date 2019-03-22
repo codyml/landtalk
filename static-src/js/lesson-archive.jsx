@@ -44,7 +44,7 @@ export default class LessonArchive extends React.Component {
         return (
 
             <React.Fragment>
-                <Lessons orderBy='random' perPage={4} paged={true} />
+                <Lessons orderBy='random' paged={false} />
             </React.Fragment>
 
         )
