@@ -83,7 +83,7 @@ export default class ConversationMap extends React.Component {
 
                 this.map = new google.maps.Map(element, {
                     zoom: 2,
-                    center: new google.maps.LatLng(39.8282, -98.5795),
+                    center: new google.maps.LatLng(19.1724, -41.0266),
                     streetViewControl: false,
                     mapTypeControl: false,
                     fullscreenControl: false,
