@@ -16,7 +16,8 @@ RUN echo "file_uploads = On" >> /usr/local/etc/php/conf.d/uploads.ini \
 RUN apt-get update \
     && apt-get install -y zlib1g-dev \
     && rm -rf /var/lib/apt/lists/* \
-    && docker-php-ext-install zip 
+    && docker-php-ext-install zip \ 
+    && apt-get install -y unzip
 
 #   Adds sendmail support [https://github.com/docker-library/wordpress/issues/30#issuecomment-351462895]
 RUN apt-get update \
@@ -29,5 +30,6 @@ RUN apt-get update \
     && echo 'service sendmail restart' >> /usr/local/bin/docker-entrypoint-wrapper.sh \
     && echo 'exec docker-entrypoint.sh "$@"' >> /usr/local/bin/docker-entrypoint-wrapper.sh \
     && chmod +x /usr/local/bin/docker-entrypoint-wrapper.sh
+
 ENTRYPOINT ["docker-entrypoint-wrapper.sh"]
 CMD ["apache2-foreground"]
