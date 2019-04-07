@@ -10,10 +10,10 @@ Run the Docker application.
 Copy the file `.env.php` to `landtalk-custom-theme/inc`.
 Copy the file `.env.js` to `static-src`.
 
-Run:
+Run (keep this running in a separate terminal while doing future commands):
 ```
 npm install
-npm run build-dev
+npm run watch
 ```
 
 Run (keep this running in a separate terminal while doing future commands):
