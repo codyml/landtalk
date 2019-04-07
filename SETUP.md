@@ -1,5 +1,11 @@
 # Local setup
-Install [Docker](https://www.docker.com) and then run the Docker application.
+## Prerequisites
+- Install [Docker](https://www.docker.com) and then 
+- Make sure you have three files (get it from whoever worked on Landtalk previously): `.env.php`, `.env.js`, and `dump.sql`.
+
+## Setup instructions
+
+Run the Docker application.
 
 Copy the file `.env.php` to `landtalk-custom-theme/inc`.
 Copy the file `.env.js` to `static-src`.
@@ -10,16 +16,12 @@ npm install
 npm run build
 ```
 
-Run (keep this running in a separate terminal while doing things):
+Run (keep this running in a separate terminal while doing future commands):
 ```
 docker-compose up
 ```
 
-Download dump.sql from someone on the Landtalk team.
-
-Copy `dump.sql` and `mysql-test-user-setup.sql` to `/dev-env/dumps`.
-
-Copy `setup-wordpress.sh` to `/dev-env/wordpress`.
+Copy `dump.sql` to the `/dumps` file.
 
 Then run:
 ```
@@ -29,15 +31,15 @@ chmod +x ./dumps/setup-mysql.sh
 exit
 ```
 
-Then run:
-```
-docker-compose exec wordpress bash
-chmod +x setup-wordpress.sh
-./setup-wordpress.sh
-```
-
 Go to http://localhost and you should see this:
 
-![image](https://user-images.githubusercontent.com/1689183/55282261-16009180-5317-11e9-9aa5-8b0ddda1c612.png)
 
-Go to http://localhost/wp-admin/
+
+Go to http://localhost/wp-admin/ and sign in with username `root` and password `root`.
+
+## Regular running instructions
+To run the app in the future, run:
+```
+docker-compose up
+```
+And open http://localhost in your browser.

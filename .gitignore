@@ -3,3 +3,5 @@ dev-env
 node_modules
 landtalk-custom-theme/static
 .env*
+plugins
+dump.sql
