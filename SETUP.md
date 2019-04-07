@@ -13,7 +13,7 @@ Copy the file `.env.js` to `static-src`.
 Run:
 ```
 npm install
-npm run build
+npm run build-dev
 ```
 
 Run (keep this running in a separate terminal while doing future commands):
@@ -42,4 +42,16 @@ To run the app in the future, run:
 ```
 docker-compose up
 ```
+And in another terminal, run:
+```
+npm run watch
+```
 And open http://localhost in your browser.
+
+## Deployment
+Run:
+```
+npm run build
+```
+
+And then connect to the server via FTP / SSH, then replace the remote `wp-content/themes/landtalk-custom-theme` directory with the local `./landtalk-custom-theme` directory.

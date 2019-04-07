@@ -19,7 +19,7 @@
 *    - relatedId: will return posts that share a keyword with the
 *       post matching the passed post ID.
 */
-let absPath = 'https://web.stanford.edu/group/spatialhistory/cgi-bin/landtalk'
+let absPath = process.env.absPath;
 
 const cache = {}
 let randomSeed

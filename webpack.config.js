@@ -1,7 +1,8 @@
 const path = require('path')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const webpack = require('webpack')
 
-module.exports = {
+module.exports = env => ({
 
     entry: [
         './static-src/lib/markerclusterer.js',
@@ -13,7 +14,7 @@ module.exports = {
     output: {
         filename: 'script.js',
         path: path.resolve(__dirname, 'landtalk-custom-theme/static'),
-        publicPath: 'https://web.stanford.edu/group/spatialhistory/cgi-bin/landtalk/wp-content/themes/landtalk-custom-theme/static/',
+        publicPath: env === 'dev' ? 'http://localhost/wp-content/themes/landtalk-custom-theme/static/': 'https://web.stanford.edu/group/spatialhistory/cgi-bin/landtalk/wp-content/themes/landtalk-custom-theme/static/',
     },
 
     module: {
@@ -48,6 +49,9 @@ module.exports = {
 
     plugins: [
         new ExtractTextPlugin('styles.css'),
+        new webpack.DefinePlugin({
+            absPath: JSON.stringify(env === 'dev' ? 'http://localhost': 'https://web.stanford.edu/group/spatialhistory/cgi-bin/landtalk')
+        })
     ],
 
-}
+})
