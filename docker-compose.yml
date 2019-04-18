@@ -5,7 +5,7 @@ services:
         image: mysql:5.7
         volumes:
             - ./dev-env/mysql:/var/lib/mysql
-            - ./dev-env/dumps:/dumps
+            - ./dumps:/dumps
         restart: always
         environment:
             MYSQL_ROOT_PASSWORD: root
@@ -19,6 +19,7 @@ services:
         build: .
         volumes:
             - ./dev-env/wordpress:/var/www/html
+            - ./plugins:/var/www/html/wp-content/plugins
             - ./landtalk-custom-theme:/var/www/html/wp-content/themes/landtalk-custom-theme
         ports:
             - "80:80"
