@@ -239,30 +239,11 @@
             "new_lines": "wpautop"
         },
         {
-            "key": "field_5a4be11c00100",
-            "label": "Historic Activities (Required)",
-            "name": "used_to_do_here",
+            "key": "field_5ce6293802519",
+            "label": "Historic & Current Activities (Required)",
+            "name": "activities",
             "type": "textarea",
-            "instructions": "What are some of the things the observer used to do here?",
-            "required": 1,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "placeholder": "10-1000 characters",
-            "maxlength": 1000,
-            "rows": "",
-            "new_lines": "wpautop"
-        },
-        {
-            "key": "field_5a4be12c00101",
-            "label": "Current Activities (Required)",
-            "name": "does_here_now",
-            "type": "textarea",
-            "instructions": "What are some of the things the observer does here now?",
+            "instructions": "What are some of the things the observer used to do here?  What are some of the things the observer does here now?",
             "required": 1,
             "conditional_logic": 0,
             "wrapper": {

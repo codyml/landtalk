@@ -200,7 +200,7 @@
                     "name": "email_address",
                     "type": "email",
                     "instructions": "",
-                    "required": 1,
+                    "required": 0,
                     "conditional_logic": 0,
                     "wrapper": {
                         "width": "50",
@@ -259,6 +259,25 @@
             "ui": 1,
             "ui_on_text": "",
             "ui_off_text": ""
+        },
+        {
+            "key": "field_5ce62d7ec822e",
+            "label": "Migrate Activities on Update",
+            "name": "migrate_activities",
+            "type": "true_false",
+            "instructions": "If set to \"Yes,\" all Conversations that have content in the old, separate \"Historic Activities\" and \"Current Activities\" fields instead of in the new, combined \"Historic & Current Activities\" field will have the contents of the two separate fields automatically joined with a newline and inserted into the combined field when you click the \"Update\" button on this page.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
         }
     ],
     "location": [
@@ -279,5 +298,5 @@
     "active": 1,
     "description": "",
     "recaptcha": 0,
-    "modified": 1559171667
+    "modified": 1559173308
 }
