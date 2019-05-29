@@ -112,6 +112,12 @@ while ( have_posts() ): the_post();
                 <strong>Current Activities</strong>
                 <div><?php the_field('does_here_now'); ?></div>
             </div>
+            <?php if ( get_field( 'additional_information' ) ) : ?>
+                <div class="conversation-response">
+                    <strong>Additional Information</strong>
+                    <div><?php the_field('additional_information'); ?></div>
+                </div>
+            <?php endif; ?>
         </div>
     </div>
 </div>

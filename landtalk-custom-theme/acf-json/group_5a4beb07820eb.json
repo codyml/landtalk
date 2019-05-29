@@ -70,7 +70,7 @@
             "name": "submission_message",
             "type": "group",
             "instructions": "Enter the subject and body of the email that will optionally be sent to the submitter and\/or observer upon successful Land Talk Conversation submission.",
-            "required": 1,
+            "required": 0,
             "conditional_logic": 0,
             "wrapper": {
                 "width": "",
@@ -240,6 +240,25 @@
                     "return_format": "value"
                 }
             ]
+        },
+        {
+            "key": "field_5ceec608e9d6c",
+            "label": "Production Instance",
+            "name": "production",
+            "type": "true_false",
+            "instructions": "When Production Instance is set to \"Yes,\" editing Custom Fields is disabled.  Editing Custom Fields on production instances (e.g. landtalk.stanford.edu) is not recommended because modifications to fields are saved to the live WordPress database instead of being saved to code, preventing those changes from being included in the version-controlled repository and making collaboration more difficult.  See README.md in the repository for more information on how to modify Custom Fields locally.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
         }
     ],
     "location": [
@@ -260,5 +279,5 @@
     "active": 1,
     "description": "",
     "recaptcha": 0,
-    "modified": 1518145713
+    "modified": 1559171667
 }
