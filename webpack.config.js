@@ -50,7 +50,7 @@ module.exports = env => ({
     plugins: [
         new ExtractTextPlugin('styles.css'),
         new webpack.DefinePlugin({
-            absPath: JSON.stringify(env === 'dev' ? 'http://localhost': 'https://web.stanford.edu/group/spatialhistory/cgi-bin/landtalk')
+            'process.env.absPath': JSON.stringify(env === 'dev' ? 'http://localhost': 'https://web.stanford.edu/group/spatialhistory/cgi-bin/landtalk')
         })
     ],
 
