@@ -14,7 +14,7 @@ module.exports = env => ({
     output: {
         filename: 'script.js',
         path: path.resolve(__dirname, 'landtalk-custom-theme/static'),
-        publicPath: env === 'dev' ? 'http://localhost/wp-content/themes/landtalk-custom-theme/static/': 'https://web.stanford.edu/group/spatialhistory/cgi-bin/landtalk/wp-content/themes/landtalk-custom-theme/static/',
+        publicPath: env === 'dev' ? 'http://localhost/wp-content/themes/landtalk-custom-theme/static/': 'https://landtalk.stanford.edu/wp-content/themes/landtalk-custom-theme/static/',
     },
 
     module: {
@@ -50,7 +50,7 @@ module.exports = env => ({
     plugins: [
         new ExtractTextPlugin('styles.css'),
         new webpack.DefinePlugin({
-            'process.env.absPath': JSON.stringify(env === 'dev' ? 'http://localhost': 'https://web.stanford.edu/group/spatialhistory/cgi-bin/landtalk')
+            'process.env.absPath': JSON.stringify(env === 'dev' ? 'http://localhost': 'https://landtalk.stanford.edu')
         })
     ],
 
