@@ -105,13 +105,15 @@ while ( have_posts() ): the_post();
                 <div><?php the_field('has_changed'); ?></div>
             </div>
             <div class="conversation-response">
-                <strong>Historic Activities</strong>
-                <div><?php the_field('used_to_do_here'); ?></div>
+                <strong>Historic & Current Activities</strong>
+                <div><?php the_field('activities'); ?></div>
             </div>
-            <div class="conversation-response">
-                <strong>Current Activities</strong>
-                <div><?php the_field('does_here_now'); ?></div>
-            </div>
+            <?php if ( get_field( 'additional_information' ) ) : ?>
+                <div class="conversation-response">
+                    <strong>Additional Information</strong>
+                    <div><?php the_field('additional_information'); ?></div>
+                </div>
+            <?php endif; ?>
         </div>
     </div>
 </div>

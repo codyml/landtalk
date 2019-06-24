@@ -1,7 +1,7 @@
 <div class="container">
     <div class="level">
         <div class="level-left">
-            <a href="https://web.stanford.edu/group/spatialhistory/cgi-bin/landtalk" class="level-item">
+            <a href="<?php echo get_site_url() . '/' ?>" class="level-item">
                 <img src="<?php echo get_template_directory_uri() . '/img/logo.png'; ?>" alt="Land Talk" class="normal-header-logo">
             </a>
         </div>

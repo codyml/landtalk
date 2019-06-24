@@ -1,7 +1,7 @@
 <div class="container">
     <div class="columns is-centered is-mobile">
         <div class="column is-half-mobile is-one-third-tablet">
-            <a href="https://web.stanford.edu/group/spatialhistory/cgi-bin/landtalk">
+            <a href="<?php echo get_site_url() . '/' ?>">
                 <img src="<?php echo get_template_directory_uri() . '/img/logo.png'; ?>" alt="Land Talk">
             </a>
         </div>

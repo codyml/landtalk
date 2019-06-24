@@ -2,8 +2,8 @@
 #   Custom Dockerfile for WordPress image with some modifications.
 #
 
-#   Starts with latest WordPress image
-FROM wordpress:latest
+#   Starts with a fixed-version WordPress image (should be the same as the live site)
+FROM wordpress:4.9
 
 #   Modifies PHP defaults
 RUN echo "file_uploads = On" >> /usr/local/etc/php/conf.d/uploads.ini \
@@ -11,13 +11,6 @@ RUN echo "file_uploads = On" >> /usr/local/etc/php/conf.d/uploads.ini \
     && echo "upload_max_filesize = 500M" >> /usr/local/etc/php/conf.d/uploads.ini \
     && echo "post_max_size = 500M" >> /usr/local/etc/php/conf.d/uploads.ini \
     && echo "max_execution_time = 600" >> /usr/local/etc/php/conf.d/uploads.ini
-
-#   Adds zip support [https://github.com/docker-library/wordpress/issues/213#issuecomment-337260184]
-RUN apt-get update \
-    && apt-get install -y zlib1g-dev \
-    && rm -rf /var/lib/apt/lists/* \
-    && docker-php-ext-install zip \ 
-    && apt-get install -y unzip
 
 #   Adds sendmail support [https://github.com/docker-library/wordpress/issues/30#issuecomment-351462895]
 RUN apt-get update \

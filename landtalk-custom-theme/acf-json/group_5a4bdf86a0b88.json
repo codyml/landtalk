@@ -24,7 +24,7 @@
             "label": "Place Name (Required)",
             "name": "place_name",
             "type": "text",
-            "instructions": "Include the name of the city, state\/province, and country. Avoid local abbreviations.",
+            "instructions": "Be as specific as possible. Include the full name of the place, city, state\/province, and country. Do not use state or province abbreviations (although \"USA\" is preferred).",
             "required": 1,
             "conditional_logic": 0,
             "wrapper": {
@@ -33,7 +33,7 @@
                 "id": ""
             },
             "default_value": "",
-            "placeholder": "Example: Alton, Illinois, USA",
+            "placeholder": "Example: Riverfront, Alton, Illinois, USA",
             "prepend": "",
             "append": "",
             "maxlength": ""
@@ -109,7 +109,7 @@
                             "label": "Latitude",
                             "name": "latitude",
                             "type": "number",
-                            "instructions": "Valid latitudes are between -90.0000 and 90.0000.",
+                            "instructions": "Valid latitudes are between -90.0000 and 90.0000. Coordinates in southern hemisphere are negative!",
                             "required": 1,
                             "conditional_logic": 0,
                             "wrapper": {
@@ -118,7 +118,7 @@
                                 "id": "submit-form-latitude"
                             },
                             "default_value": "",
-                            "placeholder": "",
+                            "placeholder": "Example: 42.84532",
                             "prepend": "",
                             "append": "",
                             "min": -90,
@@ -130,7 +130,7 @@
                             "label": "Longitude",
                             "name": "longitude",
                             "type": "number",
-                            "instructions": "Valid longitudes are between -180.0000 and 180.0000.",
+                            "instructions": "Valid longitudes are between -180.0000 and 180.0000. Coordinates in western hemisphere are negative!",
                             "required": 1,
                             "conditional_logic": 0,
                             "wrapper": {
@@ -139,7 +139,7 @@
                                 "id": "submit-form-longitude"
                             },
                             "default_value": "",
-                            "placeholder": "",
+                            "placeholder": "Example: -122.34563",
                             "prepend": "",
                             "append": "",
                             "min": -180,
@@ -214,7 +214,7 @@
                 "id": ""
             },
             "default_value": "",
-            "placeholder": "100-1000 characters",
+            "placeholder": "10-1000 characters",
             "maxlength": 1000,
             "rows": "",
             "new_lines": "wpautop"
@@ -233,17 +233,17 @@
                 "id": ""
             },
             "default_value": "",
-            "placeholder": "100-1000 characters",
+            "placeholder": "10-1000 characters",
             "maxlength": 1000,
             "rows": "",
             "new_lines": "wpautop"
         },
         {
-            "key": "field_5a4be11c00100",
-            "label": "Historic Activities (Required)",
-            "name": "used_to_do_here",
+            "key": "field_5ce6293802519",
+            "label": "Historic & Current Activities (Required)",
+            "name": "activities",
             "type": "textarea",
-            "instructions": "What are some of the things the observer used to do here?",
+            "instructions": "What are some of the things the observer used to do here?  What are some of the things the observer does here now?",
             "required": 1,
             "conditional_logic": 0,
             "wrapper": {
@@ -252,18 +252,18 @@
                 "id": ""
             },
             "default_value": "",
-            "placeholder": "100-1000 characters",
+            "placeholder": "10-1000 characters",
             "maxlength": 1000,
             "rows": "",
             "new_lines": "wpautop"
         },
         {
-            "key": "field_5a4be12c00101",
-            "label": "Current Activities (Required)",
-            "name": "does_here_now",
-            "type": "textarea",
-            "instructions": "What are some of the things the observer does here now?",
-            "required": 1,
+            "key": "field_5c9477862cb1a",
+            "label": "Additional Information (Optional)",
+            "name": "additional_information",
+            "type": "text",
+            "instructions": "Use this box to add any additional information such as sources consulted, useful websites for visitors to check out, etc.",
+            "required": 0,
             "conditional_logic": 0,
             "wrapper": {
                 "width": "",
@@ -271,10 +271,10 @@
                 "id": ""
             },
             "default_value": "",
-            "placeholder": "100-1000 characters",
-            "maxlength": 1000,
-            "rows": "",
-            "new_lines": "wpautop"
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
         },
         {
             "key": "field_5a4be15300102",
@@ -306,7 +306,7 @@
                 "class": "",
                 "id": ""
             },
-            "message": "Upload two digital photographs: one current photo, and one from the historical period that the observer describes in the conversation.  If no historical photograph is available, a historical drawing may be uploaded instead.  Photos should be as high resolution as possible. Images should be at least 1200px by 800px.",
+            "message": "Upload two digital photographs: one current photo, and one from the historical period that the observer describes in the conversation.  If no historical photograph is available, a historical drawing may be uploaded instead.  Photos should be as high resolution as possible. Images must be at least 1200px by 800px.",
             "new_lines": "wpautop",
             "esc_html": 0
         },
@@ -346,8 +346,8 @@
                     "min_size": "",
                     "max_width": "",
                     "max_height": "",
-                    "max_size": 10,
-                    "mime_types": "jpg, jpeg, tif, tiff, png, gif, bmp"
+                    "max_size": "",
+                    "mime_types": ""
                 },
                 {
                     "key": "field_5a4be1d000105",
@@ -427,8 +427,8 @@
                     "min_size": "",
                     "max_width": "",
                     "max_height": "",
-                    "max_size": 10,
-                    "mime_types": "jpg, jpeg, tif, tiff, png, gif, bmp"
+                    "max_size": "",
+                    "mime_types": ""
                 },
                 {
                     "key": "field_5a4be21f00109",
@@ -558,7 +558,7 @@
             "new_lines": "wpautop"
         },
         {
-            "key": "field_5aaf37a67b943",
+            "key": "field_5c759cf7bd3e5",
             "label": "Conversation Transcript (Optional)",
             "name": "transcript",
             "type": "wysiwyg",
@@ -578,11 +578,11 @@
         },
         {
             "key": "field_5a4be27d0010e",
-            "label": "Date",
+            "label": "Date (Required)",
             "name": "date",
             "type": "date_picker",
-            "instructions": "Click the field below to choose the date from the calendar that the conversation was recorded.",
-            "required": 0,
+            "instructions": "Choose the date from the calendar that the conversation was recorded.",
+            "required": 1,
             "conditional_logic": 0,
             "wrapper": {
                 "width": "",
@@ -595,11 +595,11 @@
         },
         {
             "key": "field_5a4be2b70010f",
-            "label": "Your Full Name (Optional)",
+            "label": "Your Full Name (Required)",
             "name": "interviewer_full_name",
             "type": "text",
-            "instructions": "If you prefer to remain anonymous, leave this field blank.",
-            "required": 0,
+            "instructions": "",
+            "required": 1,
             "conditional_logic": 0,
             "wrapper": {
                 "width": "",
@@ -608,6 +608,25 @@
             },
             "default_value": "",
             "placeholder": "Full name",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_5c6b20583d06e",
+            "label": "Your Grade Level \/ Age (Optional)",
+            "name": "grade_level__age",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "11th Grade, Junior in College, or 8 years old",
             "prepend": "",
             "append": "",
             "maxlength": ""
@@ -753,11 +772,11 @@
             "append": ""
         },
         {
-            "key": "field_5adb90c66e5ab",
+            "key": "field_5c9482ab51283",
             "label": "Publication Confirmation",
             "name": "publication_confirmation",
-            "type": "checkbox",
-            "instructions": "Land Talk submissions are immediately visible to the general public.  Please be sure that your submission does not contain sensitive or private content.",
+            "type": "group",
+            "instructions": "Land Talk submissions are immediately visible to the general public. Please be sure that your submission does not contain sensitive or private content.",
             "required": 1,
             "conditional_logic": 0,
             "wrapper": {
@@ -765,15 +784,55 @@
                 "class": "",
                 "id": ""
             },
-            "choices": {
-                "I consent to this submission being posted in full on a public webpage.": "I consent to this submission being posted in full on a public webpage."
-            },
-            "allow_custom": 0,
-            "save_custom": 0,
-            "default_value": [],
-            "layout": "vertical",
-            "toggle": 0,
-            "return_format": "value"
+            "layout": "block",
+            "sub_fields": [
+                {
+                    "key": "field_5c948517d326d",
+                    "label": "",
+                    "name": "",
+                    "type": "checkbox",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "choices": {
+                        "I consent to this submission being posted on a public webpage.": "I consent to this submission being posted on a public webpage."
+                    },
+                    "allow_custom": 0,
+                    "save_custom": 0,
+                    "default_value": [],
+                    "layout": "vertical",
+                    "toggle": 0,
+                    "return_format": "value"
+                },
+                {
+                    "key": "field_5c94853bd326e",
+                    "label": "",
+                    "name": "",
+                    "type": "checkbox",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "choices": {
+                        "I have informed my interviewee that our conversation will be posted on a public webpage.": "I have informed my interviewee that our conversation will be posted on a public webpage."
+                    },
+                    "allow_custom": 0,
+                    "save_custom": 0,
+                    "default_value": [],
+                    "layout": "vertical",
+                    "toggle": 0,
+                    "return_format": "value"
+                }
+            ]
         },
         {
             "key": "field_5a500ab4ab9b7",
@@ -830,5 +889,5 @@
     "active": 1,
     "description": "",
     "recaptcha": 0,
-    "modified": 1524339034
+    "modified": 1559171677
 }
