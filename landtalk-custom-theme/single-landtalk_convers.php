@@ -78,6 +78,11 @@ while ( have_posts() ): the_post();
                         <?php endif; ?>
                     </div>
                     <div class="conversation-meta">
+                        <?php if ( get_field('grade_level__age')): ?>
+                            <strong>Grade Level/Age: </strong><?php the_field('grade_level__age'); ?>
+                        <?php endif; ?>
+                    </div>
+                    <div class="conversation-meta">
                         <?php if ( null !== get_field('date', false, false) && strlen( get_field('date', false, false) ) === 8 ): ?>
                             <strong>Interview Date: </strong><?php the_field('date'); ?>
                         <?php endif; ?>
