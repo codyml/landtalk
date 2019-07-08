@@ -73,13 +73,13 @@ while ( have_posts() ): the_post();
                         <?php endif; ?>
                     </div>
                     <div class="conversation-meta">
-                        <?php if ( get_field('grade_level__age')): ?>
-                            <strong>Grade Level/Age: </strong><?php the_field('grade_level__age'); ?>
+                        <?php if ( get_field('interviewer_full_name')): ?>
+                            <strong>Interviewer: </strong><?php the_field('interviewer_full_name'); ?>
                         <?php endif; ?>
                     </div>
                     <div class="conversation-meta">
-                        <?php if ( get_field('interviewer_full_name')): ?>
-                            <strong>Interviewer: </strong><?php the_field('interviewer_full_name'); ?>
+                        <?php if ( get_field('grade_level__age')): ?>
+                            <strong>Grade Level/Age: </strong><?php the_field('grade_level__age'); ?>
                         <?php endif; ?>
                     </div>
                     <div class="conversation-meta">
