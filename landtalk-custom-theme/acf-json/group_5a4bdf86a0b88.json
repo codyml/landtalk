@@ -261,7 +261,7 @@
             "key": "field_5c9477862cb1a",
             "label": "Additional Information (Optional)",
             "name": "additional_information",
-            "type": "text",
+            "type": "wysiwyg",
             "instructions": "Use this box to add any additional information such as sources consulted, useful websites for visitors to check out, etc.",
             "required": 0,
             "conditional_logic": 0,
@@ -271,10 +271,10 @@
                 "id": ""
             },
             "default_value": "",
-            "placeholder": "",
-            "prepend": "",
-            "append": "",
-            "maxlength": ""
+            "tabs": "all",
+            "toolbar": "full",
+            "media_upload": 1,
+            "delay": 0
         },
         {
             "key": "field_5a4be15300102",
@@ -889,5 +889,5 @@
     "active": 1,
     "description": "",
     "recaptcha": 0,
-    "modified": 1562350701
+    "modified": 1562618170
 }
