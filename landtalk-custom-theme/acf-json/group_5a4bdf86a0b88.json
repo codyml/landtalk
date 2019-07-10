@@ -306,7 +306,7 @@
                 "class": "",
                 "id": ""
             },
-            "message": "Upload two digital photographs of the landscape: one current photo, and one from the historical period that the observer describes in the conversation.  If no historical photograph is available, a historical drawing may be uploaded instead.  Photos should be as high resolution as possible. Images must be at least 1200px by 800px.",
+            "message": "Upload two digital photographs of the landscape: one current photo, and one from the historical period that the observer describes in the conversation.  If no historical photograph is available, a historical drawing may be uploaded instead.  Photos should be as high resolution as possible. Images must be at least 1200px by 800px. For best results, we recommend using a landscape-oriented photo with a 16:9 aspect ratio, if possible.",
             "new_lines": "wpautop",
             "esc_html": 0
         },
@@ -889,5 +889,5 @@
     "active": 1,
     "description": "",
     "recaptcha": 0,
-    "modified": 1562618170
+    "modified": 1562797967
 }
