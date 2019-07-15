@@ -27,7 +27,8 @@ define( 'HOPEFULLY_UNIQUE_POSITION_DECIMAL', '3982' );
 
 
 /*
-*   Defines the identifier for the main nav menu location.
+*   Defines the identifier for the menu locations.
 */
 
-define( 'MAIN_NAV_MENU_LOCATION', 'landtalk_main_nav_menu' );
+define( 'HEADER_MENU_LOCATION', 'landtalk_header_menu' );
+define( 'FOOTER_MENU_LOCATION', 'landtalk_footer_menu' );

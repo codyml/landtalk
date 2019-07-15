@@ -2,7 +2,7 @@
     <div class="columns is-centered">
         <div class="column is-three-quarters">
             <hr>
-            <?php wp_nav_menu( array( 'theme_location', MAIN_NAV_MENU_LOCATION ) ); ?>
+            <?php wp_nav_menu( array( 'theme_location' => FOOTER_MENU_LOCATION ) ); ?>
         </div>
     </div>
     <div class="columns is-centered">
