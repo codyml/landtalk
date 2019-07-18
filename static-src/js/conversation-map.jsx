@@ -86,7 +86,7 @@ export default class ConversationMap extends React.Component {
                     center: new google.maps.LatLng(19.1724, -41.0266),
                     streetViewControl: false,
                     mapTypeControl: false,
-                    fullscreenControl: false,
+                    fullscreenControl: true,
                 })
 
                 const styledMapType = new google.maps.StyledMapType(MAP_STYLES, { name: 'Styled Map' })
