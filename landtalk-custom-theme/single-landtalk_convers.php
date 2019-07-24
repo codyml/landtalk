@@ -57,14 +57,14 @@ while ( have_posts() ): the_post();
 <!-- Conversation Section -->
 <div class="container">
     <div class="columns is-centered">
-        <div class="column is-10 collapsible-section">
+        <div class="column is-12 collapsible-section">
             <div class="section-title is-size-4 has-text-weight-light">Conversation</div>
             <hr>
             <div class="columns">
-                <div class="column is-two-thirds">
+                <div class="column is-half">
                     <iframe width="100%" height="315" src="https://www.youtube.com/embed/<?php echo landtalk_get_youtube_embed( get_field('youtube_url')['url'] ); ?>?rel=0&amp;showinfo=0" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
                 </div>
-                <div class="column is-one-third">
+                <div class="column is-half">
                     <div><?php the_field('summary'); ?></div>
                     <br>
                     <div class="conversation-meta">
@@ -98,7 +98,7 @@ while ( have_posts() ): the_post();
 <!-- About This Place Section -->
 <div class="container">
     <div class="columns is-centered">
-        <div class="column is-10 collapsible-section">
+        <div class="column is-12 collapsible-section">
             <div class="section-title is-size-4 has-text-weight-light">About This Place</div>
             <hr>
             <div class="conversation-response">
@@ -127,7 +127,7 @@ while ( have_posts() ): the_post();
 <?php if ( get_field( 'transcript' ) ) : ?>
     <div class="container">
         <div class="columns is-centered">
-            <div class="column is-10 collapsible-section">
+            <div class="column is-12 collapsible-section">
                 <div class="section-title is-size-4 has-text-weight-light">Conversation Transcript</div>
                 <hr>
                 <div class="content conversation-transcript"><?php the_field( 'transcript' ); ?></div>
