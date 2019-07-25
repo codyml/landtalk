@@ -16,12 +16,12 @@
                 "id": ""
             },
             "taxonomy": "landtalk_refcat",
-            "field_type": "checkbox",
+            "field_type": "radio",
             "allow_null": 0,
             "add_term": 1,
             "save_terms": 1,
             "load_terms": 1,
-            "return_format": "id",
+            "return_format": "object",
             "multiple": 0
         },
         {
@@ -130,5 +130,5 @@
     "active": 1,
     "description": "",
     "recaptcha": 0,
-    "modified": 1563156229
+    "modified": 1564086452
 }
