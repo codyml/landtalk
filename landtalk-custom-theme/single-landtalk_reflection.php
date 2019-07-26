@@ -12,11 +12,22 @@ while ( have_posts() ): the_post();
 <!-- Post Title -->
 <div class="container">
     <div class="columns">
-        <div class="column is-full is-size-2 has-text-weight-light">
-            <?php the_title(); ?>
+        <div class="column content">
+            <h3><?php echo get_field( 'category' )->name ?></h3>
+            <h1><?php the_title(); ?></h1>
+            <h2><?php the_field( 'subtitle' ); ?></h2>
+            <?php the_field( 'content' ); ?>
+            <?php
+
+                foreach ( get_field( 'image_gallery' ) as $image ) {
+                    echo wp_get_attachment_image( $image['id'], 'thumbnail' );
+                }
+
+            ?>
         </div>
     </div>
 </div>
+
 
 <?php
 
