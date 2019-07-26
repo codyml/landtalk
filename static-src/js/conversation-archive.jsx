@@ -114,7 +114,7 @@ export default class ConversationArchive extends React.Component {
                         titleContent={ allConversationsSearchBar }
                         toggleCollapsed={ this.toggleCollapsibleSection.bind(this, 'all') }
                     >
-                        <Conversations orderBy='random' perPage={6} paged={true} searchTerm={ this.state.searchBarValue } />
+                        <Conversations orderBy='random' perPage={12} paged={true} searchTerm={ this.state.searchBarValue } />
                     </CollapsibleSection>
                 </div>
             </React.Fragment>
