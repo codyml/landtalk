@@ -76,3 +76,10 @@ require_once 'inc/email.php';
 */
 
 include_once 'inc/.env.php';
+
+
+/*
+*   Includes shortcodes.
+*/
+
+include_once 'inc/shortcodes.php';
