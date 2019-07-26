@@ -614,9 +614,9 @@
         },
         {
             "key": "field_5c6b20583d06e",
-            "label": "Your Grade Level \/ Age (Optional)",
+            "label": "Your Age (Optional)",
             "name": "grade_level__age",
-            "type": "text",
+            "type": "number",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -626,10 +626,12 @@
                 "id": ""
             },
             "default_value": "",
-            "placeholder": "11th Grade, Junior in College, or 8 years old",
+            "placeholder": "",
             "prepend": "",
             "append": "",
-            "maxlength": ""
+            "min": "",
+            "max": "",
+            "step": ""
         },
         {
             "key": "field_5a4be2cf00110",
@@ -889,5 +891,5 @@
     "active": 1,
     "description": "",
     "recaptcha": 0,
-    "modified": 1562797967
+    "modified": 1564162313
 }
