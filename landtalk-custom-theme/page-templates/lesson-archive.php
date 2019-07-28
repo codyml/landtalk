@@ -9,12 +9,8 @@ while ( have_posts() ): the_post();
 
 ?>
 
-<div class="container">
-    <div class="columns is-left">
-        <div class="column is-12 content">
-            <h1><?php the_title(); ?></h1>
-        </div>
-    </div>
+<div class="container content">
+    <h1><?php the_title(); ?></h1>
 </div>
 <div class="lessons container">
     <div class='columns section-title'>

@@ -9,12 +9,8 @@ while ( have_posts() ): the_post();
 
 ?>
 
-<div class="container">
-    <div class="columns is-centered">
-        <div class="column is-12 content">
-            <?php the_content(); ?>
-        </div>
-    </div>
+<div class="container content">
+    <?php the_content(); ?>
 </div>
 
 <?php
