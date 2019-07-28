@@ -1,0 +1,40 @@
+.map-wrapper {
+
+    height: 35em;
+
+    .map-popup-title {
+        font-family: $family-sans-serif;
+        font-size: 1.5em;
+        margin: .25em 0;
+    }
+
+    .map-popup-link {
+        font-family: $family-sans-serif;
+        color: $dark;
+        font-style: italic;
+        text-decoration: underline;
+    }
+
+    .gm-style-pbc {
+        display: none;
+    }
+
+    .cluster div {
+        text-shadow: 0px 1px 2px $dark;
+    }
+
+}
+
+.map-subtitle {
+
+    font-size: .85em;
+    color: $medium;
+    text-align: center;
+
+    img {
+        height: 2em;
+        position: relative;
+        top: .5em;
+    }
+
+}

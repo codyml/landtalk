@@ -1,0 +1,116 @@
+.lessons.container p {
+  margin-bottom: 1.5rem;
+}
+
+.lesson {
+  padding: 0;
+}
+
+.lesson-excerpt {
+  display: block;
+  padding: 15px;
+  width: 100%;
+  transition: background-color .5s;
+
+  .card {
+    display: flex;
+    flex-flow: row nowrap;
+    box-shadow: none;
+
+    .card-image {
+      flex: 0 33%;
+
+      figure {
+          background-repeat: no-repeat;
+          background-size: cover;
+          background-position: center;
+      }
+    }
+
+    .card-content {
+      flex: 0 0 67%;
+      padding: 5px 15px;
+      transition: background-color .5s;
+
+      .has-space-below {
+        font-weight: bold;
+        margin-bottom: 10px;
+      }
+
+      .content {
+        font-size: .8rem;
+      }
+
+      .content:not(:last-child) {
+        margin-bottom: .67rem;
+      }
+
+      .details {
+        text-transform: uppercase;
+        color: $medium;
+        font-size: .8rem;
+        font-weight: 600;
+
+        span {
+          padding-bottom: 2.5px;
+          border-bottom: 1px solid $medium;
+          margin-right: 7.5px;
+        }
+      }
+    }
+  }
+}
+
+.lesson-subtitle {
+  color: $medium;
+  font-size: 1.5rem;
+  font-weight: 400;
+
+  span {
+    background-color: #f0f0f0;
+    margin-right: 10px;
+    padding: 5px 10px;
+  }
+}
+
+.lesson-details {
+  h1 {
+    color: black;
+    font-weight: bold;
+    margin-bottom: .25em;
+  }
+}
+
+.access-lesson {
+  h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+  }
+  a {
+    display: inline-block;
+    background-color: #4688F4;
+    color: white;
+    padding: 5px 10px;
+    margin-right: 10px;
+    transition: background-color .5s;
+  }
+}
+
+.lesson-image {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.lesson-excerpt:hover {
+  background-color: #f0f0f0;
+
+  .card-content {
+    background-color: #f0f0f0;
+  }
+}
+
+.access-lesson a:hover {
+  background-color: $medium-dark;
+  color: white;
+}

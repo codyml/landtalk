@@ -47,5 +47,11 @@ $fa-font-path: '~font-awesome/fonts';
 *   Custom styles
 */
 
-@import 'custom';
-@import 'hover';
+@import 'shared';
+@import 'about';
+@import 'conversation-single';
+@import 'header';
+@import 'homepage';
+@import 'lessons';
+@import 'map';
+@import 'submit';

@@ -1,0 +1,82 @@
+.section {
+    padding-top: 0;
+    padding-bottom: 0;
+    margin: 65px 0;
+}
+
+.container {
+    margin: 65px auto;
+}
+
+.full-bleed-container {
+    margin-left: -1.5rem;
+    margin-right: -1.5rem;
+}
+
+hr {
+    margin-top: 0;
+}
+
+.has-space-below {
+    margin-bottom: 25px;
+}
+
+.conversation-excerpt {
+
+    display: block;
+
+    + .conversation-excerpt {
+        margin-top: 25px;
+    }
+
+    .card {
+
+        border-radius: 6px;
+
+        .card-image figure {
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            border-top-left-radius: 6px;
+            border-top-right-radius: 6px;
+        }
+
+        .link {
+            color: $dark;
+            font-style: italic;
+            text-decoration: underline;
+        }
+
+    }
+
+}
+
+.is-square {
+  width: 100%;
+  padding-top: 100%;
+}
+
+.collapsible-section {
+
+    .section-title {
+
+        margin-bottom: 0;
+
+        .disclosure-triangle {
+            position: absolute;
+            cursor: pointer;
+        }
+
+        .section-title-text {
+            margin-left: 1em;
+            cursor: pointer;
+        }
+
+    }
+
+    .map-wrapper {
+        border-radius: 6px;
+        height: 25em;
+    }
+
+}
