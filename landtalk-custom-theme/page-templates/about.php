@@ -51,7 +51,7 @@ while ( have_posts() ): the_post();
 
 <div class="container">
     <div class="columns is-centered">
-        <div class="column is-10 content">
+        <div class="column is-12 content">
             <h1><?php the_title(); ?></h1>
             <?php the_content(); ?>
         </div>
@@ -61,7 +61,7 @@ while ( have_posts() ): the_post();
     <div class="columns is-centered">
         <?php foreach ( get_field('images') as $index => $image ) : ?>
             <?php if ( $index === 6 ) break; ?>
-            <div class="column is-2">
+            <div class="column 12">
                 <div class="image is-4by3" style="background-image: url('<?php echo $image['sizes']['medium_large']; ?>');"></div>
             </div>
         <?php endforeach; ?>
@@ -69,7 +69,7 @@ while ( have_posts() ): the_post();
 </div>
 <div class="container">
     <div class="columns is-centered">
-        <div class="column is-10 content">
+        <div class="column is-12 content">
             <?php the_field( 'contact_form' ); ?>
             <?php if ( isset( $message ) ): ?>
                 <div class="is-italic has-text-weight-bold">Thanks for your message.  We'll get back to you soon.</div>

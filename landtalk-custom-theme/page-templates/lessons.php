@@ -11,7 +11,7 @@ while ( have_posts() ): the_post();
 
 <div class="container">
     <div class="columns is-left">
-        <div class="column is-10 content">
+        <div class="column is-12 content">
             <h1><?php the_title(); ?></h1>
             <?php the_content(); ?>
         </div>

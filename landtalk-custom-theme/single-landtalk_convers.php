@@ -34,12 +34,12 @@ while ( have_posts() ): the_post();
 <!-- Image Titles -->
 <div class="container conversation-image-titles">
     <div class="columns is-centered">
-        <div class="column is-5 has-text-left">
+        <div class="column is-6 has-text-left">
             <div class="has-text-weight-bold"><?php the_field('place_name'); ?>, <?php echo get_field('historical_image')['year_taken']; ?></div>
             <div class="conversation-image-description"><?php echo get_field('historical_image')['description']; ?></div>
         </div>
         <div class="column is-2"></div>
-        <div class="column is-5 has-text-right">
+        <div class="column is-6 has-text-right">
             <div class="has-text-weight-bold"><?php the_field('place_name'); ?>, <?php echo get_field('current_image')['year_taken']; ?></div>
             <div class="conversation-image-description"><?php echo get_field('current_image')['description']; ?></div>
         </div>

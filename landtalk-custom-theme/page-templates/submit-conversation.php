@@ -60,7 +60,7 @@ while ( have_posts() ): the_post();
 
 <div class="container">
     <div class="columns is-centered">
-        <div class="column is-10 content">
+        <div class="column is-12 content">
             <h1><?php the_title(); ?></h1>
             <?php if ( isset( $conversation ) ): ?>
                 <div>Thanks for your submission!  It's published at <a href="<?php echo $permalink; ?>"><?php echo $permalink; ?></a>.</div>
