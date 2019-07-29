@@ -8,6 +8,7 @@
 
         </main>
         <footer class="section"><?php get_template_part( 'parts/page-footer' ); ?></footer>
+        <div id="react-modal-container"></div>
         <?php wp_footer(); ?>
     </body>
 </html>

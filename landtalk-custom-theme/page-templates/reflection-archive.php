@@ -49,7 +49,7 @@ $pagination_links = paginate_links( array(
     <ul>
         <?php if ( $reflections_query->have_posts() ) : while ( $reflections_query->have_posts() ) : $reflections_query->the_post(); ?>
             <li>
-                <a href="<?php the_permalink(); ?>" class="columns is-vcentered conversation-excerpt">
+                <a href="<?php the_permalink(); ?>" class="columns is-vcentered reflection-excerpt">
                     <div class="column is-one-quarter">
                         <div class="featured-image" style="background-image: url(<?php echo wp_get_attachment_image_src( get_field( 'featured_image' ), 'medium-large' )[0]; ?>)"></div>
                     </div>

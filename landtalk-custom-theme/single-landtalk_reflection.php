@@ -7,21 +7,26 @@
 get_header();
 while ( have_posts() ): the_post();
 
+//  Get props for photo gallery
+$image_urls = array();
+foreach ( get_field( 'image_gallery' ) as $image ) {
+    array_push( $image_urls, wp_get_attachment_image_src( $image['id'], 'large' )[0] );
+}
+$photo_gallery_props = landtalk_encode_json_for_html_attr( array( 'imageUrls' => $image_urls ) );
+
 ?>
 
-<!-- Post Title -->
-<div class="container content">
-    <h3><?php echo get_field( 'category' )->name ?></h3>
+<div class="container reflection-single-title">
+    <div class="bold-cap-ui-text"><?php echo get_field( 'category' )->name ?></div>
     <h1><?php the_title(); ?></h1>
-    <h2><?php the_field( 'subtitle' ); ?></h2>
+    <div class="reflection-subtitle"><?php the_field( 'subtitle' ); ?></div>
+    <hr>
+</div>
+<div class="container content">
     <?php the_field( 'content' ); ?>
-    <?php
-
-        foreach ( get_field( 'image_gallery' ) as $image ) {
-            echo wp_get_attachment_image( $image['id'], 'thumbnail' );
-        }
-
-    ?>
+</div>
+<div class="container">
+    <div class="react-component" data-component-name="PhotoGallery" data-component-props="<?php echo $photo_gallery_props; ?>"></div>
 </div>
 
 

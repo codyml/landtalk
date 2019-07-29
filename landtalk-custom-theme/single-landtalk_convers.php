@@ -50,7 +50,7 @@ while ( have_posts() ): the_post();
 <div class="container">
     <div class="columns level">
         <div class="column is-7 level-item is-size-2 has-text-weight-light"><?php the_field('place_name'); ?></div>
-        <a href="../#<?php the_ID(); ?>" class="column is-5 level-item react-component mini-conversation-map" data-component-name="MiniConversationMap" data-post-id="<?php the_ID(); ?>"></a>
+        <a href="../#<?php the_ID(); ?>" class="column is-5 level-item react-component mini-conversation-map" data-component-name="MiniConversationMap" data-component-props="<?php echo landtalk_encode_json_for_html_attr( array( 'postId' => get_the_ID() ) ); ?>"></a>
     </div>
 </div>
 
@@ -151,7 +151,7 @@ while ( have_posts() ): the_post();
 <!-- You Might Also Like -->
 <div class="container">
     <h3 class="is-size-5 has-text-weight-bold has-text-centered has-text-grey has-space-below">You Might Also Like</h3>
-    <div class="react-component" data-component-name="RelatedConversations" data-post-id="<?php the_ID(); ?>"></div>
+    <div class="react-component" data-component-name="RelatedConversations" data-component-props="<?php echo landtalk_encode_json_for_html_attr( array( 'postId' => get_the_ID() ) ); ?>"></div>
 </div>
 
 <?php

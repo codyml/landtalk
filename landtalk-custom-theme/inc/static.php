@@ -25,3 +25,14 @@ function enqueue_static_assets() {
 }
 
 add_action( 'wp_enqueue_scripts', 'enqueue_static_assets' );
+
+
+/*
+*   Encodes a PHP array as JSON for an HTML attribute.
+*/
+
+function landtalk_encode_json_for_html_attr( $array ) {
+
+    return htmlspecialchars( json_encode( $array ), ENT_QUOTES, 'UTF-8' );
+
+}
