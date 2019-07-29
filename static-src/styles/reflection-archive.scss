@@ -1,0 +1,78 @@
+.conversation-excerpt {
+
+  padding: 18px 0;
+  background-clip: content-box;
+  transition: background-color .2s;
+
+  &, &:hover {
+    color: inherit;
+  }
+
+  &:hover {
+    opacity: 0.9em;
+    background-color: $medium-light-light;
+  }
+
+  .featured-image {
+    padding-bottom: 75%;
+    background-size: cover;
+    background-position: center;
+  }
+
+  h1 {
+    font-size: 1.4em;
+    font-weight: bold;
+    line-height: 1.25;
+    margin: .25em 0;
+  }
+
+  .excerpt-text {
+    font-size: 1em;
+    line-height: 1.45em;
+  }
+
+  .read-more {
+    margin-top: .25em;
+    font-style: italic;
+    color: $medium-medium-light;
+  }
+
+}
+
+.bold-cap-ui-text {
+  font-weight: bold;
+  font-size: 1.1em;
+  color: $medium-medium-light;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+.pagination-links {
+
+  text-align: center;
+
+  .page-numbers {
+
+    &.current {
+      color: $medium-dark;
+    }
+
+    &:not(.current) {
+
+      color: inherit;
+      &:hover {
+        color: $medium-dark;
+      }
+
+    }
+
+    margin: 0 .5em;
+
+    &.prev,
+    &.next {
+      margin: 0 1em;
+    }
+
+  }
+
+}

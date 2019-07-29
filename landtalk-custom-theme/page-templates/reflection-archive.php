@@ -14,7 +14,7 @@ while ( have_posts() ): the_post();
 
 //  Pagination constants
 define( 'REFLECTIONS_PAGE_QUERY_VAR', 'reflections_page' );
-define( 'REFLECTIONS_POSTS_PER_PAGE', 1 );  //  TODO: Change to 10
+define( 'REFLECTIONS_POSTS_PER_PAGE', 10 );
 
 //  Retrieves current page
 $current_page = 1;
@@ -49,17 +49,23 @@ $pagination_links = paginate_links( array(
     <ul>
         <?php if ( $reflections_query->have_posts() ) : while ( $reflections_query->have_posts() ) : $reflections_query->the_post(); ?>
             <li>
-                <a href="<?php the_permalink(); ?>">
-                    <h3><?php echo get_field( 'category' )->name ?></h3>
-                    <h1><?php the_title(); ?></h1>
-                    <div><?php echo wp_trim_words( get_field( 'content', $conversation ), 35 ); ?></div>
+                <a href="<?php the_permalink(); ?>" class="columns is-vcentered conversation-excerpt">
+                    <div class="column is-one-quarter">
+                        <div class="featured-image" style="background-image: url(<?php echo wp_get_attachment_image_src( get_field( 'featured_image' ), 'medium-large' )[0]; ?>)"></div>
+                    </div>
+                    <div class="column is-three-quarters">
+                        <div class="bold-cap-ui-text"><?php echo get_field( 'category' )->name ?></div>
+                        <h1><?php the_title(); ?></h1>
+                        <div class="excerpt-text"><?php echo wp_trim_words( get_field( 'content', $conversation ), 40 ); ?></div>
+                        <div class="read-more">read more</div>
+                    </div>
                 </a>
             </li>
         <?php endwhile; endif; wp_reset_postdata();?>
     </ul>
-    <div class="pagination-links">
-        <?php echo $pagination_links; ?>
-    </div>
+</div>
+<div class="container pagination-links bold-cap-ui-text">
+    <?php echo $pagination_links; ?>
 </div>
 
 <?php
