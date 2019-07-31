@@ -25,7 +25,7 @@ if ( $_GET[ REFLECTIONS_PAGE_QUERY_VAR ] ) {
 }
 
 //  Queries for Reflections
-$reflections_query = new WP_QUERY( array(
+$reflections_query = new WP_Query( array(
     'post_type' => REFLECTION_POST_TYPE,
     'posts_per_page' => REFLECTIONS_POSTS_PER_PAGE,
     'paged' => $current_page,
