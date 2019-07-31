@@ -9,10 +9,20 @@ while ( have_posts() ): the_post();
 
 //  Get props for photo gallery
 $image_urls = array();
-foreach ( get_field( 'image_gallery' ) as $image ) {
-    array_push( $image_urls, wp_get_attachment_image_src( $image['id'], 'large' )[0] );
+if ( get_field( 'image_gallery' ) ) {
+
+    foreach ( get_field( 'image_gallery' ) as $image ) {
+        array_push(
+            $image_urls,
+            wp_get_attachment_image_src( $image['id'], 'large' )[0]
+        );
+    }
+
+    $photo_gallery_props = landtalk_encode_json_for_html_attr(
+        array( 'imageUrls' => $image_urls )
+    );
+
 }
-$photo_gallery_props = landtalk_encode_json_for_html_attr( array( 'imageUrls' => $image_urls ) );
 
 ?>
 
@@ -25,9 +35,11 @@ $photo_gallery_props = landtalk_encode_json_for_html_attr( array( 'imageUrls' =>
 <div class="container content">
     <?php the_field( 'content' ); ?>
 </div>
-<div class="container">
-    <div class="react-component" data-component-name="PhotoGallery" data-component-props="<?php echo $photo_gallery_props; ?>"></div>
-</div>
+<?php if ( get_field( 'image_gallery' ) ) : ?>
+    <div class="container">
+        <div class="react-component" data-component-name="PhotoGallery" data-component-props="<?php echo $photo_gallery_props; ?>"></div>
+    </div>
+<?php endif; ?>
 
 
 <?php
