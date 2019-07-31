@@ -11,7 +11,7 @@
 
 $conversation = null;
 if ( isset( $_GET['conversation'] ) ) {
-    
+
    $post = get_post( $_GET['conversation'] );
    if ( isset( $post ) ) {
 
@@ -61,7 +61,7 @@ $options = array(
 
 $report = null;
 if ( isset( $_GET['report'] ) ) {
-    
+
     $report = get_post( $_GET['report'] );
     update_field( 'conversation', $conversation->ID, $report->ID );
     wp_update_post( array( 'ID' => $conversation->ID, 'post_status' => 'pending' ) );
@@ -74,17 +74,13 @@ while ( have_posts() ): the_post();
 
 ?>
 
-<div class="container">
-    <div class="columns is-centered">
-        <div class="column is-12 content">
-            <h1><?php the_title(); ?>: <?php echo $conversation->post_title; ?></h1>
-            <?php the_content(); ?>
-            <?php if ( isset( $report ) ): ?>
-                <div class="is-italic has-text-weight-bold">Thanks for your report.  An administrator will review it soon.</div>
-            <? else: acf_form( $options ); ?>
-            <? endif; ?>
-        </div>
-    </div>
+<div class="container content">
+    <h1><?php the_title(); ?>: <?php echo $conversation->post_title; ?></h1>
+    <?php the_content(); ?>
+    <?php if ( isset( $report ) ): ?>
+        <div class="is-italic has-text-weight-bold">Thanks for your report.  An administrator will review it soon.</div>
+    <? else: acf_form( $options ); ?>
+    <? endif; ?>
 </div>
 
 <?php

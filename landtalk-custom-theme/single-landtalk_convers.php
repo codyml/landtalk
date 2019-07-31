@@ -50,89 +50,77 @@ while ( have_posts() ): the_post();
 <div class="container">
     <div class="columns level">
         <div class="column is-7 level-item is-size-2 has-text-weight-light"><?php the_field('place_name'); ?></div>
-        <a href="../#<?php the_ID(); ?>" class="column is-5 level-item react-component mini-conversation-map" data-component-name="MiniConversationMap" data-post-id="<?php the_ID(); ?>"></a>
+        <a href="../#<?php the_ID(); ?>" class="column is-5 level-item react-component mini-conversation-map" data-component-name="MiniConversationMap" data-component-props="<?php echo landtalk_encode_json_for_html_attr( array( 'postId' => get_the_ID() ) ); ?>"></a>
     </div>
 </div>
 
 <!-- Conversation Section -->
-<div class="container">
-    <div class="columns is-centered">
-        <div class="column is-12 collapsible-section">
-            <div class="section-title is-size-4 has-text-weight-light">Conversation</div>
-            <hr>
-            <div class="columns">
-                <div class="column is-half">
-                    <iframe width="100%" height="315" src="https://www.youtube.com/embed/<?php echo landtalk_get_youtube_embed( get_field('youtube_url')['url'] ); ?>?rel=0&amp;showinfo=0" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
-                </div>
-                <div class="column is-half">
-                    <div><?php the_field('summary'); ?></div>
-                    <br>
-                    <div class="conversation-meta">
-                        <?php if ( get_field('observer_full_name') ): ?>
-                            <strong>Observer: </strong><?php the_field('observer_full_name'); ?>
-                        <?php endif; ?>
-                    </div>
-                    <div class="conversation-meta">
-                        <?php if ( get_field('interviewer_full_name')): ?>
-                            <strong>Interviewer: </strong><?php the_field('interviewer_full_name'); ?>
-                        <?php endif; ?>
-                    </div>
-                    <div class="conversation-meta">
-                        <?php if ( get_field('grade_level__age')): ?>
-                            <strong>Grade Level/Age: </strong><?php the_field('grade_level__age'); ?>
-                        <?php endif; ?>
-                    </div>
-                    <div class="conversation-meta">
-                        <?php if ( null !== get_field('date', false, false) && strlen( get_field('date', false, false) ) === 8 ): ?>
-                            <strong>Interview Date: </strong><?php the_field('date'); ?>
-                        <?php endif; ?>
-                    </div>
-                    <div class="conversation-meta"><strong>Submission Date: </strong><?php the_date(); ?></div>
-                    <div class="conversation-meta"><strong>Keywords: </strong><? echo implode( ', ', landtalk_get_keywords( $post ) ); ?></div>
-                </div>
+<div class="container collapsible-section">
+    <div class="section-title is-size-4 has-text-weight-light">Conversation</div>
+    <hr>
+    <div class="columns">
+        <div class="column is-two-thirds">
+            <iframe width="100%" height="350" src="https://www.youtube.com/embed/<?php echo landtalk_get_youtube_embed( get_field('youtube_url')['url'] ); ?>?rel=0&amp;showinfo=0" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
+        </div>
+        <div class="column is-one-third">
+            <div><?php the_field('summary'); ?></div>
+            <br>
+            <div class="conversation-meta">
+                <?php if ( get_field('observer_full_name') ): ?>
+                    <strong>Observer: </strong><?php the_field('observer_full_name'); ?>
+                <?php endif; ?>
             </div>
+            <div class="conversation-meta">
+                <?php if ( get_field('interviewer_full_name')): ?>
+                    <strong>Interviewer: </strong><?php the_field('interviewer_full_name'); ?>
+                <?php endif; ?>
+            </div>
+            <div class="conversation-meta">
+                <?php if ( get_field('grade_level__age')): ?>
+                    <strong>Grade Level/Age: </strong><?php the_field('grade_level__age'); ?>
+                <?php endif; ?>
+            </div>
+            <div class="conversation-meta">
+                <?php if ( null !== get_field('date', false, false) && strlen( get_field('date', false, false) ) === 8 ): ?>
+                    <strong>Interview Date: </strong><?php the_field('date'); ?>
+                <?php endif; ?>
+            </div>
+            <div class="conversation-meta"><strong>Submission Date: </strong><?php the_date(); ?></div>
+            <div class="conversation-meta"><strong>Keywords: </strong><? echo implode( ', ', landtalk_get_keywords( $post ) ); ?></div>
         </div>
     </div>
 </div>
 
 <!-- About This Place Section -->
-<div class="container">
-    <div class="columns is-centered">
-        <div class="column is-12 collapsible-section">
-            <div class="section-title is-size-4 has-text-weight-light">About This Place</div>
-            <hr>
-            <div class="conversation-response">
-                <strong>Historic Appearance</strong>
-                <div><?php the_field('used_to_look'); ?></div>
-            </div>
-            <div class="conversation-response">
-                <strong>Changes over Time</strong>
-                <div><?php the_field('has_changed'); ?></div>
-            </div>
-            <div class="conversation-response">
-                <strong>Historic & Current Activities</strong>
-                <div><?php the_field('activities'); ?></div>
-            </div>
-            <?php if ( get_field( 'additional_information' ) ) : ?>
-                <div class="conversation-response">
-                    <strong>Additional Information</strong>
-                    <div><?php the_field('additional_information'); ?></div>
-                </div>
-            <?php endif; ?>
-        </div>
+<div class="container collapsible-section">
+    <div class="section-title is-size-4 has-text-weight-light">About This Place</div>
+    <hr>
+    <div class="conversation-response">
+        <strong>Historic Appearance</strong>
+        <div><?php the_field('used_to_look'); ?></div>
     </div>
+    <div class="conversation-response">
+        <strong>Changes over Time</strong>
+        <div><?php the_field('has_changed'); ?></div>
+    </div>
+    <div class="conversation-response">
+        <strong>Historic & Current Activities</strong>
+        <div><?php the_field('activities'); ?></div>
+    </div>
+    <?php if ( get_field( 'additional_information' ) ) : ?>
+        <div class="conversation-response">
+            <strong>Additional Information</strong>
+            <div><?php the_field('additional_information'); ?></div>
+        </div>
+    <?php endif; ?>
 </div>
 
 <!-- Conversation Transcript Section -->
 <?php if ( get_field( 'transcript' ) ) : ?>
-    <div class="container">
-        <div class="columns is-centered">
-            <div class="column is-12 collapsible-section">
-                <div class="section-title is-size-4 has-text-weight-light">Conversation Transcript</div>
-                <hr>
-                <div class="content conversation-transcript"><?php the_field( 'transcript' ); ?></div>
-            </div>
-        </div>
+    <div class="container collapsible-section">
+        <div class="section-title is-size-4 has-text-weight-light">Conversation Transcript</div>
+        <hr>
+        <div class="content conversation-transcript"><?php the_field( 'transcript' ); ?></div>
     </div>
 <?php endif; ?>
 
@@ -163,7 +151,7 @@ while ( have_posts() ): the_post();
 <!-- You Might Also Like -->
 <div class="container">
     <h3 class="is-size-5 has-text-weight-bold has-text-centered has-text-grey has-space-below">You Might Also Like</h3>
-    <div class="react-component" data-component-name="RelatedConversations" data-post-id="<?php the_ID(); ?>"></div>
+    <div class="react-component" data-component-name="RelatedConversations" data-component-props="<?php echo landtalk_encode_json_for_html_attr( array( 'postId' => get_the_ID() ) ); ?>"></div>
 </div>
 
 <?php

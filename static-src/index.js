@@ -12,13 +12,16 @@ import ConversationArchive from './js/conversation-archive.jsx'
 import MiniConversationMap from './js/mini-conversation-map.jsx'
 import RelatedConversations from './js/related-conversations.jsx'
 import LessonArchive from './js/lesson-archive.jsx'
+import ExcerptGallery from './js/excerpt-gallery.jsx'
+import PhotoGallery from './js/photo-gallery.jsx'
 const components = {
     ConversationMap,
     ConversationArchive,
     MiniConversationMap,
     RelatedConversations,
-    LessonArchive
-
+    LessonArchive,
+    ExcerptGallery,
+    PhotoGallery,
 }
 
 
@@ -34,7 +37,12 @@ document.addEventListener('DOMContentLoaded', () => {
     elements.forEach(element => {
 
         const Component = components[element.dataset.componentName]
-        if (Component) ReactDOM.render(<Component postId={ element.dataset.postId } />, element)
+        if (Component) {
+
+            const props = element.dataset.componentProps ? JSON.parse(element.dataset.componentProps) : {}
+            ReactDOM.render(<Component {...props} />, element)
+
+        }
 
     })
 

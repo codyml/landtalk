@@ -1,0 +1,44 @@
+.homepage-intro {
+    text-align: right;
+}
+
+.homepage-map {
+    text-align: center;
+}
+
+.homepage-body {
+    text-align: left;
+}
+
+.homepage-intro, .homepage-map, .homepage-body {
+    display: flex;
+    flex-flow: column;
+
+    justify-content: center;
+}
+
+.homepage-heading {
+    font-size: 1.5rem;
+    line-height: 3;
+}
+
+.homepage-button {
+    background-color: #f0f0f0;
+    color: black;
+    display: inline-block;
+    padding: 10px 20px;
+    margin-top: 25px;
+}
+
+.homepage-image {
+    width: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.homepage-button:hover {
+  background-color: $medium-dark;
+  color: white;
+  transition: background-color .5s, color .5s;
+}

@@ -20,7 +20,9 @@
 $family-sans-serif: 'Raleway', sans-serif;
 $medium-dark: #404040;
 $medium: #808080;
+$medium-medium-light: #a6a6a6;
 $medium-light: #c0c0c0;
+$medium-light-light: #f0f0f0;
 $gap: 50px;
 $tablet: 500px;
 $desktop: 700px + (2 * $gap);
@@ -47,5 +49,13 @@ $fa-font-path: '~font-awesome/fonts';
 *   Custom styles
 */
 
-@import 'custom';
-@import 'hover';
+@import 'shared';
+@import 'about';
+@import 'conversation-single';
+@import 'header';
+@import 'homepage';
+@import 'lesson';
+@import 'map';
+@import 'reflection-archive';
+@import 'reflection-single';
+@import 'submit';

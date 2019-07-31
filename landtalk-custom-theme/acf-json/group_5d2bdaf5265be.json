@@ -1,0 +1,134 @@
+{
+    "key": "group_5d2bdaf5265be",
+    "title": "Post Type: Reflection",
+    "fields": [
+        {
+            "key": "field_5d2bdbd24633e",
+            "label": "Reflection Category",
+            "name": "category",
+            "type": "taxonomy",
+            "instructions": "Select one or more categories for the Reflection.",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "taxonomy": "landtalk_refcat",
+            "field_type": "radio",
+            "allow_null": 0,
+            "add_term": 1,
+            "save_terms": 1,
+            "load_terms": 1,
+            "return_format": "object",
+            "multiple": 0
+        },
+        {
+            "key": "field_5d2bdc444633f",
+            "label": "Featured Image",
+            "name": "featured_image",
+            "type": "image",
+            "instructions": "Select an image to display alongside this Reflection in the archive list.",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "id",
+            "preview_size": "thumbnail",
+            "library": "all",
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": ""
+        },
+        {
+            "key": "field_5d2bdb664633d",
+            "label": "Subtitle",
+            "name": "subtitle",
+            "type": "text",
+            "instructions": "Add the author's name or other post information.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_5d2bde4edff7a",
+            "label": "Reflection Content",
+            "name": "content",
+            "type": "wysiwyg",
+            "instructions": "Add the main content of the Reflection here.",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "tabs": "all",
+            "toolbar": "full",
+            "media_upload": 1,
+            "delay": 0
+        },
+        {
+            "key": "field_5d2bdca146340",
+            "label": "Image Gallery",
+            "name": "image_gallery",
+            "type": "gallery",
+            "instructions": "Select images that will appear in a gallery at the end of the Reflection.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "min": "",
+            "max": "",
+            "insert": "append",
+            "library": "all",
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "landtalk_reflection"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "acf_after_title",
+    "style": "seamless",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "",
+    "recaptcha": 0,
+    "modified": 1564104594
+}

@@ -46,24 +46,6 @@ function landtalk_prepare_lesson_for_rest_response( $post ) {
 }
 
 
-function landtalk_prepare_blog_for_rest_response( $post ) {
-
-    $response = array();
-    $response['id'] = $post->ID;
-    $response['link'] = get_permalink( $post );
-    $response['blog_title'] = get_field( 'blog_title', $post );
-    $image_object = get_field( 'image', $post );
-    if ( isset( $image_object['sizes']['medium_large'] ) ) {
-
-        $response['image_url'] = $image_object['sizes']['medium_large'];
-
-    } else $response['image_url'] = $image_object['url'];
-    // You can add more fields here
-    return $response;
-
-}
-
-
 /*
 *   Adds REST endpoint for retrieving Conversations.
 */
@@ -211,54 +193,6 @@ function landtalk_get_lessons( WP_REST_Request $request ) {
 
 }
 
-function landtalk_get_blogs( WP_REST_Request $request ) {
-
-    $args = array( 'post_type' => BLOG_POST_TYPE );
-
-    //  Order the pages correctly
-    if ( isset( $request['orderBy'] ) ) {
-
-        $args['orderby'] = $request['orderBy'];
-
-    }
-
-    //  Retrieve the correct number of lessons per page
-    if ( isset( $request['perPage'] ) ) {
-
-        $args['posts_per_page'] = $request['perPage'];
-
-    } else $args['posts_per_page'] = -1;
-
-    //  Retrieve the corect page of lessons
-    if ( isset( $request['page'] ) && isset( $request['perPage'] ) ) {
-
-        $args['offset'] = $request['page'] * $request['perPage'];
-
-    }
-
-    //  Retrieve search term results
-    if ( isset( $request['searchTerm'] ) ) {
-
-        $args['s'] = $request['searchTerm'];
-
-    }
-
-    $query = new WP_Query( $args );
-    $blog = $query->get_posts();
-
-    $prepared_blogs = array();
-    foreach ( $blogs as $blog ) {
-
-        $prepared_blogs[] = landtalk_prepare_blog_for_rest_response( $blog );
-
-    }
-
-    return array(
-        'blogs' => $prepared_blogs,
-        'nPages' => $query->max_num_pages,
-    );
-
-}
 
 function landtalk_register_conversations_endpoint() {
 
@@ -288,18 +222,6 @@ function landtalk_register_lessons_endpoint() {
 add_action( 'rest_api_init', 'landtalk_register_lessons_endpoint' );
 
 
-function landtalk_register_blogs_endpoint() {
-
-    register_rest_route( 'landtalk', '/blogs', array(
-
-        'methods' => 'GET',
-        'callback' => 'landtalk_get_blogs',
-
-    ) );
-
-}
-
-add_action( 'rest_api_init', 'landtalk_register_blogs_endpoint' );
 
 /*
 *   Retrieves the Featured Conversations.

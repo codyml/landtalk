@@ -7,7 +7,7 @@
         </div>
         <div class="level-right">
             <div class="level-item">
-                <?php wp_nav_menu( array( 'theme_location', MAIN_NAV_MENU_LOCATION ) ); ?>
+                <?php wp_nav_menu( array( 'theme_location' => HEADER_MENU_LOCATION ) ); ?>
             </div>
         </div>
     </div>

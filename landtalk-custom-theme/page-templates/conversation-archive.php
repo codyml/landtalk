@@ -9,21 +9,13 @@ while ( have_posts() ): the_post();
 
 ?>
 
-<div class="container">
-    <div class="columns is-left">
-        <div class="column is-12 content">
-            <h1><?php the_title(); ?></h1>
-            <?php the_content(); ?>
-        </div>
-    </div>
+<div class="container content">
+    <h1><?php the_title(); ?></h1>
+    <?php the_content(); ?>
 </div>
 <div class="react-component" data-component-name="ConversationArchive"></div>
-<div class="container">
-    <div class="columns is-centered">
-        <div class="column is-12 content">
-            <?php the_field('footer_text'); ?>
-        </div>
-    </div>
+<div class="container content">
+    <?php the_field('footer_text'); ?>
 </div>
 
 <?php

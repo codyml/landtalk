@@ -37,7 +37,7 @@ $options = array(
 
 $message = null;
 if ( isset( $_GET['message'] ) ) {
-    
+
     $message = get_post( $_GET['message'] );
     wp_update_post( array( 'ID' => $message->ID, 'post_title' => 'Message from ' . get_field( 'name', $message ) ) );
     landtalk_send_contact_notification( $message );
@@ -49,34 +49,27 @@ while ( have_posts() ): the_post();
 
 ?>
 
-<div class="container">
-    <div class="columns is-centered">
-        <div class="column is-12 content">
-            <h1><?php the_title(); ?></h1>
-            <?php the_content(); ?>
-        </div>
-    </div>
+
+<div class="container content">
+    <h1><?php the_title(); ?></h1>
+    <?php the_content(); ?>
 </div>
 <div class="full-bleed-container about-images">
     <div class="columns is-centered">
         <?php foreach ( get_field('images') as $index => $image ) : ?>
             <?php if ( $index === 6 ) break; ?>
-            <div class="column 12">
+            <div class="column is-2">
                 <div class="image is-4by3" style="background-image: url('<?php echo $image['sizes']['medium_large']; ?>');"></div>
             </div>
         <?php endforeach; ?>
     </div>
 </div>
-<div class="container">
-    <div class="columns is-centered">
-        <div class="column is-12 content">
-            <?php the_field( 'contact_form' ); ?>
-            <?php if ( isset( $message ) ): ?>
-                <div class="is-italic has-text-weight-bold">Thanks for your message.  We'll get back to you soon.</div>
-            <? else: acf_form( $options ); ?>
-            <? endif; ?>
-        </div>
-    </div>
+<div class="container content">
+    <?php the_field( 'contact_form' ); ?>
+    <?php if ( isset( $message ) ): ?>
+        <div class="is-italic has-text-weight-bold">Thanks for your message.  We'll get back to you soon.</div>
+    <? else: acf_form( $options ); ?>
+    <? endif; ?>
 </div>
 
 <?php

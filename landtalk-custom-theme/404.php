@@ -8,12 +8,8 @@ get_header();
 
 ?>
 
-<div class="container">
-    <div class="columns is-centered">
-        <div class="column is-10 content">
-            <?php the_field( '404_content', 'options' ); ?>
-        </div>
-    </div>
+<div class="container content">
+    <?php the_field( '404_content', 'options' ); ?>
 </div>
 
 <?php

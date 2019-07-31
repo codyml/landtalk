@@ -160,37 +160,38 @@ function landtalk_register_lesson_post_type() {
 add_action( 'init', 'landtalk_register_lesson_post_type' );
 
 /*
-*   Registers Blog custom post type.
+*   Registers Reflection custom post type.
 */
 
-function landtalk_register_blog_post_type() {
+function landtalk_register_reflection_post_type() {
 
-    register_post_type( BLOG_POST_TYPE, array(
+    register_post_type( REFLECTION_POST_TYPE, array(
         'labels' => array(
-            'name' => 'Blogs',
-            'singular_name' => 'Blog',
-            'add_new_item' => 'Add New Blog',
-            'edit_item' => 'Edit Blog',
-            'new_item' => 'New Blog',
-            'view_item' => 'View Blog',
-            'view_items' => 'View Blogs',
-            'search_items' => 'Search Blogs',
-            'not_found' => 'No Blogs Found',
-            'not_found_in_trash' => 'No Blogs found in Trash',
-            'all_items' => 'All Blogs',
-            'archives' => 'Blog Archives',
-            'attributes' => 'Blog Attributes',
-            'insert_into_item' => 'Insert into Blog',
-            'uploaded_to_this_item' => 'Uploaded to this Blog',
+            'name' => 'Reflections',
+            'singular_name' => 'Reflection',
+            'add_new_item' => 'Add New Reflection',
+            'edit_item' => 'Edit Reflection',
+            'new_item' => 'New Reflection',
+            'view_item' => 'View Reflection',
+            'view_items' => 'View Reflections',
+            'search_items' => 'Search Reflections',
+            'not_found' => 'No Reflections Found',
+            'not_found_in_trash' => 'No Reflections found in Trash',
+            'all_items' => 'All Reflections',
+            'archives' => 'Reflection Archives',
+            'attributes' => 'Reflection Attributes',
+            'insert_into_item' => 'Insert into Reflection',
+            'uploaded_to_this_item' => 'Uploaded to this Reflection',
         ),
         'menu_icon' => 'dashicons-format-aside',
         'public' => true,
-        'rewrite' => array( 'slug' => 'Blogs' ),
+        'rewrite' => array( 'slug' => 'reflections' ),
         'show_in_rest' => true,
-        'rest_base' => 'blogs',
+        'rest_base' => 'reflections',
         'supports' => array( 'title' ),
+        'taxonomies' => array( REFLECTION_CATEGORY_TAXONOMY ),
     ) );
 
 }
 
-add_action( 'init', 'landtalk_register_blog_post_type' );
+add_action( 'init', 'landtalk_register_reflection_post_type' );

@@ -1,7 +1,7 @@
 <?php
 
 /*
-*   Template Name: Land Talk: Lessons
+*   Template Name: Land Talk: Lesson Archive
 */
 
 get_header();
@@ -9,23 +9,18 @@ while ( have_posts() ): the_post();
 
 ?>
 
-<div class="container">
-    <div class="columns is-left">
-        <div class="column is-12 content">
-            <h1><?php the_title(); ?></h1>
-            <?php the_content(); ?>
-        </div>
-    </div>
+<div class="container content">
+    <h1><?php the_title(); ?></h1>
 </div>
 <div class="lessons container">
     <div class='columns section-title'>
         <div class='column is-three-quarters is-size-4 has-text-weight-light'>
-            <span class='section-title-text'>Lesson Plans</span>
+            <span class='section-title-text'><?php the_title(); ?></span>
         </div>
         <div class='column is-one-quarter'></div>
     </div>
     <hr />
-    <?php the_field('lessons_description'); ?>
+    <?php the_content(); ?>
     <div class="react-component" data-component-name="LessonArchive"></div>
 </div>
 

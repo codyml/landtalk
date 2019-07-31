@@ -10,7 +10,7 @@
         <div class="column is-narrow">
             <hr class="is-marginless">
             <div class="large-nav-menu">
-                <?php wp_nav_menu( array( 'theme_location', MAIN_NAV_MENU_LOCATION ) ); ?>
+                <?php wp_nav_menu( array( 'theme_location' => HEADER_MENU_LOCATION ) ); ?>
             </div>
         </div>
     </div>
