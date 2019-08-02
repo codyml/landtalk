@@ -143,7 +143,7 @@ while ( have_posts() ): the_post();
     </div>
     <div class="columns is-centered">
         <div class="column is-two-thirds has-text-centered">
-            <a href="../report-conversation?conversation=<?php the_ID(); ?>" class="has-text-grey is-underlined">If this conversation violates Land Talk submission standards, click here to report it.</a>
+            <a href="../../report-conversation?conversation=<?php the_ID(); ?>" class="has-text-grey is-underlined">If this conversation violates Land Talk submission standards, click here to report it.</a>
         </div>
     </div>
 </div>
