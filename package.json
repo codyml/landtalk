@@ -4,6 +4,7 @@
   "description": "Land Talk on Wordpress",
   "main": "index.js",
   "dependencies": {
+    "styled-components": "^4.3.2",
     "webpack": "^3.10.0"
   },
   "devDependencies": {
