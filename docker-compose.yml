@@ -6,7 +6,6 @@ services:
         volumes:
             - ./dev-env/mysql:/var/lib/mysql
             - ./dumps:/dumps
-        restart: always
         environment:
             MYSQL_ROOT_PASSWORD: root
             MYSQL_DATABASE: wordpress
@@ -23,7 +22,6 @@ services:
             - ./landtalk-custom-theme:/var/www/html/wp-content/themes/landtalk-custom-theme
         ports:
             - "80:80"
-        restart: always
         environment:
             WORDPRESS_DB_HOST: mysql:3306
             WORDPRESS_DB_USER: wordpress
