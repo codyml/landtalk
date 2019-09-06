@@ -21,6 +21,7 @@ function landtalk_prepare_conversation_for_rest_response( $post ) {
     } else $response['historical_image_url'] = $historical_image_object['url'];
 
     $response['summary'] = get_field( 'summary', $post );
+    $response['fields'] = get_fields( $post );
     return $response;
 
 }
@@ -62,54 +63,72 @@ function landtalk_get_conversations( WP_REST_Request $request ) {
 
     }
 
-    $args = array( 'post_type' => CONVERSATION_POST_TYPE );
-
-    //  Order the pages correctly
-    if ( isset( $request['orderBy'] ) ) {
-
-        $args['orderby'] = $request['orderBy'];
-
-    }
-
-    //  Retrieve the correct number of conversations per page
-    if ( isset( $request['perPage'] ) ) {
-
-        $args['posts_per_page'] = $request['perPage'];
-
-    } else $args['posts_per_page'] = -1;
-
-    //  Retrieve the corect page of conversations
-    if ( isset( $request['page'] ) && isset( $request['perPage'] ) ) {
-
-        $args['offset'] = $request['page'] * $request['perPage'];
-
-    }
-
     //  Retrieve search term results
     if ( isset( $request['searchTerm'] ) ) {
 
-        $args['s'] = $request['searchTerm'];
+        $relevant_conversations = landtalk_get_conversations_by_relevance( $request['searchTerm'] );
+        if ( isset( $request['perPage'] ) ) {
+
+            $length = $request['perPage'];
+            $n_pages = ceil( count( $relevant_conversations ) / $length );
+
+            if ( isset( $request['page'] ) ) {
+                $offset = $request['page'];
+                $conversations = array_slice( $relevant_conversations, $offset, $length );
+            } else {
+                $conversations = array_slice( $relevant_conversations, 0, $length );
+            }
+
+        } else {
+            $conversations = $relevant_conversations;
+        }
+
+    } else {
+
+        $args = array( 'post_type' => CONVERSATION_POST_TYPE );
+
+        //  Order the pages correctly
+        if ( isset( $request['orderBy'] ) ) {
+
+            $args['orderby'] = $request['orderBy'];
+
+        }
+
+        //  Retrieve the correct number of conversations per page
+        if ( isset( $request['perPage'] ) ) {
+
+            $args['posts_per_page'] = $request['perPage'];
+
+        } else $args['posts_per_page'] = -1;
+
+        //  Retrieve the corect page of conversations
+        if ( isset( $request['page'] ) && isset( $request['perPage'] ) ) {
+
+            $args['offset'] = $request['page'] * $request['perPage'];
+
+        }
+
+        //  Retrieve related posts
+        if ( isset( $request['relatedId'] ) ) {
+
+            $terms = get_the_terms( $request['relatedId'], KEYWORDS_TAXONOMY );
+            $args['post__not_in'] = array($request['relatedId']);
+            $args['tax_query'] = array(
+                'relation' => 'OR',
+                array(
+                    'taxonomy' => KEYWORDS_TAXONOMY,
+                    'field' => 'term_id',
+                    'terms' => array_map(function($term) { return $term->term_id; }, $terms),
+                ),
+            );
+
+        }
+
+        $query = new WP_Query( $args );
+        $conversations = $query->get_posts();
+        $n_pages = $query->max_num_pages;
 
     }
-
-    //  Retrieve related posts
-    if ( isset( $request['relatedId'] ) ) {
-
-        $terms = get_the_terms( $request['relatedId'], KEYWORDS_TAXONOMY );
-        $args['post__not_in'] = array($request['relatedId']);
-        $args['tax_query'] = array(
-            'relation' => 'OR',
-            array(
-                'taxonomy' => KEYWORDS_TAXONOMY,
-                'field' => 'term_id',
-                'terms' => array_map(function($term) { return $term->term_id; }, $terms),
-            ),
-        );
-
-    }
-
-    $query = new WP_Query( $args );
-    $conversations = $query->get_posts();
 
     //  Pad with random conversations
     if ( isset( $request['relatedId'] ) && isset( $request['perPage'] ) ) {
@@ -120,7 +139,7 @@ function landtalk_get_conversations( WP_REST_Request $request ) {
             $addl_conversations_query = new WP_Query( array(
                 'post_type' => CONVERSATION_POST_TYPE,
                 'posts_per_page' => $request['perPage'] - $count,
-                'post__not_in' => array($request['relatedId']),
+                'post__not_in' => array( $request['relatedId'] ),
                 'orderby' => 'rand',
             ) );
 
@@ -130,16 +149,12 @@ function landtalk_get_conversations( WP_REST_Request $request ) {
 
     }
 
-    $prepared_conversations = array();
-    foreach ( $conversations as $conversation ) {
-
-        $prepared_conversations[] = landtalk_prepare_conversation_for_rest_response( $conversation );
-
-    }
-
     return array(
-        'conversations' => $prepared_conversations,
-        'nPages' => $query->max_num_pages,
+        'conversations' => array_map(
+            'landtalk_prepare_conversation_for_rest_response',
+            $conversations
+        ),
+        'nPages' => $n_pages,
     );
 
 }

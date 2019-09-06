@@ -43,10 +43,11 @@ require_once 'inc/menus.php';
 
 
 /*
-*   Registers custom REST endpoints.
+*   Registers custom REST endpoints and queries that back them.
 */
 
 require_once 'inc/rest.php';
+require_once 'inc/query.php';
 
 
 /*
