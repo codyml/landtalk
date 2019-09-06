@@ -7,6 +7,7 @@
 get_header();
 while ( have_posts() ): the_post();
 
+    //  Retrieves images
     $historical_image_object = get_field( 'historical_image' )['image_file'];
     if ( isset( $historical_image_object['sizes']['large'] ) ) {
         $historical_image = $historical_image_object['sizes']['large'];
@@ -16,6 +17,20 @@ while ( have_posts() ): the_post();
     if ( isset( $current_image_object['sizes']['large'] ) ) {
         $current_image = $current_image_object['sizes']['large'];
     } else $current_image = $current_image_object['url'];
+
+    //  Updates view count if user is not logged in
+    if ( ! is_user_logged_in() ) {
+
+        $view_count = (int) get_field( 'view_count' );
+        if ( empty( $view_count ) ) {
+            $view_count = 1;
+        } else {
+            $view_count++;
+        }
+
+        update_field( 'view_count', $view_count );
+
+    }
 
 ?>
 
