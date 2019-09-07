@@ -11,6 +11,11 @@
 
 function landtalk_get_conversations_by_relevance( $search_term ) {
 
+    // $time = microtime(true);
+
+    //  Case insensitive search.
+    $lowercase_search_term = strtolower( $search_term );
+
     //  Fetches all conversations.
     $args = array(
         'post_type' => CONVERSATION_POST_TYPE,
@@ -19,20 +24,38 @@ function landtalk_get_conversations_by_relevance( $search_term ) {
     $query = new WP_Query( $args );
     $conversations = $query->get_posts();
 
+    $preprocessed_conversations = array();
+    foreach ( $conversations as $conversation ) {
+
+        $preprocessed_conversations[ $conversation->ID ] = array(
+
+            'title' => strtolower( $conversation->post_title ),
+            'keywords' => strtolower( implode( '%%%%%', array_map( function( $keyword ) {
+                return $keyword->name;
+            }, get_field( 'keywords', $conversation->ID ) ) ) ),
+            'narrative' => strtolower( implode( '%%%%%', array(
+                get_field( 'used_to_look', $conversation->ID ),
+                get_field( 'has_changed', $conversation->ID ),
+                get_field( 'activities', $conversation->ID )
+            ) ) ),
+            'transcript' => strtolower( get_field( 'transcript', $conversation->ID ) ),
+            'additional_information' => strtolower( get_field( 'additional_information', $conversation->ID ) ),
+
+        );
+
+    };
+
     //  Retrieves custom fields and calculates a score for each
     //  conversation for relevance to search term.
-    $scored_conversations = array_map( function( $conversation ) use ( $search_term ) {
+    $scored_conversations = array_map( function( $conversation ) use ( $preprocessed_conversations, $lowercase_search_term ) {
 
-        $fields = get_fields( $conversation );
         $score = landtalk_score_conversation_by_relevance(
-            $conversation,
-            $fields,
-            $search_term
+            $preprocessed_conversations[ $conversation->ID ],
+            $lowercase_search_term
         );
 
         return array(
             'conversation' => $conversation,
-            'fields' => $fields,
             'score' => $score,
         );
 
@@ -78,71 +101,32 @@ $relevance_score_facets = array(
     //  Title
     array(
         'relevance' => 4,
-        'match' => function( $conversation, $fields, $search_term ) {
-            $re = '/' . $search_term . '/i';
-            $str = $conversation->post_title;
-            return preg_match( $re, $str );
-        },
+        'field' => 'title',
     ),
 
     //  Keywords
     array(
         'relevance' => 3,
-        'match' => function( $conversation, $fields, $search_term ) {
-            $re = '/' . $search_term . '/i';
-            foreach ( $fields['keywords'] as $keyword ) {
-                $str = $keyword->name;
-                if ( preg_match( $re, $str ) ) {
-                    return true;
-                }
-            }
-
-            return false;
-        },
+        'field' => 'keywords',
 
     ),
 
     //  Narrative
     array(
         'relevance' => 2,
-        'match' => function( $conversation, $fields, $search_term ) {
-            $re = '/' . $search_term . '/i';
-            $searchedFields = array(
-                'used_to_look',
-                'has_changed',
-                'activities'
-            );
-
-            foreach ( $searchedFields as $fieldName ) {
-                $str = $fields[ $fieldName ];
-                if ( preg_match( $re, $str ) ) {
-                    return true;
-                }
-            }
-
-            return false;
-        },
+        'field' => 'narrative',
     ),
 
     //  Transcript
     array(
         'relevance' => 1,
-        'match' => function( $conversation, $fields, $search_term ) {
-            $re = '/' . $search_term . '/i';
-            $str = $fields['transcript'];
-            return preg_match( $re, $str );
-        },
+        'field' => 'transcript',
     ),
 
     //  Additional Information
     array(
         'relevance' => 0,
-        'match' => function( $conversation, $fields, $search_term ) {
-            $re = '/' . $search_term . '/i';
-            $str = $fields['additional_information'];
-            return preg_match( $re, $str );
-        },
-
+        'additional_information',
     ),
 
 );
@@ -155,7 +139,6 @@ $relevance_score_facets = array(
 
 function landtalk_score_conversation_by_relevance(
     $conversation,
-    $fields,
     $search_term
 ) {
 
@@ -165,8 +148,8 @@ function landtalk_score_conversation_by_relevance(
         function( $prev_score, $facet ) use ($conversation, $fields, $search_term ) {
 
             $next_score = $prev_score;
-            $match = $facet['match']( $conversation, $fields, $search_term );
-            if ( ! empty( $match ) ) {
+            $match = strpos( $conversation[ $facet['field'] ], $search_term ) !== false;
+            if ( $match ) {
                 $next_score += 1 << $facet['relevance'];
             }
 
