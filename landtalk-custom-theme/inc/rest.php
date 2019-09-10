@@ -73,7 +73,7 @@ function landtalk_get_conversations( WP_REST_Request $request ) {
             $n_pages = ceil( count( $relevant_conversations ) / $length );
 
             if ( isset( $request['page'] ) ) {
-                $offset = $request['page'];
+                $offset = $request['page'] * $length;
                 $conversations = array_slice( $relevant_conversations, $offset, $length );
             } else {
                 $conversations = array_slice( $relevant_conversations, 0, $length );

@@ -56,3 +56,30 @@ if ( get_field( 'migrate_activities', 'options' ) ) {
     update_field( 'migrate_activities', false, 'options');
 
 }
+
+
+/*
+*   Updates all Conversations with separate Historic Activities
+*   and Current Activities fields, filling the combined Historic
+*   & Current Activities field with the contents of the two separate
+*   fields separated by a paragraph break.
+*/
+
+if ( get_field( 'preprocess_conversations_for_relevance', 'options' ) ) {
+
+    $conversations_query = new WP_Query( array(
+        'post_type' => CONVERSATION_POST_TYPE,
+        'posts_per_page' => -1,
+    ) );
+
+    if ( $conversations_query->have_posts() ) {
+        while ( $conversations_query->have_posts() ) {
+            $conversations_query->the_post();
+            landtalk_save_relevance_postmeta( $post->ID );
+        }
+        wp_reset_postdata();
+    }
+
+    update_field( 'preprocess_conversations_for_relevance', false, 'options' );
+
+}

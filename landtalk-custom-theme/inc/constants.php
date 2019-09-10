@@ -32,3 +32,13 @@ define( 'HOPEFULLY_UNIQUE_POSITION_DECIMAL', '3982' );
 
 define( 'HEADER_MENU_LOCATION', 'landtalk_header_menu' );
 define( 'FOOTER_MENU_LOCATION', 'landtalk_footer_menu' );
+
+
+/*
+*   Defines postmeta field key prefix for preprocessed relevance
+*   query data and the separator used to separate multiple-value
+*   fields.
+*/
+
+define( 'RELEVANCE_POSTMETA_KEY_PREFIX', 'lt_rel_' );
+define( 'PREPROCESSED_SEPARATOR', '%%%%%' );

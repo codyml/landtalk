@@ -22,13 +22,6 @@ require_once 'inc/custom-post-types.php';
 
 
 /*
-*   Adds an Options page.
-*/
-
-require_once 'inc/options.php';
-
-
-/*
 *   Registers static assets for inclusion on rendered pages.
 */
 
@@ -43,11 +36,17 @@ require_once 'inc/menus.php';
 
 
 /*
-*   Registers custom REST endpoints and queries that back them.
+*   Registers custom REST endpoints.
 */
 
 require_once 'inc/rest.php';
-require_once 'inc/query.php';
+
+
+/*
+*   Adds support for relevance querying.
+*/
+
+require_once 'inc/relevance-search.php';
 
 
 /*
@@ -84,3 +83,10 @@ include_once 'inc/.env.php';
 */
 
 include_once 'inc/shortcodes.php';
+
+
+/*
+*   Adds an Options page.
+*/
+
+require_once 'inc/options.php';
