@@ -32,6 +32,18 @@ hr {
     .card {
 
         border-radius: 6px;
+        background-color: #fff;
+        transition: background-color .2s;
+
+        .card-content {
+
+            padding: 1.25em 1.5em;
+
+            .card-summary {
+                margin-top: 0.75em;
+            }
+
+        }
 
         .card-image {
             background-repeat: no-repeat;

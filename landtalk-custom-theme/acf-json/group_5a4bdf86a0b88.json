@@ -555,7 +555,7 @@
             "placeholder": "10-1000 characters",
             "maxlength": 1000,
             "rows": "",
-            "new_lines": "wpautop"
+            "new_lines": ""
         },
         {
             "key": "field_5c759cf7bd3e5",
@@ -891,5 +891,5 @@
     "active": 1,
     "description": "",
     "recaptcha": 0,
-    "modified": 1564162313
+    "modified": 1568158698
 }
