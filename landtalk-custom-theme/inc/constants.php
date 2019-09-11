@@ -42,3 +42,10 @@ define( 'FOOTER_MENU_LOCATION', 'landtalk_footer_menu' );
 
 define( 'RELEVANCE_POSTMETA_KEY_PREFIX', 'lt_rel_' );
 define( 'PREPROCESSED_SEPARATOR', '%%%%%' );
+
+
+/*
+*   Defines spatial query constants.
+*/
+
+define( 'EARTH_RADIUS', 3959 );

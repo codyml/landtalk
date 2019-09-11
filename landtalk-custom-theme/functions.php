@@ -36,6 +36,13 @@ require_once 'inc/menus.php';
 
 
 /*
+*   Imports spatial search helpers.
+*/
+
+require_once 'inc/radius-search.php';
+
+
+/*
 *   Registers custom REST endpoints.
 */
 

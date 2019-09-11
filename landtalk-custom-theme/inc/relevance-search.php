@@ -1,74 +1,6 @@
 <?php
 
 /*
-*   Searches Conversations in multiple content areas and returns
-*   an array of arrays, each containing the conversation object,
-*   the ACF fields for the conversation and the calculated relevance
-*   score.
-*
-*   TODO: currently has terrible performance (> 2s / query)
-*/
-
-function landtalk_get_conversations_by_relevance( $search_term ) {
-
-    //  Don't allow searches for the separator.
-    if ( $search_term === PREPROCESSED_SEPARATOR ) {
-        return array();
-    }
-
-    //  Case insensitive search.
-    $lowercase_search_term = strtolower( $search_term );
-
-    //  Fetches all conversations.
-    $args = array(
-        'post_type' => CONVERSATION_POST_TYPE,
-        'posts_per_page' => -1,
-    );
-    $query = new WP_Query( $args );
-    $conversations = $query->get_posts();
-
-    //  Fetches preprocessed relevance query data for conversations.
-    $preprocessed_conversations = landtalk_retrieve_relevance_postmeta( $conversations );
-
-    //  Scores each conversation based on preprocessed data.
-    $scored_conversations = array_map( function( $conversation ) use ( $preprocessed_conversations, $lowercase_search_term ) {
-
-        $score = landtalk_score_conversation_by_relevance(
-            $preprocessed_conversations[ $conversation->ID ],
-            $lowercase_search_term
-        );
-
-        return array(
-            'conversation' => $conversation,
-            'score' => $score,
-        );
-
-    }, $conversations );
-
-    //  Filters to only results with score > 0
-    $filtered_scored_conversations = array_filter(
-        $scored_conversations,
-        function( $scored_conversation ) {
-            return $scored_conversation['score'] > 0;
-        }
-    );
-
-    //  Sorts results by score
-    usort( $filtered_scored_conversations, function( $a, $b ) {
-        $difference = $b['score'] - $a['score'];
-        if ( $difference === 0 ) {
-            return $b['conversation']->ID - $a['conversation']->ID;
-        } else return $difference;
-    });
-
-    return array_map( function( $scored_conversation) {
-        return $scored_conversation['conversation'];
-    }, $filtered_scored_conversations );
-
-}
-
-
-/*
 *   Each sub-array is a facet of the conversation's relevance score
 *   for a given search term.  `relevance` is how much the facet
 *   weighs into the overall relevance score (higher numbers mean
@@ -150,6 +82,129 @@ $relevance_score_facets = array(
 
 
 /*
+*   Preprocesses and saves a conversation's relevance query fields
+*   to postmeta whenever a post is saved.
+*/
+
+function landtalk_save_relevance_postmeta( $post_id ) {
+
+    global $relevance_score_facets;
+    foreach ( $relevance_score_facets as $facet ) {
+        update_post_meta(
+            $post_id,
+            RELEVANCE_POSTMETA_KEY_PREFIX . $facet['field_key'],
+            $facet['preprocess']( $post_id )
+        );
+    }
+
+}
+
+add_action(
+    'save_post_' . CONVERSATION_POST_TYPE,
+    'landtalk_save_relevance_postmeta'
+);
+
+
+/*
+*   Searches Conversations in multiple content areas and returns
+*   an array of arrays, each containing the conversation object,
+*   the ACF fields for the conversation and the calculated relevance
+*   score.
+*/
+
+function landtalk_filter_conversations_by_relevance(
+    $conversations,
+    $search_term,
+    $orderByRelevance
+) {
+
+    //  Don't allow searches for the separator.
+    if ( $search_term === PREPROCESSED_SEPARATOR ) {
+        return array();
+    }
+
+    //  Case insensitive search.
+    $lowercase_search_term = strtolower( $search_term );
+
+    //  Fetches preprocessed relevance query data for conversations.
+    $preprocessed_conversations = landtalk_retrieve_relevance_postmeta(
+        $conversations
+    );
+
+    //  Scores each conversation based on preprocessed data.
+    $scored_conversations = array_map( function( $conversation ) use ( $preprocessed_conversations, $lowercase_search_term ) {
+
+        $score = landtalk_score_conversation_by_relevance(
+            $preprocessed_conversations[ $conversation->ID ],
+            $lowercase_search_term
+        );
+
+        return array(
+            'conversation' => $conversation,
+            'score' => $score,
+        );
+
+    }, $conversations );
+
+    //  Filters to only results with score > 0
+    $filtered_scored_conversations = array_filter(
+        $scored_conversations,
+        function( $scored_conversation ) {
+            return $scored_conversation['score'] > 0;
+        }
+    );
+
+    //  Sorts results by descending score, if indicated
+    if ( $orderByRelevance ) {
+        usort( $filtered_scored_conversations, function( $a, $b ) {
+            $difference = $b['score'] - $a['score'];
+            if ( $difference === 0 ) {
+                return $b['conversation']->ID - $a['conversation']->ID;
+            } else return $difference;
+        });
+    }
+
+    return array_map( function( $scored_conversation) {
+        return $scored_conversation['conversation'];
+    }, $filtered_scored_conversations );
+
+}
+
+
+/*
+*   Retrieves preprocessed relevance query fields for the passed
+*   Conversations.
+*/
+
+function landtalk_retrieve_relevance_postmeta( $conversations ) {
+
+    global $relevance_score_facets;
+    $preprocessed_conversations = array();
+    foreach ( $conversations as $conversation ) {
+
+        $preprocessed_conversation = array();
+        foreach ( $relevance_score_facets as $facet ) {
+
+            $meta = get_post_meta(
+                $conversation->ID,
+                RELEVANCE_POSTMETA_KEY_PREFIX . $facet['field_key'],
+                true
+            );
+
+            $preprocessed_conversation[ $facet['field_key'] ] = $meta;
+
+        }
+
+        $preprocessed_conversations[ $conversation->ID ] = $preprocessed_conversation;
+
+    }
+
+    return $preprocessed_conversations;
+
+}
+
+
+/*
 *   Calculate's a conversation's relevance to the search term using
 *   the above relevance score facets.
 */
@@ -185,60 +240,5 @@ function landtalk_score_conversation_by_relevance(
         },
         0
     );
-
-}
-
-
-/*
-*   Preprocesses and saves a conversation's relevance query fields
-*   to postmeta for quick retrieval whenever a post is saved.
-*/
-
-function landtalk_save_relevance_postmeta( $post_id ) {
-
-    global $relevance_score_facets;
-    foreach ( $relevance_score_facets as $facet ) {
-        update_post_meta(
-            $post_id,
-            RELEVANCE_POSTMETA_KEY_PREFIX . $facet['field_key'],
-            $facet['preprocess']( $post_id )
-        );
-    }
-
-}
-
-add_action( 'save_post_' . CONVERSATION_POST_TYPE, 'landtalk_save_relevance_postmeta' );
-
-
-
-/*
-*   Retrieves preprocessed relevance query fields for the passed
-*   Conversations.
-*/
-
-function landtalk_retrieve_relevance_postmeta( $conversations ) {
-
-    global $relevance_score_facets;
-    $preprocessed_conversations = array();
-    foreach ( $conversations as $conversation ) {
-
-        $preprocessed_conversation = array();
-        foreach ( $relevance_score_facets as $facet ) {
-
-            $meta = get_post_meta(
-                $conversation->ID,
-                RELEVANCE_POSTMETA_KEY_PREFIX . $facet['field_key'],
-                true
-            );
-
-            $preprocessed_conversation[ $facet['field_key'] ] = $meta;
-
-        }
-
-        $preprocessed_conversations[ $conversation->ID ] = $preprocessed_conversation;
-
-    }
-
-    return $preprocessed_conversations;
 
 }

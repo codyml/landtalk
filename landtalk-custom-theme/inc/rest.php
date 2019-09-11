@@ -6,22 +6,35 @@
 *   on the Conversation Map and as a Conversation Excerpt.
 */
 
-function landtalk_prepare_conversation_for_rest_response( $post ) {
+function landtalk_prepare_conversation_for_rest_response(
+    $conversation,
+    $forMapOnly
+) {
 
     $response = array();
-    $response['id'] = $post->ID;
-    $response['link'] = get_permalink( $post );
-    $response['place_name'] = get_field( 'place_name', $post );
-    $response['location'] = get_field( 'location', $post );
-    $historical_image_object = get_field( 'historical_image', $post )['image_file'];
-    if ( isset( $historical_image_object['sizes']['medium_large'] ) ) {
+    $response['id'] = $conversation->ID;
+    $response['link'] = get_permalink( $conversation );
+    $response['place_name'] = get_field( 'place_name', $conversation );
+    $response['location'] = get_field( 'location', $conversation )['lat_lng'];
 
-        $response['historical_image_url'] = $historical_image_object['sizes']['medium_large'];
+    if ( ! $forMapOnly ) {
 
-    } else $response['historical_image_url'] = $historical_image_object['url'];
+        $historical_image_object = get_field(
+            'historical_image',
+            $conversation
+        )['image_file'];
 
-    $response['summary'] = get_field( 'summary', $post );
-    $response['fields'] = get_fields( $post );
+        if ( isset( $historical_image_object['sizes']['medium_large'] ) ) {
+
+            $response['historical_image_url'] =
+                $historical_image_object['sizes']['medium_large'];
+
+        } else $response['historical_image_url'] = $historical_image_object['url'];
+
+        $response['summary'] = get_field( 'summary', $conversation );
+
+    }
+
     return $response;
 
 }
@@ -48,112 +61,214 @@ function landtalk_prepare_lesson_for_rest_response( $post ) {
 
 
 /*
-*   Adds REST endpoint for retrieving Conversations.
+*   Adds REST endpoint for retrieving Conversations.  API description
+*   of GET parameters:
+*
+*   `query`     The set of results to apply filters, sorting and
+*               pagination to.  `query=all` returns all published
+*               Conversations, `query=featured` returns the Featured
+*               Conversations as set in Options, and `query=related`
+*               returns the Conversations related to the conversation
+*               referenced by ID in `relatedId`.  Default is `all`.
+*
+*   `filterBy`  The filters to apply to the queried set.  `filterBy=relevance`
+*               performs a relevance search for the term in `relevanceSearchTerm`.
+*               `filterBy=radius` performs a spatial search for
+*               results that are within `radiusDistance` to `radiusLat`
+*               and `radiusLng`.  `filterBy=relevance,radius` does
+*               both (both sets of additional params must be supplied).
+*               default is none.
+*
+*   `orderBy`   Ordering to apply to the filtered queried set.
+*               `orderBy=rand` sorts randomly, `orderBy=RAND(seed)`
+*               sorts randomly using the provided seed, `orderBy=relevance`
+*               sorts by descending relevance score (only works
+*               if filtered by relevance), `orderBy=popular` sorts
+*               by descending page views, and `orderBy=recent` sorts
+*               by initial publication date from most recent to
+*               least recent.  Default is `rand` if not filtering
+*               by relevance; `relevance` if filtering by relevance.
+*               NOTE: if not sorting by random, sorts are stabilized
+*               by sorting by descending ID if primary keys are equal.
+*
+*   `perPage`   If `perPage=all`, all results are returned.  Otherwise,
+*               up to `perPage` results are returned.  Default is `all`.
+*
+*   `page`      If `perPage` is not `all`, this will return the
+*               specified page of results.  Default is `0`, the
+*               first page.
+*
+*   `pad`       If `perPage` is not `all` and the number of results
+*               is less than `perPage`, setting `pad=rand` will
+*               pad add as many random results as required to create
+*               a complete page.  Default is none.
+*
+*   `for`       If `for=mapOnly`, only the limited amount of information
+*               required for rendering points to the map will be
+*               returned.  Default is none.
 */
 
 function landtalk_get_conversations( WP_REST_Request $request ) {
 
-    //  Retrieve Featured Conversations
-    if ( isset( $request['featured'] ) ) {
+    //  Basic WP query params for `query=all`.
+    $args = array(
+        'post_type' => CONVERSATION_POST_TYPE,
+        'posts_per_page' => -1,
+    );
 
-        return array(
-            'conversations' => landtalk_get_featured_conversations(),
-            'nPages' => 1
+    //  Applies default random sorting.
+    if ( isset( $request['orderBy'] ) ) {
+        if ( strncasecmp( $request['orderBy'], 'rand', 4 ) === 0 ) {
+            $args['orderby'] = $request['orderBy'];
+        }
+    } else {
+        $args['orderby'] = 'rand';
+    }
+
+    //  Params for `featured` query.
+    if ( $request['query'] === 'featured' ) {
+        $args['post__in'] = get_field( 'featured_conversations', 'options' );
+    }
+
+    //  Params for `related` query.
+    if ( $request['query'] === 'related' ) {
+
+        $keywords = get_field( 'keywords', $request['relatedId'] );
+        $args['post__not_in'] = array( $request['relatedId'] );
+        $args['tax_query'] = array(
+            array(
+                'taxonomy' => KEYWORDS_TAXONOMY,
+                'field' => 'term_id',
+                'terms' => isset( $keywords ) ? array_map(
+                    function( $term ) { return $term->term_id; },
+                    $keywords
+                ) : array(),
+            ),
         );
 
     }
 
-    //  Retrieve search term results
-    if ( isset( $request['searchTerm'] ) ) {
+    //  Performs WP query to retrieve post objects.
+    $query = new WP_Query( $args );
+    $conversations = $query->get_posts();
 
-        $relevant_conversations = landtalk_get_conversations_by_relevance( $request['searchTerm'] );
-        if ( isset( $request['perPage'] ) ) {
+    //  Applies `relevance` filter.
+    if (
+        isset( $request['filterBy'] ) &&
+        strpos( $request['filterBy'], 'relevance' ) !== false
+    ) {
 
-            $length = $request['perPage'];
-            $n_pages = ceil( count( $relevant_conversations ) / $length );
+        $orderByRelevance = (
+            ! isset( $request['orderBy'] ) ||
+            $request['orderBy'] === 'relevance'
+        );
 
-            if ( isset( $request['page'] ) ) {
-                $offset = $request['page'] * $length;
-                $conversations = array_slice( $relevant_conversations, $offset, $length );
-            } else {
-                $conversations = array_slice( $relevant_conversations, 0, $length );
+        $conversations = landtalk_filter_conversations_by_relevance(
+            $conversations,
+            $request['relevanceSearchTerm'],
+            $orderByRelevance
+        );
+
+    }
+
+    //  Applies `radius` filter.
+    if (
+        isset( $request['filterBy'] ) &&
+        strpos( $request['filterBy'], 'radius' ) !== false
+    ) {
+        $conversations = landtalk_filter_conversations_by_radius(
+            $conversations,
+            (float) $request['radiusDistance'], // Miles
+            (float) $request['radiusLat'], // Decimal
+            (float) $request['radiusLng'] // Decimal
+        );
+    }
+
+    //  Sorts by descending `popular`.
+    if ( $request['orderBy'] === 'popular' ) {
+        usort( $conversations, function( $a, $b ) {
+            $a_view_count = get_field( 'view_count', $a );
+            $b_view_count = get_field( 'view_count', $b );
+            $difference = $b_view_count - $a_view_count;
+            if ( $difference === 0 ) {
+                return $b->ID - $a->ID;
+            } else return $difference;
+        });
+    }
+
+    //  Sorts by descending `recent`.
+    if ( $request['orderBy'] === 'recent' ) {
+        usort( $conversations, function( $a, $b ) {
+            $a_date = get_the_date( 'U', $a );
+            $b_date = get_the_date( 'U', $b );
+            $difference = $b_date - $a_date;
+            if ( $difference === 0 ) {
+                return $b->ID - $a->ID;
+            } else return $difference;
+        });
+    }
+
+    //  Paginates & pads with random.
+    if ( isset( $request['perPage'] ) && $request['perPage'] !== 'all' ) {
+
+        //  Limits to indicated page of results
+        $per_page = (int) $request['perPage'];
+        $n_pages = ceil( count( $conversations ) / $per_page );
+        $page = isset( $request['page'] ) ? (int) $request['page'] : 0;
+        $offset = $page * $per_page;
+        $conversations_in_page = array_slice( $conversations, $offset, $per_page );
+        $n_conversations_in_page = count( $conversations_in_page );
+
+        //  Pads with random if indicated.
+        if (
+            $request['pad'] === 'rand' &&
+            $n_conversations_in_page < $per_page
+        ) {
+
+            $addl_conversations_query_args = array(
+                'post_type' => CONVERSATION_POST_TYPE,
+                'posts_per_page' => $per_page - $n_conversations_in_page,
+                'post__not_in' => array_map( // Exclude queried Conversations.
+                    function( $conversation ) { return $conversation->ID; },
+                    $conversations
+                ),
+                'orderby' => 'rand',
+            );
+
+            //  Exclude Conversation specified in `relatedId`.
+            if ( isset( $request['relatedId'] ) ) {
+                $addl_conversations_query_args['post__not_in'][] =
+                    $request['relatedId'];
             }
 
-        } else {
-            $conversations = $relevant_conversations;
-        }
+            $addl_conversations = ( new WP_Query(
+                $addl_conversations_query_args
+            ) )->get_posts();
 
-    } else {
-
-        $args = array( 'post_type' => CONVERSATION_POST_TYPE );
-
-        //  Order the pages correctly
-        if ( isset( $request['orderBy'] ) ) {
-
-            $args['orderby'] = $request['orderBy'];
-
-        }
-
-        //  Retrieve the correct number of conversations per page
-        if ( isset( $request['perPage'] ) ) {
-
-            $args['posts_per_page'] = $request['perPage'];
-
-        } else $args['posts_per_page'] = -1;
-
-        //  Retrieve the corect page of conversations
-        if ( isset( $request['page'] ) && isset( $request['perPage'] ) ) {
-
-            $args['offset'] = $request['page'] * $request['perPage'];
-
-        }
-
-        //  Retrieve related posts
-        if ( isset( $request['relatedId'] ) ) {
-
-            $terms = get_the_terms( $request['relatedId'], KEYWORDS_TAXONOMY );
-            $args['post__not_in'] = array($request['relatedId']);
-            $args['tax_query'] = array(
-                'relation' => 'OR',
-                array(
-                    'taxonomy' => KEYWORDS_TAXONOMY,
-                    'field' => 'term_id',
-                    'terms' => array_map(function($term) { return $term->term_id; }, $terms),
-                ),
+            $conversations_in_page = array_merge(
+                $conversations_in_page,
+                $addl_conversations
             );
 
         }
 
-        $query = new WP_Query( $args );
-        $conversations = $query->get_posts();
-        $n_pages = $query->max_num_pages;
-
+    } else {
+        $n_pages = 1;
+        $conversations_in_page = $conversations;
     }
 
-    //  Pad with random conversations
-    if ( isset( $request['relatedId'] ) && isset( $request['perPage'] ) ) {
-
-        $count = count( $conversations );
-        if ( $count < $request['perPage'] ) {
-
-            $addl_conversations_query = new WP_Query( array(
-                'post_type' => CONVERSATION_POST_TYPE,
-                'posts_per_page' => $request['perPage'] - $count,
-                'post__not_in' => array( $request['relatedId'] ),
-                'orderby' => 'rand',
-            ) );
-
-            $conversations = array_merge($conversations, $addl_conversations_query->get_posts());
-
-        }
-
+    //  Prepares Conversations for JSON payload.
+    $prepared_conversations = array();
+    $forMapOnly = $request['for'] === 'mapOnly';
+    foreach ( $conversations_in_page as $conversation ) {
+        $prepared_conversations[] = landtalk_prepare_conversation_for_rest_response(
+            $conversation,
+            $forMapOnly
+        );
     }
 
     return array(
-        'conversations' => array_map(
-            'landtalk_prepare_conversation_for_rest_response',
-            $conversations
-        ),
+        'conversations' => $prepared_conversations,
         'nPages' => $n_pages,
     );
 
@@ -235,25 +350,3 @@ function landtalk_register_lessons_endpoint() {
 }
 
 add_action( 'rest_api_init', 'landtalk_register_lessons_endpoint' );
-
-
-
-/*
-*   Retrieves the Featured Conversations.
-*/
-
-function landtalk_get_featured_conversations() {
-
-    $conversations = get_field( 'featured_conversations', 'options' );
-    $response = array();
-    foreach ( $conversations as $conversation ) {
-
-        if ( $conversation['conversation']->post_status === 'publish' ) {
-            $response[] = landtalk_prepare_conversation_for_rest_response( $conversation['conversation'] );
-        }
-
-    }
-
-    return $response;
-
-}
