@@ -61,6 +61,21 @@ export default class ConversationMap extends React.Component {
     constructor(props) {
 
         super(props)
+        this.state = {}
+
+        if (this.props.selectedMarker) {
+
+            this.state.selectedMarker = this.props.selectedMarker
+
+        } else if (location.hash) {
+
+            const id = location.hash.match(/#selected-marker=(\d+)/)
+            if (id) {
+                this.state.selectedMarker = +id[1]
+            }
+
+        }
+
         this.createMap = this.createMap.bind(this)
         this.addMarkers = this.addMarkers.bind(this)
         this.handleSelectedMarker = this.handleSelectedMarker.bind(this)
@@ -162,9 +177,9 @@ export default class ConversationMap extends React.Component {
 
     handleSelectedMarker() {
 
-        if (this.props.selectedMarker && this.markers[this.props.selectedMarker]) {
+        if (this.state.selectedMarker && this.markers[this.state.selectedMarker]) {
 
-            const { position, mapMarker, infoWindowContent } = this.markers[this.props.selectedMarker]
+            const { position, mapMarker, infoWindowContent } = this.markers[this.state.selectedMarker]
 
             //  Makes selected marker larger
             const selectedIcon = {
@@ -249,7 +264,11 @@ export default class ConversationMap extends React.Component {
     render() {
         return (
             <React.Fragment>
-                <div className="map-wrapper" ref={this.createMap} />
+                <div
+                    className="map-wrapper"
+                    style={{ height: this.props.height }}
+                    ref={this.createMap}
+                />
                 {
                     this.props.miniMap
                     ? <div className="map-subtitle">Click map to reveal this conversation on the full-size map and see nearby conversations.</div>
@@ -261,4 +280,8 @@ export default class ConversationMap extends React.Component {
         )
     }
 
+}
+
+ConversationMap.defaultProps = {
+    height: '35em',
 }

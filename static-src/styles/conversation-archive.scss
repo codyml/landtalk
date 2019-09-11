@@ -1,0 +1,20 @@
+.keyword-cloud {
+  margin-top: 0.5em;
+}
+
+.keyword-cloud-keyword {
+
+  color: inherit;
+  transition: color .15s;
+
+  &:hover {
+    color: #3273dc;
+  }
+
+  &:not(:last-child)::after {
+    content: '•';
+    margin: 0 .25em;
+    color: #4a4a4a;
+  }
+
+}
