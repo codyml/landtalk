@@ -14,6 +14,7 @@ import RelatedConversations from './js/related-conversations.jsx'
 import LessonArchive from './js/lesson-archive.jsx'
 import ExcerptGallery from './js/excerpt-gallery.jsx'
 import PhotoGallery from './js/photo-gallery.jsx'
+import FeaturedConversations from './js/featured-conversations.jsx'
 const components = {
     ConversationMap,
     ConversationArchive,
@@ -22,6 +23,7 @@ const components = {
     LessonArchive,
     ExcerptGallery,
     PhotoGallery,
+    FeaturedConversations,
 }
 
 

@@ -91,15 +91,6 @@ export default class ConversationArchive extends React.Component {
             <React.Fragment>
                 <div className='container'>
                     <CollapsibleSection
-                        collapsed={ this.state.collapsed.featured }
-                        title='Featured Conversations'
-                        toggleCollapsed={ this.toggleCollapsibleSection.bind(this, 'featured') }
-                    >
-                        <Conversations featured={true}/>
-                    </CollapsibleSection>
-                </div>
-                <div className='container'>
-                    <CollapsibleSection
                         collapsed={ this.state.collapsed.map }
                         title='Map'
                         toggleCollapsed={ this.toggleCollapsibleSection.bind(this, 'map') }

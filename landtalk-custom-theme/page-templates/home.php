@@ -14,7 +14,7 @@ get_header();
             <?php the_field( 'intro_text' ); ?>
         </div>
         <div class="column is-6">
-          <figure class="image is-3by2 homepage-image" style="background-image: url('<?php the_field( 'intro_image' ); ?>')"></figure>
+            <figure class="image is-3by2 homepage-image" style="background-image: url('<?php the_field( 'intro_image' ); ?>')"></figure>
         </div>
     </div>
 </div>
@@ -30,12 +30,20 @@ get_header();
 </div>
 <div class="container">
     <div class="columns is-centered">
-      <div class="column is-6">
-        <figure class="image is-3by2 homepage-image" style="background-image: url('<?php the_field( 'body_image' ); ?>')"></figure>
-      </div>
-      <div class="column is-6 homepage-body">
-          <?php the_field( 'body_text' ); ?>
-      </div>
+        <div class="column is-6 homepage-map">
+            <?php the_field( 'featured_text' ); ?>
+        </div>
+    </div>
+    <div class="react-component" data-component-name="FeaturedConversations"></div>
+</div>
+<div class="container">
+    <div class="columns is-centered">
+        <div class="column is-6">
+            <figure class="image is-3by2 homepage-image" style="background-image: url(' <?php the_field( 'body_image' ); ?>')"></figure>
+        </div>
+        <div class="column is-6 homepage-body">
+            <?php the_field( 'body_text' ); ?>
+        </div>
     </div>
 </div>
 
