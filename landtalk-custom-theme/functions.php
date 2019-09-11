@@ -1,4 +1,9 @@
 <?php
+/**
+ * Imports PHP functionality includes.
+ *
+ * @package Land Talk Custom Theme
+ */
 
 /*
 *   Defines constants.
@@ -82,14 +87,14 @@ require_once 'inc/email.php';
 *   Includes environmental variables.
 */
 
-include_once 'inc/.env.php';
+require_once 'inc/.env.php';
 
 
 /*
 *   Includes shortcodes.
 */
 
-include_once 'inc/shortcodes.php';
+require_once 'inc/shortcodes.php';
 
 
 /*

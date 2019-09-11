@@ -1,4 +1,9 @@
 <?php
+/**
+ * Defines constants for the theme.
+ *
+ * @package Land Talk Custom Theme
+ */
 
 /*
 *   Defines custom post type identifiers.
@@ -15,7 +20,7 @@ define( 'REFLECTION_POST_TYPE', 'landtalk_reflection' );
 */
 
 define( 'KEYWORDS_TAXONOMY', 'landtalk_keywords' );
-define( 'REFLECTION_CATEGORY_TAXONOMY', 'landtalk_refcat');
+define( 'REFLECTION_CATEGORY_TAXONOMY', 'landtalk_refcat' );
 
 
 /*
