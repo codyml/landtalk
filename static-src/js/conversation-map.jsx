@@ -24,7 +24,7 @@ export const loadGoogleMapsAPI = () => new Promise(resolve => {
         element.src = `https://maps.googleapis.com/maps/api/js?key=${ GOOGLE_MAPS_JS_API_KEY }&libraries=geometry&callback=googleMapsAPILoaded`
         document.body.appendChild(element)
     }
-    
+
 })
 
 
@@ -33,7 +33,7 @@ export const loadGoogleMapsAPI = () => new Promise(resolve => {
 */
 
 const MAP_STYLES = [
-    { 
+    {
         elementType: 'labels',
         stylers: [ { visibility: 'off' } ],
     },
@@ -95,13 +95,13 @@ export default class ConversationMap extends React.Component {
                 this.infoWindow = new google.maps.InfoWindow()
 
             })
-            .then(downloadConversations)
+            .then(() => downloadConversations({ for: 'mapOnly' }))
             .then(({ conversations }) => this.addMarkers(conversations))
             .then(this.handleSelectedMarker)
             .catch(console.error.bind(console))
 
         }
-    
+
     }
 
 
@@ -113,7 +113,7 @@ export default class ConversationMap extends React.Component {
 
         const markers = conversations.map(conversation => {
 
-            const position = new google.maps.LatLng(conversation.location.lat_lng.latitude, conversation.location.lat_lng.longitude)
+            const position = new google.maps.LatLng(conversation.location.latitude, conversation.location.longitude)
             const normalIcon = {
                 url: markerIcon,
                 scaledSize: { width: 32, height: 51 },
@@ -130,7 +130,7 @@ export default class ConversationMap extends React.Component {
                     <div class="map-popup-link">Click for conversation</div>
                 </a>
             `
-            
+
             const mapMarker = new google.maps.Marker({ position, icon: normalIcon })
             if (!this.props.miniMap) {
 
@@ -180,12 +180,12 @@ export default class ConversationMap extends React.Component {
             .extend(originalMarker.position)
             .extend(closestMarker.position)
             .extend(secondClosestMarker.position)
-            
+
             this.map.fitBounds(bounds, 50)
 
             //  Opens info window and sets up marker clustering if full-size map
             if (!this.props.miniMap) {
-                
+
                 this.infoWindow.setContent(infoWindowContent)
                 this.infoWindow.open(this.map, mapMarker)
                 let listener
@@ -193,7 +193,7 @@ export default class ConversationMap extends React.Component {
                     this.clusterMarkers()
                     google.maps.event.removeListener(listener)
                 }), 500)
-            
+
             } else this.map.setOptions({ gestureHandling: 'none', zoomControl: false })
 
         } else this.clusterMarkers()
@@ -237,7 +237,7 @@ export default class ConversationMap extends React.Component {
                     width: 42,
                     textColor: '#fff',
                     textSize: 13,
-                    anchorText: [ -3, -1 ], 
+                    anchorText: [ -3, -1 ],
                 },
             ],
             enableRetinaIcons: true,

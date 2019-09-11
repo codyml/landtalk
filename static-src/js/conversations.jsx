@@ -14,7 +14,7 @@ import ExcerptGallery from './excerpt-gallery.jsx'
 export default class Conversations extends React.Component {
 
     constructor(props) {
-        
+
         super(props)
         this.state = { conversations: [], loading: false }
         if (this.props.paged) {
@@ -24,12 +24,12 @@ export default class Conversations extends React.Component {
 
         this.componentDidMount = this.componentDidMount.bind(this)
         this.loadMore = this.loadMore.bind(this)
-    
+
     }
 
     componentDidMount() { this.loadMore() }
     componentWillReceiveProps(newProps) {
-        
+
         if (this.props.searchTerm !== newProps.searchTerm) {
 
             const newState = { conversations: [], loading: false }
@@ -43,26 +43,22 @@ export default class Conversations extends React.Component {
         }
 
     }
-    
+
     loadMore() {
 
         this.setState({ loading: true })
         const thisRequest = {}
         this.latestRequest = thisRequest
         downloadConversations({
-            orderBy: this.props.orderBy,
-            perPage: this.props.perPage,
+            ...this.props.queryParams,
             page: this.state.currentPage,
-            searchTerm: this.props.searchTerm,
-            featured: this.props.featured,
-            relatedId: this.props.relatedId,
         })
         .then(response => {
 
             if (this.latestRequest !== thisRequest) {
-                
+
                 throw 'Obsolete request.'
-            
+
             } else return response
 
         })
@@ -95,7 +91,7 @@ export default class Conversations extends React.Component {
                     : null
                 }
                 {
-                    this.props.perPage && !this.state.loading && this.state.conversations.length && this.state.morePages 
+                    this.props.perPage && !this.state.loading && this.state.conversations.length && this.state.morePages
                     ? <a className='column is-size-4 has-text-weight-light has-text-centered has-text-grey block' onClick={ this.loadMore }>Load More</a>
                     : null
                 }
