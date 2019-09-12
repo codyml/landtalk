@@ -1,0 +1,34 @@
+/*
+* Imports.
+*/
+
+import React from 'react';
+import PropTypes from 'prop-types';
+
+
+/*
+* Component definition.
+*/
+
+const KeywordSearch = ({ searchedKeyword, setSearchedKeyword }) => (
+  <div className="search-control keyword-search">
+    <div className="search-control-title">Search by keyword:</div>
+    <input
+      type="text"
+      value={searchedKeyword}
+      onChange={(e) => setSearchedKeyword(e.target.value)}
+      className="input"
+      placeholder="Keyword"
+    />
+    <div className="search-control-description">
+      Enter a word or phrase to find matching results.
+    </div>
+  </div>
+);
+
+KeywordSearch.propTypes = {
+  searchedKeyword: PropTypes.string.isRequired,
+  setSearchedKeyword: PropTypes.func.isRequired,
+};
+
+export default KeywordSearch;

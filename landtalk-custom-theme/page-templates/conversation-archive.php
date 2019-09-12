@@ -19,16 +19,6 @@ while ( have_posts() ) :
 		)
 	);
 
-	$keywords_with_links = array_map(
-		function( $keyword ) {
-			return array(
-				'name' => $keyword,
-				'link' => get_site_url() . '/conversations/#keyword=' . rawurlencode( $keyword ),
-			);
-		},
-		$keywords
-	);
-
 	?>
 
 <!-- Title -->
@@ -39,7 +29,7 @@ while ( have_posts() ) :
 </div>
 
 <!-- ConversationArchive React component -->
-<div class="react-component" data-component-name="ConversationArchive" data-component-props="<?php echo esc_attr( landtalk_encode_json_for_html_attr( array( 'topKeywords' => $keywords_with_links ) ) ); ?>"></div>
+<div class="react-component" data-component-name="ConversationArchive" data-component-props="<?php echo esc_attr( landtalk_encode_json_for_html_attr( array( 'topKeywords' => $keywords ) ) ); ?>"></div>
 
 <!-- Footer text -->
 <div class="container content">

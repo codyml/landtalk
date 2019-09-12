@@ -1,5 +1,16 @@
-.keyword-cloud {
-  margin-top: 0.5em;
+.search-control {
+  margin: 0.5em 0;
+}
+
+.search-control-title {
+  margin-bottom: 0.5em;
+  font-weight: bold;
+}
+
+.search-control-description {
+  font-size: 0.9em;
+  font-style: italic;
+  margin-top: 0.75em;
 }
 
 .keyword-cloud-keyword {
@@ -15,6 +26,42 @@
     content: '•';
     margin: 0 .25em;
     color: #4a4a4a;
+  }
+
+}
+
+.place-search {
+
+  .dropdown {
+    width: 100%;
+  }
+
+  .dropdown-trigger {
+
+    width: 100%;
+
+    button {
+
+      height: auto;
+      width: 100%;
+      justify-content: space-between;
+      white-space: normal;
+
+    }
+
+  }
+
+  .dropdown-menu {
+    width: 100%;
+  }
+
+  .place {
+
+    text-align: left;
+    .address {
+      font-size: .85em;
+    }
+
   }
 
 }

@@ -3,10 +3,20 @@
 */
 
 import React from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 
 import ConversationMap from './conversation-map';
 import Conversations from './conversations';
+import KeywordCloud from './keyword-cloud';
+import PlaceSearch from './place-search';
+import KeywordSearch from './keyword-search';
+
+
+/*
+* Defines the radius of search for Place Search in miles.
+*/
+
+const PLACE_SEARCH_RADIUS = 20;
 
 
 /*
@@ -39,9 +49,9 @@ const getStateFromHash = () => {
 
         case 'place':
           state.searchedPlace = {
-            placeAddress: decodeURIComponent(placeAddress),
-            placeLatitude: decodeURIComponent(placeLatitude),
-            placeLongitude: decodeURIComponent(placeLongitude),
+            address: decodeURIComponent(placeAddress),
+            latitude: +decodeURIComponent(placeLatitude),
+            longitude: +decodeURIComponent(placeLongitude),
           };
           break;
 
@@ -66,11 +76,11 @@ const setHashFromState = (state) => {
   const hashComponents = [];
 
   if (state.selectedMarker) {
-    hashComponents.append(`selected-marker=${encodeURIComponent(state.selectedMarker)}`);
+    hashComponents.push(`selected-marker=${encodeURIComponent(state.selectedMarker)}`);
   }
 
   if (state.searchedKeyword) {
-    hashComponents.append(`keyword=${encodeURIComponent(state.searchedKeyword)}`);
+    hashComponents.push(`keyword=${encodeURIComponent(state.searchedKeyword)}`);
   }
 
   if (state.searchedPlace) {
@@ -80,11 +90,11 @@ const setHashFromState = (state) => {
       encodeURIComponent(state.searchedPlace.longitude),
     ];
 
-    hashComponents.append(`place=${placeComponents.join(',')}`);
+    hashComponents.push(`place=${placeComponents.join(',')}`);
   }
 
   if (state.searchSort) {
-    hashComponents.append(`sort=${encodeURIComponent(state.searchSort)}`);
+    hashComponents.push(`sort=${encodeURIComponent(state.searchSort)}`);
   }
 
   window.location.hash = hashComponents.join('&');
@@ -124,14 +134,15 @@ export default class ConversationArchive extends React.Component {
     const filterBy = [];
 
     if (searchedKeyword) {
-      filterBy.append('relevance');
+      filterBy.push('relevance');
       queryParams.relevanceSearchTerm = searchedKeyword;
     }
 
     if (searchedPlace) {
-      filterBy.append('radius');
+      filterBy.push('radius');
       queryParams.radiusLat = searchedPlace.latitude;
       queryParams.radiusLng = searchedPlace.longitude;
+      queryParams.radiusDistance = PLACE_SEARCH_RADIUS;
     }
 
     if (filterBy.length) {
@@ -146,16 +157,16 @@ export default class ConversationArchive extends React.Component {
   }
 
   updateSearch(update) {
-    this.setState(update, () => setHashFromState());
+    this.setState(update, () => setHashFromState(this.state));
   }
 
   render() {
     const searchQueryParams = this.getSearchQueryParams();
-    // const { topKeywords } = this.props;
+    const { topKeywords } = this.props;
     const {
       selectedMarker,
-      // searchedKeyword,
-      // searchedPlace,
+      searchedKeyword,
+      searchedPlace,
       // searchSort,
     } = this.state;
 
@@ -169,29 +180,23 @@ export default class ConversationArchive extends React.Component {
         <div className="container">
           <div className="columns is-multiline">
             <div className="column is-full">
-              {/*
-                <KeywordCloud
-                  keywords={topKeywords}
-                  searchedKeyword={searchedKeyword}
-                  setSearchedKeyword={(keyword) => this.updateSearch({ searchedKeyword: keyword })}
-                />
-              */}
+              <KeywordCloud
+                keywords={topKeywords}
+                searchedKeyword={searchedKeyword}
+                setSearchedKeyword={(keyword) => this.updateSearch({ searchedKeyword: keyword })}
+              />
             </div>
-            <div className="column is-one-half">
-              {/*
-                <PlaceSearch
-                  searchedPlace={searchedPlace}
-                  setSearchedPlace={(place) => this.updateSearch({ searchedPlace: place })}
-                />
-              */}
+            <div className="column is-half">
+              <PlaceSearch
+                searchedPlace={searchedPlace}
+                setSearchedPlace={(place) => this.updateSearch({ searchedPlace: place })}
+              />
             </div>
-            <div className="column is-one-half">
-              {/*
-                <KeywordSearch
-                  searchedKeyword={searchedKeyword}
-                  setSearchedKeyword={(keyword) => this.updateSearch({ searchedKeyword: keyword })}
-                />
-              */}
+            <div className="column is-half">
+              <KeywordSearch
+                searchedKeyword={searchedKeyword}
+                setSearchedKeyword={(keyword) => this.updateSearch({ searchedKeyword: keyword })}
+              />
             </div>
             <div className="column is-full">
               {/*
@@ -206,7 +211,7 @@ export default class ConversationArchive extends React.Component {
               <Conversations
                 paged
                 queryParams={searchQueryParams}
-                key={searchQueryParams}
+                key={JSON.stringify(searchQueryParams)}
               />
             </div>
           </div>
@@ -216,9 +221,6 @@ export default class ConversationArchive extends React.Component {
   }
 }
 
-// ConversationArchive.propTypes = {
-//   topKeywords: PropTypes.arrayOf(PropTypes.shape({
-//     name: PropTypes.string.isRequired,
-//     link: PropTypes.string.isRequired,
-//   })).isRequired,
-// };
+ConversationArchive.propTypes = {
+  topKeywords: PropTypes.arrayOf(PropTypes.string).isRequired,
+};

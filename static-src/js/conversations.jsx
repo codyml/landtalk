@@ -27,6 +27,8 @@ export default class Conversations extends React.Component {
 
   componentDidMount() { this.loadMore(); }
 
+  componentWillUnmount() { this.latestRequest = null; }
+
   async loadMore() {
     this.setState({ loading: true });
 
