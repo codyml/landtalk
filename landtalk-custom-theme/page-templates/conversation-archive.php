@@ -38,27 +38,8 @@ while ( have_posts() ) :
 	</div>
 </div>
 
-<!-- Map -->
-<div class="full-bleed-container">
-	<div class="react-component" data-component-name="ConversationMap" data-component-props="<?php echo esc_attr( landtalk_encode_json_for_html_attr( array( 'height' => '27.5em' ) ) ); ?>"></div>
-</div>
-
-<!-- Keyword cloud -->
-<div class="container">
-	<div class="has-text-weight-bold">Popular topics:</div>
-	<ul class="keyword-cloud">
-		<?php foreach ( $keywords_with_links as $keyword ) : ?>
-			<a class="keyword-cloud-keyword" href="<?php echo esc_attr( $keyword['link'] ); ?>">
-				<?php echo esc_html( $keyword['name'] ); ?>
-			</a>
-		<?php endforeach; ?>
-	</ul>
-</div>
-
-<!-- Search & results -->
-<div class="container">
-	<div class="react-component" data-component-name="ConversationSearch"></div>
-</div>
+<!-- ConversationArchive React component -->
+<div class="react-component" data-component-name="ConversationArchive" data-component-props="<?php echo esc_attr( landtalk_encode_json_for_html_attr( array( 'topKeywords' => $keywords_with_links ) ) ); ?>"></div>
 
 <!-- Footer text -->
 <div class="container content">

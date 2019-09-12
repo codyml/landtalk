@@ -30,7 +30,7 @@ export default class Conversations extends React.Component {
     componentDidMount() { this.loadMore() }
     componentWillReceiveProps(newProps) {
 
-        if (this.props.searchTerm !== newProps.searchTerm) {
+        if (this.props.queryParams !== newProps.queryParams) {
 
             const newState = { conversations: [], loading: false }
             if (this.props.paged) {

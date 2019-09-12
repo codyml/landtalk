@@ -1,117 +1,215 @@
 /*
-*   Imports.
+* Imports.
 */
 
-import React from 'react'
-import debounce from 'lodash.debounce'
-import CollapsibleSection from './collapsible-section.jsx'
-import Conversations from './conversations.jsx'
-import ConversationMap from './conversation-map.jsx'
+import React from 'react';
+import PropTypes from 'prop-types';
+
+import ConversationMap from './conversation-map';
+import Conversations from './conversations';
 
 
 /*
-*   React component for the various Conversations page viewing options.
+* Returns a state object from the URL hash.
+*/
+
+const getStateFromHash = () => {
+  const state = {};
+
+  if (window.location.hash.length > 1) {
+    const hashComponents = window.location.hash.slice(1).split('&');
+    hashComponents.forEach((keyValuePair) => {
+      const [key, value] = keyValuePair.split('=');
+
+      let placeName;
+      let placeLatitude;
+      let placeLongitude;
+      if (key === 'place') {
+        [placeName, placeLatitude, placeLongitude] = value.split(',');
+      }
+
+      switch (key) {
+        case 'selected-marker':
+          state.selectedMarker = decodeURIComponent(value);
+          break;
+
+        case 'keyword':
+          state.searchedKeyword = decodeURIComponent(value);
+          break;
+
+        case 'place':
+          state.searchedPlace = {
+            placeName: decodeURIComponent(placeName),
+            placeLatitude: decodeURIComponent(placeLatitude),
+            placeLongitude: decodeURIComponent(placeLongitude),
+          };
+          break;
+
+        case 'sort':
+          state.searchSort = decodeURIComponent(value);
+          break;
+
+        default:
+      }
+    });
+  }
+
+  return state;
+};
+
+
+/*
+* Sets the URL hash based on a state object.
+*/
+
+const setHashFromState = (state) => {
+  const hashComponents = []
+
+  if (state.selectedMarker) {
+    hashComponents.append(`selected-marker=${encodeURIComponent(state.selectedMarker)}`);
+  }
+
+  if (state.searchedKeyword) {
+    hashComponents.append(`keyword=${encodeURIComponent(state.searchedKeyword)}`);
+  }
+
+  if (state.searchedPlace) {
+    const placeComponents = [
+      encodeURIComponent(state.searchedPlace.name),
+      encodeURIComponent(state.searchedPlace.latitude),
+      encodeURIComponent(state.searchedPlace.longitude),
+    ];
+
+    hashComponents.append(`place=${placeComponents.join(',')}`);
+  }
+
+  if (state.searchSort) {
+    hashComponents.append(`sort=${encodeURIComponent(state.searchSort)}`);
+  }
+
+  window.location.hash = hashComponents.join('&');
+
+}
+
+
+/*
+* ConversationArchive component definition.
 */
 
 export default class ConversationArchive extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      selectedMarker: null,
+      searchedKeyword: '',
+      searchedPlace: null,
+      searchSort: null,
+      ...getStateFromHash(),
+    };
 
-    constructor(props) {
+    this.updateSearch = this.updateSearch.bind(this);
+    this.getSearchQueryParams = this.getSearchQueryParams.bind(this);
+  }
 
-        super(props)
-        this.state = {
-            collapsed: { latest: false, map: false, all: false },
-            searchBarValue: ''
-        }
+  getSearchQueryParams() {
+    const {
+      searchedKeyword,
+      searchedPlace,
+      searchSort,
+    } = this.state;
 
-        //  Parses hash to determine ID of selected marker, if applicable
-        if (location.hash) {
-            const id = location.hash.match(/#(\d+)/)
-            if (id) {
-                this.state.selectedMarker = +id[1]
-                this.state.collapsed.latest = true
-                this.state.collapsed.all = true
-            }
-        }
+    const queryParams = {
+      perPage: 12,
+    };
 
-        this.toggleCollapsibleSection = this.toggleCollapsibleSection.bind(this)
-        this.handleSearchBarChange = this.handleSearchBarChange.bind(this)
+    const filterBy = [];
 
+    if (searchedKeyword) {
+      filterBy.append('relevance');
+      queryParams.relevanceSearchTerm = searchedKeyword;
     }
 
-
-    /*
-    *   Collapses or expands a section.
-    */
-
-    toggleCollapsibleSection(key) {
-
-        this.setState({
-            collapsed: {
-                ...this.state.collapsed,
-                [key]: !this.state.collapsed[key],
-            }
-        })
-
+    if (searchedPlace) {
+      filterBy.append('radius');
+      queryParams.radiusLat = searchedPlace.latitude;
+      queryParams.radiusLng = searchedPlace.longitude;
     }
 
-
-    /*
-    *   Handles a change to the All Conversations search bar.
-    */
-
-    handleSearchBarChange(event) {
-
-        this.setState({
-
-            collapsed: { ...this.state.collapsed, all: false },
-            searchBarValue: event.target.value,
-
-        })
-
+    if (filterBy.length) {
+      queryParams.filterBy = filterBy.join(',');
     }
 
-    render() {
+    if (searchSort) {
+      queryParams.orderBy = searchSort;
+    }
 
-        //  Sets up the All Conversations search bar
-        const allConversationsSearchBar = <div className={ 'control is-small has-icons-left' }>
-            <input
-                type='text'
-                className='input is-small'
-                placeholder='search conversations'
-                value={ this.state.searchBarValue }
-                onChange={ this.handleSearchBarChange }
-            />
-            <span className="icon is-small is-left">
-                <i className="fa fa-search"></i>
-            </span>
+    return queryParams;
+  }
+
+  updateSearch(update) {
+    this.setState(update, () => setHashFromState());
+  }
+
+  render() {
+    const { topKeywords } = this.props;
+    const {
+      selectedMarker,
+      searchedKeyword,
+      searchedPlace,
+      searchSort,
+    } = this.state;
+
+    return (
+      <React.Fragment>
+        <div className="full-bleed-container">
+          <ConversationMap
+            selectedMarker={selectedMarker}
+          />
         </div>
-
-        return (
-
-            <React.Fragment>
-                <div className='container'>
-                    <CollapsibleSection
-                        collapsed={ this.state.collapsed.map }
-                        title='Map'
-                        toggleCollapsed={ this.toggleCollapsibleSection.bind(this, 'map') }
-                    >
-                        <ConversationMap selectedMarker={ this.state.selectedMarker } />
-                    </CollapsibleSection>
-                </div>
-                <div className='container'>
-                    <CollapsibleSection
-                        collapsed={ this.state.collapsed.all }
-                        title='All Conversations'
-                        titleContent={ allConversationsSearchBar }
-                        toggleCollapsed={ this.toggleCollapsibleSection.bind(this, 'all') }
-                    >
-                        <Conversations orderBy='random' perPage={12} paged={true} searchTerm={ this.state.searchBarValue } />
-                    </CollapsibleSection>
-                </div>
-            </React.Fragment>
-
-        )
-
-    }
-
+        <div className="container">
+          <div className="columns multiline">
+            <div className="column is-full">
+              <KeywordCloud
+                keywords={topKeywords}
+                searchedKeyword={searchedKeyword}
+                setSearchedKeyword={(keyword) => this.updateSearch({ searchedKeyword: keyword })}
+              />
+            </div>
+            <div className="column is-one-half">
+              <PlaceSearch
+                searchedPlace={searchedPlace}
+                setSearchedPlace={(place) => this.updateSearch({ searchedPlace: place })}
+              />
+            </div>
+            <div className="column is-one-half">
+              <KeywordSearch
+                searchedKeyword={searchedKeyword}
+                setSearchedKeyword={(keyword) => this.updateSearch({ searchedKeyword: keyword })}
+              />
+            </div>
+            <div className="column is-full">
+              <SortDropdown
+                searchedKeyword={searchedKeyword}
+                searchSort={searchSort}
+                setSearchSort={(sort) => this.updateSearch({ searchSort: sort })}
+              />
+            </div>
+            <div className="column is-full">
+              <Conversations
+                paged
+                queryParams={this.getSearchQueryParams()}
+              />
+            </div>
+          </div>
+        </div>
+      </React.Fragment>
+    );
+  }
 }
+
+ConversationArchive.propTypes = {
+  topKeywords: PropTypes.arrayOf(PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    link: PropTypes.string.isRequired,
+  })).isRequired,
+};
