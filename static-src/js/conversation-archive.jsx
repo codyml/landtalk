@@ -21,11 +21,11 @@ const getStateFromHash = () => {
     hashComponents.forEach((keyValuePair) => {
       const [key, value] = keyValuePair.split('=');
 
-      let placeName;
+      let placeAddress;
       let placeLatitude;
       let placeLongitude;
       if (key === 'place') {
-        [placeName, placeLatitude, placeLongitude] = value.split(',');
+        [placeAddress, placeLatitude, placeLongitude] = value.split(',');
       }
 
       switch (key) {
@@ -39,7 +39,7 @@ const getStateFromHash = () => {
 
         case 'place':
           state.searchedPlace = {
-            placeName: decodeURIComponent(placeName),
+            placeAddress: decodeURIComponent(placeAddress),
             placeLatitude: decodeURIComponent(placeLatitude),
             placeLongitude: decodeURIComponent(placeLongitude),
           };
@@ -63,7 +63,7 @@ const getStateFromHash = () => {
 */
 
 const setHashFromState = (state) => {
-  const hashComponents = []
+  const hashComponents = [];
 
   if (state.selectedMarker) {
     hashComponents.append(`selected-marker=${encodeURIComponent(state.selectedMarker)}`);
@@ -75,7 +75,7 @@ const setHashFromState = (state) => {
 
   if (state.searchedPlace) {
     const placeComponents = [
-      encodeURIComponent(state.searchedPlace.name),
+      encodeURIComponent(state.searchedPlace.address),
       encodeURIComponent(state.searchedPlace.latitude),
       encodeURIComponent(state.searchedPlace.longitude),
     ];
@@ -88,8 +88,7 @@ const setHashFromState = (state) => {
   }
 
   window.location.hash = hashComponents.join('&');
-
-}
+};
 
 
 /*

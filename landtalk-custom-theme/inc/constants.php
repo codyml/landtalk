@@ -61,3 +61,10 @@ define( 'EARTH_RADIUS', 3959 );
 */
 
 define( 'N_TOP_KEYWORDS', 25 );
+
+
+/*
+*	Defines the REST API namespace for custom endpoints.
+*/
+
+define( 'REST_API_NAMESPACE', 'landtalk' );
