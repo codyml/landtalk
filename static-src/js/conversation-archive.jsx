@@ -3,7 +3,7 @@
 */
 
 import React from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 
 import ConversationMap from './conversation-map';
 import Conversations from './conversations';
@@ -150,12 +150,13 @@ export default class ConversationArchive extends React.Component {
   }
 
   render() {
-    const { topKeywords } = this.props;
+    const searchQueryParams = this.getSearchQueryParams();
+    // const { topKeywords } = this.props;
     const {
       selectedMarker,
-      searchedKeyword,
-      searchedPlace,
-      searchSort,
+      // searchedKeyword,
+      // searchedPlace,
+      // searchSort,
     } = this.state;
 
     return (
@@ -166,37 +167,46 @@ export default class ConversationArchive extends React.Component {
           />
         </div>
         <div className="container">
-          <div className="columns multiline">
+          <div className="columns is-multiline">
             <div className="column is-full">
-              <KeywordCloud
-                keywords={topKeywords}
-                searchedKeyword={searchedKeyword}
-                setSearchedKeyword={(keyword) => this.updateSearch({ searchedKeyword: keyword })}
-              />
+              {/*
+                <KeywordCloud
+                  keywords={topKeywords}
+                  searchedKeyword={searchedKeyword}
+                  setSearchedKeyword={(keyword) => this.updateSearch({ searchedKeyword: keyword })}
+                />
+              */}
             </div>
             <div className="column is-one-half">
-              <PlaceSearch
-                searchedPlace={searchedPlace}
-                setSearchedPlace={(place) => this.updateSearch({ searchedPlace: place })}
-              />
+              {/*
+                <PlaceSearch
+                  searchedPlace={searchedPlace}
+                  setSearchedPlace={(place) => this.updateSearch({ searchedPlace: place })}
+                />
+              */}
             </div>
             <div className="column is-one-half">
-              <KeywordSearch
-                searchedKeyword={searchedKeyword}
-                setSearchedKeyword={(keyword) => this.updateSearch({ searchedKeyword: keyword })}
-              />
+              {/*
+                <KeywordSearch
+                  searchedKeyword={searchedKeyword}
+                  setSearchedKeyword={(keyword) => this.updateSearch({ searchedKeyword: keyword })}
+                />
+              */}
             </div>
             <div className="column is-full">
-              <SortDropdown
-                searchedKeyword={searchedKeyword}
-                searchSort={searchSort}
-                setSearchSort={(sort) => this.updateSearch({ searchSort: sort })}
-              />
+              {/*
+                <SortDropdown
+                  searchedKeyword={searchedKeyword}
+                  searchSort={searchSort}
+                  setSearchSort={(sort) => this.updateSearch({ searchSort: sort })}
+                />
+              */}
             </div>
             <div className="column is-full">
               <Conversations
                 paged
-                queryParams={this.getSearchQueryParams()}
+                queryParams={searchQueryParams}
+                key={searchQueryParams}
               />
             </div>
           </div>
@@ -206,9 +216,9 @@ export default class ConversationArchive extends React.Component {
   }
 }
 
-ConversationArchive.propTypes = {
-  topKeywords: PropTypes.arrayOf(PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    link: PropTypes.string.isRequired,
-  })).isRequired,
-};
+// ConversationArchive.propTypes = {
+//   topKeywords: PropTypes.arrayOf(PropTypes.shape({
+//     name: PropTypes.string.isRequired,
+//     link: PropTypes.string.isRequired,
+//   })).isRequired,
+// };
