@@ -10,6 +10,7 @@ import Conversations from './conversations';
 import KeywordCloud from './keyword-cloud';
 import PlaceSearch from './place-search';
 import KeywordSearch from './keyword-search';
+import SortDropdown, { RELEVANCE_SORT, RANDOM_SORT } from './sort-dropdown';
 
 
 /*
@@ -97,7 +98,11 @@ const setHashFromState = (state) => {
     hashComponents.push(`sort=${encodeURIComponent(state.searchSort)}`);
   }
 
-  window.location.hash = hashComponents.join('&');
+  if (hashComponents.length) {
+    window.location.hash = hashComponents.join('&');
+  } else {
+    window.location.hash = 'clear';
+  }
 };
 
 
@@ -112,9 +117,14 @@ export default class ConversationArchive extends React.Component {
       selectedMarker: null,
       searchedKeyword: '',
       searchedPlace: null,
-      searchSort: null,
       ...getStateFromHash(),
     };
+
+    //  Sets initial sort.
+    const { searchSort, searchedKeyword } = this.state;
+    if (!searchSort) {
+      this.state.searchSort = searchedKeyword ? RELEVANCE_SORT : RANDOM_SORT;
+    }
 
     this.updateSearch = this.updateSearch.bind(this);
     this.getSearchQueryParams = this.getSearchQueryParams.bind(this);
@@ -157,7 +167,36 @@ export default class ConversationArchive extends React.Component {
   }
 
   updateSearch(update) {
-    this.setState(update, () => setHashFromState(this.state));
+    this.setState(
+      (prevState) => {
+        //  If now searching by keyword, switch from random to relevance sorting
+        if (
+          !prevState.searchedKeyword
+          && update.searchedKeyword
+          && prevState.searchSort === RANDOM_SORT
+        ) {
+          return {
+            ...update,
+            searchSort: RELEVANCE_SORT,
+          };
+        }
+
+        //  If no longer searching by keyword, switch from relevance to random sorting
+        if (
+          prevState.searchedKeyword
+          && !update.searchedKeyword
+          && prevState.searchSort === RELEVANCE_SORT
+        ) {
+          return {
+            ...update,
+            searchSort: RANDOM_SORT,
+          };
+        }
+
+        return update;
+      },
+      () => setHashFromState(this.state),
+    );
   }
 
   render() {
@@ -167,7 +206,7 @@ export default class ConversationArchive extends React.Component {
       selectedMarker,
       searchedKeyword,
       searchedPlace,
-      // searchSort,
+      searchSort,
     } = this.state;
 
     return (
@@ -177,7 +216,7 @@ export default class ConversationArchive extends React.Component {
             selectedMarker={selectedMarker}
           />
         </div>
-        <div className="container">
+        <div className="container conversation-search-and-results">
           <div className="columns is-multiline">
             <div className="column is-full">
               <KeywordCloud
@@ -199,15 +238,13 @@ export default class ConversationArchive extends React.Component {
               />
             </div>
             <div className="column is-full">
-              {/*
-                <SortDropdown
-                  searchedKeyword={searchedKeyword}
-                  searchSort={searchSort}
-                  setSearchSort={(sort) => this.updateSearch({ searchSort: sort })}
-                />
-              */}
+              <SortDropdown
+                searchedKeyword={searchedKeyword}
+                searchSort={searchSort}
+                setSearchSort={(sort) => this.updateSearch({ searchSort: sort })}
+              />
             </div>
-            <div className="column is-full">
+            <div className="column is-full search-results">
               <Conversations
                 paged
                 queryParams={searchQueryParams}

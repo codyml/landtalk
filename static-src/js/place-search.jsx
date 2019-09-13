@@ -162,7 +162,7 @@ export default class PlaceSearch extends React.Component {
                 searchedPlace ? (
                   <React.Fragment>
                     <hr className="dropdown-divider" />
-                    <a className="dropdown-item has-text-danger" onClick={() => this.selectResult()}>
+                    <a className="dropdown-item has-text-grey" onClick={() => this.selectResult()}>
                       <strong>Clear</strong>
                     </a>
                   </React.Fragment>

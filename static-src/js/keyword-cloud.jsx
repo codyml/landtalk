@@ -22,13 +22,9 @@ const KeywordCloud = ({ keywords, searchedKeyword, setSearchedKeyword }) => (
           }
 
           return (
-            <a
-              className={className}
-              onClick={setSearchedKeyword.bind(null, keyword)}
-              key={keyword}
-            >
-              {keyword}
-            </a>
+            <li className={className} key={keyword}>
+              <a onClick={setSearchedKeyword.bind(null, keyword)}>{keyword}</a>
+            </li>
           );
         })
       }

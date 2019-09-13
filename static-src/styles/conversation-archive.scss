@@ -1,5 +1,13 @@
+.conversation-search-and-results {
+  min-height: 100vh;
+}
+
 .search-control {
-  margin: 0.5em 0;
+  margin-bottom: 1em;
+}
+
+.search-results {
+  margin-top: 1em;
 }
 
 .search-control-title {
@@ -15,17 +23,23 @@
 
 .keyword-cloud-keyword {
 
-  color: inherit;
-  transition: color .15s;
-
-  &:hover {
-    color: #3273dc;
-  }
+  display: inline-block;
 
   &:not(:last-child)::after {
     content: '•';
     margin: 0 .25em;
     color: #4a4a4a;
+  }
+
+}
+
+.keyword-cloud-keyword a {
+
+  color: inherit;
+  transition: color .15s;
+
+  &:hover {
+    color: #3273dc;
   }
 
 }
@@ -62,6 +76,36 @@
       font-size: .85em;
     }
 
+  }
+
+}
+
+.keyword-search .keyword-search-field {
+
+  width: 100%;
+  position: relative;
+
+  input {
+    padding-right: 2em;
+  }
+
+  .clear-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: calc(100% - 1.5em);
+  }
+
+}
+
+.sort-dropdown {
+
+  display: flex;
+  align-items: center;
+
+  .search-control-title {
+    margin-bottom: 0;
+    margin-right: 1em;
   }
 
 }

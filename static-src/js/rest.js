@@ -20,7 +20,7 @@ export const downloadConversations = async (params = {}) => {
 
     if (key === 'orderBy') {
       if (value === 'rand') {
-        if (params.page === 0) {
+        if (!params.page) {
           randomSeed = Math.floor(Math.random() * 4294967295);
         }
 
