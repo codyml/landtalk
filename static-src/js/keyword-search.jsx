@@ -24,7 +24,7 @@ const KeywordSearch = ({ searchedKeyword, setSearchedKeyword }) => (
       {
         searchedKeyword ? (
           <a
-            className="clear-button icon is-small has-text-grey-light"
+            className="clear-button icon is-small"
             onClick={() => setSearchedKeyword('')}
           >
             <i className="fa fa-times-circle" />

@@ -121,7 +121,7 @@ export default class PlaceSearch extends React.Component {
                     onChange={this.handleInputChange}
                     ref={this.inputRef}
                     className="input"
-                    placeholder="Address or coordinates"
+                    placeholder="37.7749, -122.4194"
                   />
                 </div>
               </div>

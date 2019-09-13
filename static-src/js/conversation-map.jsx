@@ -67,13 +67,6 @@ export default class ConversationMap extends React.Component {
 
             this.state.selectedMarker = this.props.selectedMarker
 
-        } else if (location.hash) {
-
-            const id = location.hash.match(/#selected-marker=(\d+)/)
-            if (id) {
-                this.state.selectedMarker = +id[1]
-            }
-
         }
 
         this.createMap = this.createMap.bind(this)

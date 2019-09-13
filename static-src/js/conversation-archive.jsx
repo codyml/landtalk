@@ -214,6 +214,7 @@ export default class ConversationArchive extends React.Component {
         <div className="full-bleed-container">
           <ConversationMap
             selectedMarker={selectedMarker}
+            height="27.5em"
           />
         </div>
         <div className="container conversation-search-and-results">

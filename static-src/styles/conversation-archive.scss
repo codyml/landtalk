@@ -90,10 +90,18 @@
   }
 
   .clear-button {
+
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
     left: calc(100% - 1.5em);
+    transition: color .15s;
+    color: #bbb;
+
+    &:hover {
+      color: #aaa;
+    }
+
   }
 
 }

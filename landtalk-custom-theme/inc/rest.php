@@ -265,7 +265,7 @@ function landtalk_get_conversations( WP_REST_Request $request ) {
  */
 function landtalk_prepare_conversation_for_rest_response(
 	$conversation,
-	$for_map_only
+	$for_map_only = false
 ) {
 
 	$response               = array();
