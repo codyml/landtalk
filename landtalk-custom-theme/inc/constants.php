@@ -1,4 +1,9 @@
 <?php
+/**
+ * Defines constants used in the theme.
+ *
+ * @package Land Talk Custom Theme
+ */
 
 /*
 *   Defines custom post type identifiers.
@@ -15,7 +20,7 @@ define( 'REFLECTION_POST_TYPE', 'landtalk_reflection' );
 */
 
 define( 'KEYWORDS_TAXONOMY', 'landtalk_keywords' );
-define( 'REFLECTION_CATEGORY_TAXONOMY', 'landtalk_refcat');
+define( 'REFLECTION_CATEGORY_TAXONOMY', 'landtalk_refcat' );
 
 
 /*
@@ -32,3 +37,34 @@ define( 'HOPEFULLY_UNIQUE_POSITION_DECIMAL', '3982' );
 
 define( 'HEADER_MENU_LOCATION', 'landtalk_header_menu' );
 define( 'FOOTER_MENU_LOCATION', 'landtalk_footer_menu' );
+
+
+/*
+*   Defines postmeta field key prefix for preprocessed relevance
+*   query data and the separator used to separate multiple-value
+*   fields.
+*/
+
+define( 'RELEVANCE_POSTMETA_KEY_PREFIX', 'lt_rel_' );
+define( 'PREPROCESSED_SEPARATOR', '%%%%%' );
+
+
+/*
+*   Defines spatial query constants.
+*/
+
+define( 'EARTH_RADIUS', 3959 );
+
+
+/*
+*	Defines number of keywords to show on the Conversations page.
+*/
+
+define( 'N_TOP_KEYWORDS', 25 );
+
+
+/*
+*	Defines the REST API namespace for custom endpoints.
+*/
+
+define( 'REST_API_NAMESPACE', 'landtalk' );

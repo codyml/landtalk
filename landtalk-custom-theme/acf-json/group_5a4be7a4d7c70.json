@@ -65,11 +65,30 @@
             "delay": 0
         },
         {
+            "key": "field_5d78381f7e2bb",
+            "label": "Featured Conversations Text",
+            "name": "featured_text",
+            "type": "wysiwyg",
+            "instructions": "Enter the text that will appear above the Featured Conversations.",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "tabs": "all",
+            "toolbar": "full",
+            "media_upload": 1,
+            "delay": 0
+        },
+        {
             "key": "field_5b774562f31e8",
             "label": "Body Image",
             "name": "body_image",
             "type": "image",
-            "instructions": "Insert the image that will appear below the map.",
+            "instructions": "Insert the image that will appear in the content area below the map and Featured Conversations.",
             "required": 1,
             "conditional_logic": 0,
             "wrapper": {
@@ -93,7 +112,7 @@
             "label": "Body Text",
             "name": "body_text",
             "type": "wysiwyg",
-            "instructions": "Enter the text that will appear below the map.",
+            "instructions": "Insert the text that will appear in the content area below the map and Featured Conversations.",
             "required": 1,
             "conditional_logic": 0,
             "wrapper": {
@@ -136,5 +155,5 @@
     "active": 1,
     "description": "",
     "recaptcha": 0,
-    "modified": 1559171673
+    "modified": 1568159832
 }

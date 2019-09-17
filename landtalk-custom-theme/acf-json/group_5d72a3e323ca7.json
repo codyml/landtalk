@@ -1,0 +1,51 @@
+{
+    "key": "group_5d72a3e323ca7",
+    "title": "Conversation Administration",
+    "fields": [
+        {
+            "key": "field_5d72a3ef0d674",
+            "label": "View Count",
+            "name": "view_count",
+            "type": "number",
+            "instructions": "View count start at 0 and increases by 1 for every view by a non-logged-in visitor to the Conversation's page.  Edit this field to modify or reset it.",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": 0,
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "min": 0,
+            "max": "",
+            "step": 1
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "landtalk_convers"
+            },
+            {
+                "param": "current_user",
+                "operator": "==",
+                "value": "viewing_back"
+            }
+        ]
+    ],
+    "menu_order": 1,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "",
+    "recaptcha": 0,
+    "modified": 1567795893
+}
