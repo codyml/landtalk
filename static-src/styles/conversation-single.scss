@@ -50,9 +50,11 @@
 
 }
 
-.conversation-transcript {
-    overflow-y: scroll;
-    max-height: 50em;
+.conversation-keyword {
+    &:not(:last-child)::after {
+        content: ', ';
+        color: #363636;
+    }
 }
 
 .conversation-keyword {
