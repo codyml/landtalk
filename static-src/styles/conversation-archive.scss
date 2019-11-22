@@ -24,6 +24,7 @@
 .keyword-cloud-keyword {
 
   display: inline-block;
+  text-transform: lowercase;
 
   &:not(:last-child)::after {
     content: '•';
