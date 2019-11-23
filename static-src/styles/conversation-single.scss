@@ -56,10 +56,3 @@
         color: #363636;
     }
 }
-
-.conversation-keyword {
-    &:not(:last-child)::after {
-        content: ', ';
-        color: #363636;
-    }
-}
