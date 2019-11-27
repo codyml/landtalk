@@ -5,3 +5,4 @@ landtalk-custom-theme/static
 .env*
 plugins
 dump.sql
+vendor
