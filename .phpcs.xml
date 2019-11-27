@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<ruleset name="Land Talk">
+    <rule ref="Generic.PHP.Syntax"/>
+    <rule ref="WordPress"/>
+</ruleset>
