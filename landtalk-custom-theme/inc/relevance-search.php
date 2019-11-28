@@ -13,7 +13,31 @@
  * @package Land Talk
  */
 
+define( 'LOCATION_RADIUS', 20.0 );
 $relevance_score_facets = array(
+
+	// Location.
+	array(
+		'field_key'  => 'lat_lng',
+		'relevance'  => 5,
+		'preprocess' => function( $post_id ) {
+			$lat_lng = get_field( 'location', $post_id )['lat_lng'];
+			return $lat_lng['latitude'] . ',' . $lat_lng['longitude'];
+		},
+		'match'      => function( $preprocessed_value, $search_term, $location ) {
+			if ( isset( $location ) ) {
+				$lat_lng = explode( ',', $preprocessed_value );
+				$distance = landtalk_haversine_great_circle_distance(
+					(float) $location['latitude'],
+					(float) $location['longitude'],
+					(float) $lat_lng[0],
+					(float) $lat_lng[1]
+				);
+
+				return $distance < LOCATION_RADIUS;
+			}
+		},
+	),
 
 	// Title.
 	array(
@@ -131,6 +155,13 @@ function landtalk_filter_conversations_by_relevance(
 		return array();
 	}
 
+	// Attempt to geocode the search term.
+	$geocoded_location  = null;
+	$geocoded_locations = landtalk_geocode( $search_term, 1 );
+	if ( ! empty( $geocoded_locations ) ) {
+		$geocoded_location = $geocoded_locations[0];
+	}
+
 	// Case insensitive search.
 	$lowercase_search_term = strtolower( $search_term );
 
@@ -141,11 +172,16 @@ function landtalk_filter_conversations_by_relevance(
 
 	// Scores each conversation based on preprocessed data.
 	$scored_conversations = array_map(
-		function( $conversation ) use ( $preprocessed_conversations, $lowercase_search_term ) {
+		function( $conversation ) use (
+			$preprocessed_conversations,
+			$lowercase_search_term,
+			$geocoded_location
+		) {
 
 			$score = landtalk_score_conversation_by_relevance(
 				$preprocessed_conversations[ $conversation->ID ],
-				$lowercase_search_term
+				$lowercase_search_term,
+				$geocoded_location
 			);
 
 			return array(
@@ -229,30 +265,39 @@ function landtalk_retrieve_relevance_postmeta( $conversations ) {
  * Calculate's a conversation's relevance to the search term using
  * the above relevance score facets.
  *
- * @param array  $preprocessed_conversation The preprocessed conversation.
- * @param string $search_term The string to match against.
+ * @param array      $preprocessed_conversation The preprocessed conversation.
+ * @param string     $search_term The string to match against.
+ * @param array|null $location The location to match against, in
+ *                   the format returned by landtalk_geocode.
  */
 function landtalk_score_conversation_by_relevance(
 	$preprocessed_conversation,
-	$search_term
+	$search_term,
+	$location
 ) {
 
 	global $relevance_score_facets;
 	return array_reduce(
 		$relevance_score_facets,
-		function(
-			$prev_score,
-			$facet
-		) use (
+		function( $prev_score, $facet ) use (
 			$preprocessed_conversation,
-			$search_term
+			$search_term,
+			$location
 		) {
 
 			$next_score = $prev_score;
-			$match      = strpos(
-				$preprocessed_conversation[ $facet['field_key'] ],
-				$search_term
-			) !== false;
+			if ( isset( $facet['match'] ) ) {
+				$match = $facet['match'](
+					$preprocessed_conversation[ $facet['field_key'] ],
+					$search_term,
+					$location
+				);
+			} else {
+				$match = strpos(
+					$preprocessed_conversation[ $facet['field_key'] ],
+					$search_term
+				) !== false;
+			}
 
 			if ( $match ) {
 				$next_score += 1 << $facet['relevance'];
