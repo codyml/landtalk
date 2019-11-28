@@ -8,16 +8,8 @@ import PropTypes from 'prop-types';
 import ConversationMap from './conversation-map';
 import Conversations from './conversations';
 import KeywordCloud from './keyword-cloud';
-import PlaceSearch from './place-search';
 import KeywordSearch from './keyword-search';
 import SortDropdown, { RELEVANCE_SORT, RANDOM_SORT } from './sort-dropdown';
-
-
-/*
-* Defines the radius of search for Place Search in miles.
-*/
-
-const PLACE_SEARCH_RADIUS = 20;
 
 
 /*
@@ -31,14 +23,6 @@ const getStateFromHash = () => {
     const hashComponents = window.location.hash.slice(1).split('&');
     hashComponents.forEach((keyValuePair) => {
       const [key, value] = keyValuePair.split('=');
-
-      let placeAddress;
-      let placeLatitude;
-      let placeLongitude;
-      if (key === 'place') {
-        [placeAddress, placeLatitude, placeLongitude] = value.split(',');
-      }
-
       switch (key) {
         case 'selected-marker':
           state.selectedMarker = decodeURIComponent(value);
@@ -46,14 +30,6 @@ const getStateFromHash = () => {
 
         case 'keyword':
           state.searchedKeyword = decodeURIComponent(value);
-          break;
-
-        case 'place':
-          state.searchedPlace = {
-            address: decodeURIComponent(placeAddress),
-            latitude: +decodeURIComponent(placeLatitude),
-            longitude: +decodeURIComponent(placeLongitude),
-          };
           break;
 
         case 'sort':
@@ -84,16 +60,6 @@ const setHashFromState = (state) => {
     hashComponents.push(`keyword=${encodeURIComponent(state.searchedKeyword)}`);
   }
 
-  if (state.searchedPlace) {
-    const placeComponents = [
-      encodeURIComponent(state.searchedPlace.address),
-      encodeURIComponent(state.searchedPlace.latitude),
-      encodeURIComponent(state.searchedPlace.longitude),
-    ];
-
-    hashComponents.push(`place=${placeComponents.join(',')}`);
-  }
-
   if (state.searchSort) {
     hashComponents.push(`sort=${encodeURIComponent(state.searchSort)}`);
   }
@@ -116,7 +82,6 @@ export default class ConversationArchive extends React.Component {
     this.state = {
       selectedMarker: null,
       searchedKeyword: '',
-      searchedPlace: null,
       ...getStateFromHash(),
     };
 
@@ -131,11 +96,7 @@ export default class ConversationArchive extends React.Component {
   }
 
   getSearchQueryParams() {
-    const {
-      searchedKeyword,
-      searchedPlace,
-      searchSort,
-    } = this.state;
+    const { searchedKeyword, searchSort } = this.state;
 
     const queryParams = {
       perPage: 12,
@@ -146,13 +107,6 @@ export default class ConversationArchive extends React.Component {
     if (searchedKeyword) {
       filterBy.push('relevance');
       queryParams.relevanceSearchTerm = searchedKeyword;
-    }
-
-    if (searchedPlace) {
-      filterBy.push('radius');
-      queryParams.radiusLat = searchedPlace.latitude;
-      queryParams.radiusLng = searchedPlace.longitude;
-      queryParams.radiusDistance = PLACE_SEARCH_RADIUS;
     }
 
     if (filterBy.length) {
@@ -202,12 +156,7 @@ export default class ConversationArchive extends React.Component {
   render() {
     const searchQueryParams = this.getSearchQueryParams();
     const { topKeywords } = this.props;
-    const {
-      selectedMarker,
-      searchedKeyword,
-      searchedPlace,
-      searchSort,
-    } = this.state;
+    const { selectedMarker, searchedKeyword, searchSort } = this.state;
 
     return (
       <React.Fragment>
@@ -224,12 +173,6 @@ export default class ConversationArchive extends React.Component {
                 keywords={topKeywords}
                 searchedKeyword={searchedKeyword}
                 setSearchedKeyword={(keyword) => this.updateSearch({ searchedKeyword: keyword })}
-              />
-            </div>
-            <div className="column is-half">
-              <PlaceSearch
-                searchedPlace={searchedPlace}
-                setSearchedPlace={(place) => this.updateSearch({ searchedPlace: place })}
               />
             </div>
             <div className="column is-half">

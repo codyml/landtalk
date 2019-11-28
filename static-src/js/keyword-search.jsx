@@ -12,14 +12,14 @@ import PropTypes from 'prop-types';
 
 const KeywordSearch = ({ searchedKeyword, setSearchedKeyword }) => (
   <div className="search-control keyword-search">
-    <div className="search-control-title">Search by keyword:</div>
+    <div className="search-control-title">Search by place or keyword:</div>
     <div className="keyword-search-field">
       <input
         type="text"
         value={searchedKeyword}
         onChange={(e) => setSearchedKeyword(e.target.value)}
         className="input"
-        placeholder="Keyword"
+        placeholder="place name or keyword"
       />
       {
         searchedKeyword ? (
