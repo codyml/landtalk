@@ -37,11 +37,7 @@ add_action(
  *
  * `filterBy`  The filters to apply to the queried set.  `filterBy=relevance`
  *             performs a relevance search for the term in `relevanceSearchTerm`.
- *             `filterBy=radius` performs a spatial search for
- *             results that are within `radiusDistance` to `radiusLat`
- *             and `radiusLng`.  `filterBy=relevance,radius` does
- *             both (both sets of additional params must be supplied).
- *             default is none.
+ *             Default is none.
  *
  * `orderBy`   Ordering to apply to the filtered queried set.
  *             `orderBy=rand` sorts randomly, `orderBy=RAND(seed)`
@@ -136,19 +132,6 @@ function landtalk_get_conversations( WP_REST_Request $request ) {
 			$order_by_relevance
 		);
 
-	}
-
-	// Applies `radius` filter.
-	if (
-		isset( $request['filterBy'] ) &&
-		strpos( $request['filterBy'], 'radius' ) !== false
-	) {
-		$conversations = landtalk_filter_conversations_by_radius(
-			$conversations,
-			(float) $request['radiusDistance'], // Miles.
-			(float) $request['radiusLat'], // Decimal.
-			(float) $request['radiusLng'] // Decimal.
-		);
 	}
 
 	// Sorts by descending `popular`.
@@ -400,97 +383,5 @@ function landtalk_prepare_lesson_for_rest_response( $post ) {
 	$response['grade']     = get_field( 'grade', $post );
 	$response['synopsis']  = get_field( 'synopsis', $post );
 	return $response;
-
-}
-
-
-/*
-*	Adds endpoints for forward-geocoding addresses to coordinates
-*	with the MapQuest API.
-*/
-
-add_action(
-	'rest_api_init',
-	function() {
-		register_rest_route(
-			REST_API_NAMESPACE,
-			'/geocode',
-			array(
-				'methods'  => 'GET',
-				'callback' => 'landtalk_geocode',
-			)
-		);
-	}
-);
-
-
-/**
- * Given an address, performs a forward-geocoding request to the
- * MapQuest API to get full address matches and their respective
- * lat/lng coordinates.  Returns an array of {address, latitude, longitude}
- * objects.  If coordinate pair given as input, that coordinate pair
- * is returned with its closest address equivalent with `inputCoordinates`
- * set to `true`.
- *
- * @param WP_REST_Request $request The WP REST request object.
- */
-function landtalk_geocode( WP_REST_Request $request ) {
-
-	// Checks params.
-	$input_address = $request['inputAddress'];
-	$n_results     = $request['nResults'];
-	if ( ! isset( $input_address ) || ! isset( $n_results ) ) {
-		return array( 'error' => 'Missing inputAddress and/or nResults parameters.' );
-	}
-
-	// Performs request.
-	$url                  = 'http://www.mapquestapi.com/geocoding/v1/address';
-	$url                 .= '?key=' . MAPQUEST_API_KEY;
-	$url                 .= '&location=' . rawurlencode( $input_address );
-	$url                 .= '&maxResults=' . $n_results;
-	$response             = wp_remote_get( $url );
-	$response_body        = wp_remote_retrieve_body( $response );
-	$parsed_response_body = json_decode( $response_body, true );
-	$locations            = $parsed_response_body['results'][0]['locations'];
-	$provided_location    = $parsed_response_body['results'][0]['providedLocation'];
-
-	// Prepares location objects for return.
-	$prepared_locations = array_map(
-		function( $location ) {
-
-			$address = implode(
-				array_filter(
-					array_map(
-						function( $component_key ) use ( $location ) {
-							return $location[ $component_key ];
-						},
-						array( 'street', 'adminArea5', 'adminArea3', 'adminArea1' )
-					),
-					function( $component_value ) {
-						return ! empty( $component_value );
-					}
-				),
-				', '
-			);
-
-			return array(
-				'address'   => $address,
-				'latitude'  => $location['displayLatLng']['lat'],
-				'longitude' => $location['displayLatLng']['lng'],
-			);
-
-		},
-		$locations
-	);
-
-	// If coordinate pair provided instead of address.
-	if ( isset( $provided_location['latLng'] ) ) {
-		$prepared_locations[0]['latitude']         = $provided_location['latLng']['lat'];
-		$prepared_locations[0]['longitude']        = $provided_location['latLng']['lng'];
-		$prepared_locations[0]['inputCoordinates'] = true;
-	}
-
-	// Returns prepared locations.
-	return $prepared_locations;
 
 }

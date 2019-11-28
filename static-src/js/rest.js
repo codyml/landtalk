@@ -59,20 +59,3 @@ export const downloadLessons = async (params = {}) => {
 
   return cache[url];
 };
-
-
-/*
-* Retrieves geocoded results for an entered string.
-*/
-
-const N_RESULTS = 5;
-export const getGeocodedAddress = async (inputAddress) => {
-  const url = `${absPath}/wp-json/landtalk/geocode?inputAddress=${inputAddress}&nResults=${N_RESULTS}`;
-
-  if (!cache[url]) {
-    const response = await fetch(url);
-    cache[url] = await response.json();
-  }
-
-  return cache[url];
-};
